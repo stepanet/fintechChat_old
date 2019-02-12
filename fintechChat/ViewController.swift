@@ -12,51 +12,50 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.init(named: "backGrndColor")
-        
-        //есть сомнения, но без закрытия view эти методы не работают
-        self.viewWillDisappear(true)
-        self.viewDidDisappear(true)
+        view.backgroundColor = UIColor(named: "backGrndColor")
 
     }
     
     override func viewDidLayoutSubviews() {
-        if ShowLog.show {
+        
+        #if SHOWLOG
             print(#function)
-        }
+        #endif
     }
     
     override func viewWillLayoutSubviews() {
-        if ShowLog.show {
+        
+        #if SHOWLOG
             print(#function)
-        }
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if ShowLog.show {
+        
+        #if SHOWLOG
             print(#function)
-        }
+        #endif
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if ShowLog.show {
+        
+        #if SHOWLOG
             print(#function)
-        }
+        #endif
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if ShowLog.show {
+        
+        #if SHOWLOG
             print(#function)
-        }
+        #endif
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        if ShowLog.show {
+        
+        #if SHOWLOG
             print(#function)
-        }
+        #endif
     }
-    
-
-
 }
 
