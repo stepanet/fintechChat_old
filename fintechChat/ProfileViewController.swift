@@ -19,6 +19,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func awakeFromNib() {
         //невозможно. еще не определены переменные
+        //print(editProfileBtn.frame)
     }
     
     
@@ -36,7 +37,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     override func viewDidAppear(_ animated: Bool) {
         //уже известны точные размеры вью и размеры кнопки
+        #if DEBUG
         print(editProfileBtn.frame)
+        #endif
     }
     
     
