@@ -60,7 +60,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
         enum cornerRadius: CGFloat {
             case imageViewAndPhotoBtn = 40
-            case editBtn = 10
+            case editBtn = 18
         }
         
         self.view.backgroundColor = .white
