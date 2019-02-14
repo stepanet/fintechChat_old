@@ -21,13 +21,14 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-user" translatesAutoresizingMaskIntoConstraints="NO" id="Ma0-bQ-Xsq">
                                 <rect key="frame" x="30" y="36" width="260" height="260"/>
+                                <color key="backgroundColor" name="backPhotoProfileColor"/>
+                                <rect key="contentStretch" x="0.0" y="0.0" width="0.94999999999999996" height="1"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ma0-bQ-Xsq" secondAttribute="height" multiplier="1:1" id="m32-5z-kBM"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYk-WV-pG3">
                                 <rect key="frame" x="210" y="216" width="80" height="80"/>
-                                <color key="backgroundColor" name="btnImageSet"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uYk-WV-pG3" secondAttribute="height" multiplier="1:1" id="63T-OB-2O2"/>
                                     <constraint firstAttribute="width" constant="80" id="PUB-oW-4Vl"/>
@@ -41,16 +42,16 @@
                                     <action selector="tekePIctureBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v43-nc-Sby"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя профайла очень длинное имя" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRB-FR-lbq">
-                                <rect key="frame" x="30" y="304" width="260" height="105"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Забытые легенды Греции" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRB-FR-lbq">
+                                <rect key="frame" x="30" y="304" width="260" height="70"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qam-ZA-3Y9">
-                                <rect key="frame" x="30" y="417" width="260" height="83"/>
+                                <rect key="frame" x="30" y="382" width="260" height="118"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <string key="text">Действие игры происходит в 431 году до н. э., за четыреста лет до событий Assassin’s Creed Origins. В ней рассказывается история Пелопонесской войны, происходившей между древнегреческими полисами. Игроку предстоит взять на себя роль наёмника Алексиоса или Кассандры и сразиться на стороне Афин, руководящих Делосским союзом, или же Спарты, возглавляющей Пелопоннесский союз. Главная сюжетная линия концентрируется вокруг попыток брата или сестры воссоединиться с семьёй после того, как в детстве они оба были сброшены с обрыва и оставлены умирать своим отцом по приказу спартанского оракула. Помимо этого игрок столкнётся с задачей искоренения злостного Культа Космоса, охватившего весь греческий мир, и обнаружением артефактов и монстров времён Атлантиды.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -61,18 +62,28 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Редактировать"/>
                             </button>
+                            <switch opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vuY-d4-YS5">
+                                <rect key="frame" x="30" y="241" width="51" height="31"/>
+                                <color key="onTintColor" name="backPhotoProfileColor"/>
+                                <color key="thumbTintColor" red="0.56854259967803955" green="0.5724945068359375" blue="0.58038955926895142" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <connections>
+                                    <action selector="darkThemeSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="kiu-pS-fbD"/>
+                                </connections>
+                            </switch>
                         </subviews>
-                        <color key="backgroundColor" name="backGrndColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="zRB-FR-lbq" firstAttribute="top" secondItem="Ma0-bQ-Xsq" secondAttribute="bottom" constant="8" id="0pi-t2-egn"/>
                             <constraint firstItem="zRB-FR-lbq" firstAttribute="centerX" secondItem="Ma0-bQ-Xsq" secondAttribute="centerX" id="14W-iL-zm2"/>
                             <constraint firstItem="uYk-WV-pG3" firstAttribute="trailing" secondItem="Ma0-bQ-Xsq" secondAttribute="trailing" id="2RC-WW-AbF"/>
                             <constraint firstItem="qam-ZA-3Y9" firstAttribute="top" secondItem="zRB-FR-lbq" secondAttribute="bottom" constant="8" id="5gu-Uk-2oN"/>
+                            <constraint firstItem="vuY-d4-YS5" firstAttribute="bottom" secondItem="Ma0-bQ-Xsq" secondAttribute="bottom" constant="-24" id="6KJ-WC-18U"/>
                             <constraint firstItem="qam-ZA-3Y9" firstAttribute="width" secondItem="zRB-FR-lbq" secondAttribute="width" id="8n5-Co-83p"/>
                             <constraint firstItem="zRB-FR-lbq" firstAttribute="width" secondItem="Ma0-bQ-Xsq" secondAttribute="width" id="HKo-gB-wb4"/>
                             <constraint firstItem="Ma0-bQ-Xsq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="Lya-nr-Yyd"/>
                             <constraint firstItem="N4G-Y2-nb6" firstAttribute="width" secondItem="qam-ZA-3Y9" secondAttribute="width" id="MQp-Jg-hlS"/>
                             <constraint firstItem="qam-ZA-3Y9" firstAttribute="centerX" secondItem="zRB-FR-lbq" secondAttribute="centerX" id="Pnu-G6-prv"/>
+                            <constraint firstItem="vuY-d4-YS5" firstAttribute="leading" secondItem="Ma0-bQ-Xsq" secondAttribute="leading" id="TbG-eo-qDw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="N4G-Y2-nb6" secondAttribute="bottom" constant="16" id="XZR-XQ-55Y"/>
                             <constraint firstItem="N4G-Y2-nb6" firstAttribute="centerX" secondItem="qam-ZA-3Y9" secondAttribute="centerX" id="dw3-xX-r6p"/>
                             <constraint firstItem="Ma0-bQ-Xsq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="jsl-4N-4MZ"/>
@@ -97,12 +108,9 @@
     </scenes>
     <resources>
         <image name="placeholder-user" width="600" height="600"/>
-        <image name="slr-camera-2-xxl" width="256" height="256"/>
-        <namedColor name="backGrndColor">
-            <color red="0.97200000286102295" green="0.87000000476837158" blue="0.33700001239776611" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="btnImageSet">
-            <color red="0.24705882352941178" green="0.47058823529411764" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="slr-camera-2-xxl" width="384" height="384"/>
+        <namedColor name="backPhotoProfileColor">
+            <color red="0.096000000834465027" green="0.14800000190734863" blue="0.25900000333786011" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

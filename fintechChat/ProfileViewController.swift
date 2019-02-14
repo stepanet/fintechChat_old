@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var profileNameLbl: UILabel!
     @IBOutlet weak var aboutProfileTextView: UITextView!
     @IBOutlet weak var editProfileBtn: UIButton!
-    
+
     
     override func awakeFromNib() {
         //невозможно. еще не определены переменные
@@ -38,7 +38,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidAppear(_ animated: Bool) {
         //уже известны точные размеры вью и размеры кнопки
         #if DEBUG
-        print(editProfileBtn.frame)
+            print(editProfileBtn.frame)
         #endif
     }
     
@@ -48,7 +48,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         handleSelectProfileImageView()
     }
 
-
+    @IBAction func darkThemeSwitch(_ sender: UISwitch) {
+        if sender.isOn {
+            setupDarkTheme()
+        } else {
+            setupUI()
+        }
+    }
+    
     private func setupUI() {
     
         enum cornerRadius: CGFloat {
@@ -56,18 +63,37 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             case editBtn = 10
         }
         
+        self.view.backgroundColor = .white
+        
+        
         profileImageView.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue //radiusUI
         profileImageView.clipsToBounds = true
         
         takePicturesForProfile.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue
         takePicturesForProfile.clipsToBounds = true
+        takePicturesForProfile.layer.borderWidth = 0
+        takePicturesForProfile.layer.backgroundColor = UIColor(named: "blueColor")?.cgColor
+        
         
         editProfileBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
         editProfileBtn.clipsToBounds = true
         editProfileBtn.tintColor = .black
         editProfileBtn.layer.borderWidth = 1
         editProfileBtn.layer.borderColor = UIColor.black.cgColor
+        editProfileBtn.backgroundColor = .white
+        editProfileBtn.tintColor = .black
+
+    }
+    
+    func setupDarkTheme() {
+        //для себя :)
         
+        self.view.backgroundColor = UIColor(named: "yellowColor")
+        takePicturesForProfile.layer.borderWidth = 3
+        takePicturesForProfile.layer.borderColor = UIColor(named: "yellowColor")?.cgColor
+        takePicturesForProfile.layer.backgroundColor = UIColor(named: "darkColor")?.cgColor
+        editProfileBtn.backgroundColor = UIColor(named: "darkColor")
+        editProfileBtn.tintColor = UIColor(named: "yellowColor")
     }
     
     //выбор картинки в профайл
@@ -91,15 +117,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         if let selectedImage = selectImageFromPicker {
             profileImageView.image = selectedImage
         }
-        
         dismiss(animated: true, completion: nil)
-        
     }
     
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
-
 }
