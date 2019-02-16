@@ -42,17 +42,17 @@
                                     <action selector="tekePIctureBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v43-nc-Sby"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Забытые легенды Греции" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRB-FR-lbq">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="капитан Джек Воробей" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRB-FR-lbq">
                                 <rect key="frame" x="30" y="304" width="260" height="70"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qam-ZA-3Y9">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="qam-ZA-3Y9">
                                 <rect key="frame" x="30" y="382" width="260" height="118"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Действие игры происходит в 431 году до н. э., за четыреста лет до событий Assassin’s Creed Origins. В ней рассказывается история Пелопонесской войны, происходившей между древнегреческими полисами. Игроку предстоит взять на себя роль наёмника Алексиоса или Кассандры и сразиться на стороне Афин, руководящих Делосским союзом, или же Спарты, возглавляющей Пелопоннесский союз. Главная сюжетная линия концентрируется вокруг попыток брата или сестры воссоединиться с семьёй после того, как в детстве они оба были сброшены с обрыва и оставлены умирать своим отцом по приказу спартанского оракула. Помимо этого игрок столкнётся с задачей искоренения злостного Культа Космоса, охватившего весь греческий мир, и обнаружением артефактов и монстров времён Атлантиды.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <string key="text">Исчерпавший свою удачу капитан Джек Воробей обнаруживает, что за ним охотится его старый неприятель, ужасный капитан Салазар и его призрачные пираты. Они только что сбежали из бермудского треугольника и намерены уничтожить всех капитанов, включая Джека. Поможет спастись лишь могущественный артефакт — трезубец Теслы, который дарует своему обладателю полный контроль над морями и космосом.</string>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N4G-Y2-nb6">

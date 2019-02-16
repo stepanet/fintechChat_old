@@ -30,7 +30,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         //настроим интерфейс
         setupUI()
         
-        //не знаем точные размеры вью, поэтому берем размеры кнопки под SE
+        //не знаем точные размеры вью, поэтому берем размеры кнопки из интерфейса
         print(editProfileBtn.frame)
     }
     
@@ -44,7 +44,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     @IBAction func tekePIctureBtnAction(_ sender: UIButton) {
-         print("Выбери изображение профиля")
+        print("Выбери изображение профиля")
         handleSelectProfileImageView()
     }
 
@@ -65,7 +65,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.view.backgroundColor = .white
         
-        
         profileImageView.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue //radiusUI
         profileImageView.clipsToBounds = true
         
@@ -74,14 +73,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         takePicturesForProfile.layer.borderWidth = 0
         takePicturesForProfile.layer.backgroundColor = UIColor(named: "blueColor")?.cgColor
         
-        
         editProfileBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
         editProfileBtn.clipsToBounds = true
         editProfileBtn.tintColor = .black
         editProfileBtn.layer.borderWidth = 1
         editProfileBtn.layer.borderColor = UIColor.black.cgColor
         editProfileBtn.backgroundColor = .white
-        editProfileBtn.tintColor = .black
 
     }
     
@@ -95,6 +92,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         editProfileBtn.backgroundColor = UIColor(named: "darkColor")
         editProfileBtn.tintColor = UIColor(named: "yellowColor")
     }
+    
     
     //выбор картинки в профайл
     func handleSelectProfileImageView(){
