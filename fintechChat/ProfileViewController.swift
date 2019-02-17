@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var takePicturesForProfile: UIButton!
@@ -16,6 +16,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var aboutProfileTextView: UITextView!
     @IBOutlet weak var editProfileBtn: UIButton!
 
+    
+    enum ImageSource {
+        case photoLibrary
+        case camera
+    }
+    
     
     override func awakeFromNib() {
         //невозможно. еще не определены переменные
@@ -26,87 +32,78 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         //настроим интерфейс
         setupUI()
-        
-        //не знаем точные размеры вью, поэтому берем размеры кнопки из интерфейса
+        //не знаем точные размеры вью, поэтому берем размеры кнопки из Main.storyboard
         print(editProfileBtn.frame)
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         //уже известны точные размеры вью и размеры кнопки
-        #if DEBUG
             print(editProfileBtn.frame)
-        #endif
     }
     
     
     @IBAction func tekePIctureBtnAction(_ sender: UIButton) {
         print("Выбери изображение профиля")
-        handleSelectProfileImageView()
+        takePhotoProfile(cameraOff: false)
     }
 
-    @IBAction func darkThemeSwitch(_ sender: UISwitch) {
-        if sender.isOn {
-            setupDarkTheme()
-        } else {
-            setupUI()
-        }
-    }
-    
+
     private func setupUI() {
     
+        //можно было сделать через user defined runtime attributes
+        
         enum cornerRadius: CGFloat {
             case imageViewAndPhotoBtn = 40
             case editBtn = 18
         }
         
-        self.view.backgroundColor = .white
+//        self.view.backgroundColor = .white
+        
+        
         
         profileImageView.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue //radiusUI
         profileImageView.clipsToBounds = true
         
         takePicturesForProfile.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue
         takePicturesForProfile.clipsToBounds = true
-        takePicturesForProfile.layer.borderWidth = 0
-        takePicturesForProfile.layer.backgroundColor = UIColor(named: "blueColor")?.cgColor
-        
+
         editProfileBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
         editProfileBtn.clipsToBounds = true
         editProfileBtn.tintColor = .black
         editProfileBtn.layer.borderWidth = 1
         editProfileBtn.layer.borderColor = UIColor.black.cgColor
         editProfileBtn.backgroundColor = .white
+    }
+    
+ 
+    //выбор фотографии в профайл
+    func handleSelectProfileImageView(_ source: ImageSource){
 
-    }
-    
-    func setupDarkTheme() {
-        //для себя :)
-        
-        self.view.backgroundColor = UIColor(named: "yellowColor")
-        takePicturesForProfile.layer.borderWidth = 3
-        takePicturesForProfile.layer.borderColor = UIColor(named: "yellowColor")?.cgColor
-        takePicturesForProfile.layer.backgroundColor = UIColor(named: "darkColor")?.cgColor
-        editProfileBtn.backgroundColor = UIColor(named: "darkColor")
-        editProfileBtn.tintColor = UIColor(named: "yellowColor")
-    }
-    
-    
-    //выбор картинки в профайл
-    func handleSelectProfileImageView(){
-        
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
+  
+        switch source {
+            case .camera:
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+                takePhotoProfile(cameraOff: true)
+                return
+            }
+             picker.sourceType = .camera
+        case .photoLibrary:
+            picker.sourceType = .photoLibrary
+        }
         present(picker, animated: true, completion: nil)
-        
+
     }
-    
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        var selectImageFromPicker:UIImage?
         
+        var selectImageFromPicker:UIImage?
+
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             selectImageFromPicker = editedImage
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
@@ -117,9 +114,36 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         dismiss(animated: true, completion: nil)
     }
-    
-    
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    
+
+    private func takePhotoProfile(cameraOff: Bool) {
+        
+        var titleForCamera = "Фото"
+        
+        if cameraOff {
+            titleForCamera = "Камера не доступна"
+        }
+        
+        let alertController = UIAlertController(title: "", message: "Выберите фотографию для профиля", preferredStyle: .actionSheet)
+        let actionPhoto = UIAlertAction(title: titleForCamera , style: .default) { (action) in
+            
+            self.handleSelectProfileImageView(.camera)
+        }
+        let actionLibrary = UIAlertAction(title: "Библиотека", style: .default) { (action) in
+            self.handleSelectProfileImageView(.photoLibrary)
+        }
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel) { (action) in
+            print("cancel")
+        }
+        alertController.addAction(actionPhoto)
+        alertController.addAction(actionLibrary)
+        alertController.addAction(actionCancel)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
 }
+

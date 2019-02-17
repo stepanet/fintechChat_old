@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oCe-40-bVO">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,103 +12,100 @@
     </dependencies>
     <scenes>
         <!--Profile View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <scene sceneID="IyA-Ef-Qq4">
             <objects>
-                <viewController id="BYZ-38-t0r" userLabel="Profile View Controller" customClass="ProfileViewController" customModule="fintechChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                <viewController id="oCe-40-bVO" customClass="ProfileViewController" customModule="fintechChat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="GVZ-ue-wY7">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-user" translatesAutoresizingMaskIntoConstraints="NO" id="Ma0-bQ-Xsq">
-                                <rect key="frame" x="30" y="36" width="260" height="260"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <rect key="contentStretch" x="0.0" y="0.0" width="0.94999999999999996" height="1"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-user" translatesAutoresizingMaskIntoConstraints="NO" id="EYl-ZF-PTp">
+                                <rect key="frame" x="16" y="28" width="288" height="288"/>
+                                <color key="backgroundColor" name="yellowColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Ma0-bQ-Xsq" secondAttribute="height" multiplier="1:1" id="m32-5z-kBM"/>
+                                    <constraint firstAttribute="width" secondItem="EYl-ZF-PTp" secondAttribute="height" multiplier="1:1" id="PR0-dY-gE0"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYk-WV-pG3">
-                                <rect key="frame" x="210" y="216" width="80" height="80"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Капитан Джек Воробей" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ys8-L6-OxC">
+                                <rect key="frame" x="16" y="324" width="288" height="74"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="uYk-WV-pG3" secondAttribute="height" multiplier="1:1" id="63T-OB-2O2"/>
-                                    <constraint firstAttribute="width" constant="80" id="PUB-oW-4Vl"/>
-                                    <constraint firstAttribute="height" constant="80" id="gQj-ro-4vY"/>
+                                    <constraint firstAttribute="height" constant="74" id="O86-9i-1p8"/>
                                 </constraints>
-                                <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="15"/>
-                                <state key="normal" image="slr-camera-2-xxl">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="tekePIctureBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v43-nc-Sby"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="капитан Джек Воробей" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zRB-FR-lbq">
-                                <rect key="frame" x="30" y="304" width="260" height="70"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="textColor" name="darkColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="qam-ZA-3Y9">
-                                <rect key="frame" x="30" y="382" width="260" height="118"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Исчерпавший свою удачу капитан Джек Воробей обнаруживает, что за ним охотится его старый неприятель, ужасный капитан Салазар и его призрачные пираты. Они только что сбежали из бермудского треугольника и намерены уничтожить всех капитанов, включая Джека. Поможет спастись лишь могущественный артефакт — трезубец Теслы, который дарует своему обладателю полный контроль над морями и космосом.</string>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="246" verticalCompressionResistancePriority="753" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="gqE-7A-GHO">
+                                <rect key="frame" x="16" y="406" width="288" height="110"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <string key="text">Исчерпавший свою удачу капитан Джек Воробей обнаруживает, что за ним охотится его старый неприятель, ужасный капитан Салазар и его призрачные пираты.</string>
+                                <color key="textColor" name="darkColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N4G-Y2-nb6">
-                                <rect key="frame" x="30" y="516" width="260" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="es2-fs-98o">
+                                <rect key="frame" x="16" y="521" width="288" height="39"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="tintColor" name="darkColor"/>
                                 <state key="normal" title="Редактировать"/>
                             </button>
-                            <switch opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vuY-d4-YS5">
-                                <rect key="frame" x="237" y="518.5" width="51" height="31"/>
-                                <color key="onTintColor" name="yellowColor"/>
-                                <color key="thumbTintColor" name="darkColor"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="je9-TB-S7s">
+                                <rect key="frame" x="224" y="236" width="80" height="80"/>
+                                <color key="backgroundColor" name="blueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="0DM-yO-A9W"/>
+                                    <constraint firstAttribute="width" constant="80" id="T1I-Dl-Kf8"/>
+                                </constraints>
+                                <color key="tintColor" name="yellowColor"/>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="slr-camera-2-xxl"/>
                                 <connections>
-                                    <action selector="darkThemeSwitch:" destination="BYZ-38-t0r" eventType="valueChanged" id="kiu-pS-fbD"/>
+                                    <action selector="tekePIctureBtnAction:" destination="oCe-40-bVO" eventType="touchUpInside" id="pUa-yx-nPB"/>
                                 </connections>
-                            </switch>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="zRB-FR-lbq" firstAttribute="top" secondItem="Ma0-bQ-Xsq" secondAttribute="bottom" constant="8" id="0pi-t2-egn"/>
-                            <constraint firstItem="zRB-FR-lbq" firstAttribute="centerX" secondItem="Ma0-bQ-Xsq" secondAttribute="centerX" id="14W-iL-zm2"/>
-                            <constraint firstItem="uYk-WV-pG3" firstAttribute="trailing" secondItem="Ma0-bQ-Xsq" secondAttribute="trailing" id="2RC-WW-AbF"/>
-                            <constraint firstItem="qam-ZA-3Y9" firstAttribute="top" secondItem="zRB-FR-lbq" secondAttribute="bottom" constant="8" id="5gu-Uk-2oN"/>
-                            <constraint firstItem="qam-ZA-3Y9" firstAttribute="width" secondItem="zRB-FR-lbq" secondAttribute="width" id="8n5-Co-83p"/>
-                            <constraint firstItem="vuY-d4-YS5" firstAttribute="trailing" secondItem="N4G-Y2-nb6" secondAttribute="trailing" constant="-4" id="FKd-2e-a5c"/>
-                            <constraint firstItem="zRB-FR-lbq" firstAttribute="width" secondItem="Ma0-bQ-Xsq" secondAttribute="width" id="HKo-gB-wb4"/>
-                            <constraint firstItem="Ma0-bQ-Xsq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="Lya-nr-Yyd"/>
-                            <constraint firstItem="N4G-Y2-nb6" firstAttribute="width" secondItem="qam-ZA-3Y9" secondAttribute="width" id="MQp-Jg-hlS"/>
-                            <constraint firstItem="qam-ZA-3Y9" firstAttribute="centerX" secondItem="zRB-FR-lbq" secondAttribute="centerX" id="Pnu-G6-prv"/>
-                            <constraint firstItem="vuY-d4-YS5" firstAttribute="centerY" secondItem="N4G-Y2-nb6" secondAttribute="centerY" id="WhY-Er-wQK"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="N4G-Y2-nb6" secondAttribute="bottom" constant="16" id="XZR-XQ-55Y"/>
-                            <constraint firstItem="N4G-Y2-nb6" firstAttribute="centerX" secondItem="qam-ZA-3Y9" secondAttribute="centerX" id="dw3-xX-r6p"/>
-                            <constraint firstItem="Ma0-bQ-Xsq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="jsl-4N-4MZ"/>
-                            <constraint firstItem="N4G-Y2-nb6" firstAttribute="top" secondItem="qam-ZA-3Y9" secondAttribute="bottom" constant="16" id="kc7-OI-Z8M"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ma0-bQ-Xsq" secondAttribute="trailing" constant="30" id="vLU-VZ-MMI"/>
-                            <constraint firstItem="uYk-WV-pG3" firstAttribute="bottom" secondItem="Ma0-bQ-Xsq" secondAttribute="bottom" id="xbl-2g-QAE"/>
+                            <constraint firstItem="Ys8-L6-OxC" firstAttribute="leading" secondItem="EYl-ZF-PTp" secondAttribute="leading" id="4sm-sj-vNL"/>
+                            <constraint firstItem="gqE-7A-GHO" firstAttribute="top" secondItem="Ys8-L6-OxC" secondAttribute="bottom" constant="8" symbolic="YES" id="530-qR-y3s"/>
+                            <constraint firstItem="je9-TB-S7s" firstAttribute="trailing" secondItem="Ys8-L6-OxC" secondAttribute="trailing" id="86j-eV-ytG"/>
+                            <constraint firstItem="Ys8-L6-OxC" firstAttribute="top" secondItem="je9-TB-S7s" secondAttribute="bottom" constant="8" symbolic="YES" id="DGm-xb-rLA"/>
+                            <constraint firstItem="5FQ-Pr-wUh" firstAttribute="trailing" secondItem="EYl-ZF-PTp" secondAttribute="trailing" constant="16" id="E2t-Cx-LpX"/>
+                            <constraint firstItem="es2-fs-98o" firstAttribute="top" secondItem="gqE-7A-GHO" secondAttribute="bottom" constant="5" id="Hnc-nu-PMU"/>
+                            <constraint firstItem="EYl-ZF-PTp" firstAttribute="top" secondItem="5FQ-Pr-wUh" secondAttribute="top" constant="8" id="KkZ-YY-laE"/>
+                            <constraint firstItem="EYl-ZF-PTp" firstAttribute="leading" secondItem="5FQ-Pr-wUh" secondAttribute="leading" constant="16" id="QZT-SI-HIl"/>
+                            <constraint firstItem="gqE-7A-GHO" firstAttribute="leading" secondItem="es2-fs-98o" secondAttribute="leading" id="T8c-iQ-abT"/>
+                            <constraint firstItem="Ys8-L6-OxC" firstAttribute="leading" secondItem="gqE-7A-GHO" secondAttribute="leading" id="bez-iB-H4H"/>
+                            <constraint firstItem="5FQ-Pr-wUh" firstAttribute="bottom" secondItem="es2-fs-98o" secondAttribute="bottom" constant="8" id="dpg-99-Lzp"/>
+                            <constraint firstItem="gqE-7A-GHO" firstAttribute="trailing" secondItem="es2-fs-98o" secondAttribute="trailing" id="k6m-Am-Ywj"/>
+                            <constraint firstItem="Ys8-L6-OxC" firstAttribute="top" secondItem="EYl-ZF-PTp" secondAttribute="bottom" constant="8" symbolic="YES" id="ksQ-4U-sCG"/>
+                            <constraint firstItem="Ys8-L6-OxC" firstAttribute="trailing" secondItem="gqE-7A-GHO" secondAttribute="trailing" id="rWJ-jG-AKP"/>
+                            <constraint firstItem="je9-TB-S7s" firstAttribute="trailing" secondItem="EYl-ZF-PTp" secondAttribute="trailing" id="vEt-T2-YlY"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="5FQ-Pr-wUh"/>
                     </view>
                     <connections>
-                        <outlet property="aboutProfileTextView" destination="qam-ZA-3Y9" id="fUq-bW-aZo"/>
-                        <outlet property="editProfileBtn" destination="N4G-Y2-nb6" id="s4T-c1-E9U"/>
-                        <outlet property="profileImageView" destination="Ma0-bQ-Xsq" id="hcu-gg-zNp"/>
-                        <outlet property="profileNameLbl" destination="zRB-FR-lbq" id="DM7-iG-jRA"/>
-                        <outlet property="takePicturesForProfile" destination="uYk-WV-pG3" id="8xB-qw-SgU"/>
+                        <outlet property="aboutProfileTextView" destination="gqE-7A-GHO" id="jEO-hk-mby"/>
+                        <outlet property="editProfileBtn" destination="es2-fs-98o" id="0hv-a0-D8L"/>
+                        <outlet property="profileImageView" destination="EYl-ZF-PTp" id="cZH-We-oMP"/>
+                        <outlet property="profileNameLbl" destination="Ys8-L6-OxC" id="sow-KS-xSW"/>
+                        <outlet property="takePicturesForProfile" destination="je9-TB-S7s" id="TI0-LX-gvo"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GUk-SY-bSZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="138.75" y="133.09859154929578"/>
+            <point key="canvasLocation" x="138.75" y="813.38028169014081"/>
         </scene>
     </scenes>
     <resources>
         <image name="placeholder-user" width="600" height="600"/>
-        <image name="slr-camera-2-xxl" width="384" height="384"/>
+        <image name="slr-camera-2-xxl" width="96" height="96"/>
+        <namedColor name="blueColor">
+            <color red="0.24705882352941178" green="0.47058823529411764" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="darkColor">
             <color red="0.096000000834465027" green="0.14800000190734863" blue="0.25900000333786011" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
