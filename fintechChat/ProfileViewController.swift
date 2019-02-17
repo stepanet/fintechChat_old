@@ -34,6 +34,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
         //настроим интерфейс
         setupUI()
+        
         //не знаем точные размеры вью, поэтому берем размеры кнопки из Main.storyboard
         print(editProfileBtn.frame)
     }
@@ -53,17 +54,13 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
     private func setupUI() {
     
-        //можно было сделать через user defined runtime attributes
+        //можно было сделать через user defined runtime attributes, но здесь более наглядно  и понятно и редактировать удобней
         
         enum cornerRadius: CGFloat {
             case imageViewAndPhotoBtn = 40
             case editBtn = 18
         }
-        
-//        self.view.backgroundColor = .white
-        
-        
-        
+
         profileImageView.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue //radiusUI
         profileImageView.clipsToBounds = true
         
@@ -136,12 +133,15 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         let actionLibrary = UIAlertAction(title: "Библиотека", style: .default) { (action) in
             self.handleSelectProfileImageView(.photoLibrary)
         }
+        let deletePhotoProfile = UIAlertAction(title: "Удалить фото", style: .destructive) { (action) in
+            self.profileImageView.image = UIImage(named: "placeholder-user")
+        }
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel) { (action) in
-            print("cancel")
         }
         alertController.addAction(actionPhoto)
         alertController.addAction(actionLibrary)
         alertController.addAction(actionCancel)
+        alertController.addAction(deletePhotoProfile)
         self.present(alertController, animated: true, completion: nil)
     }
     
