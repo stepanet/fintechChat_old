@@ -22,9 +22,10 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         case camera
     }
     
-    
-    override func awakeFromNib() {
-        //невозможно. еще не определены переменные
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        //невозможно. еще не определены view, subview, переменные
         //print(editProfileBtn.frame)
     }
     
