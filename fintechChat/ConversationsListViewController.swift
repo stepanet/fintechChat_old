@@ -93,7 +93,7 @@ extension ConversationsListViewController: UITableViewDataSource {
         let item3 = ConversationList(name: "Дима", message: "Как дз? сделал?", date: dateFormatter.date(from: "2019-01-06 08:51:01"), online: false, hasUnreadMessage: true)
         let item4 = ConversationList(name: "Света", message: "Привет сладкий", date: Date(), online: true, hasUnreadMessage: true)
         let item5 = ConversationList(name: "Звезда", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-05 11:21:01"), online: false, hasUnreadMessage: false)
-        let item6 = ConversationList(name: "Соня", message: nil, date: Date(), online: false, hasUnreadMessage: true)
+        let item6 = ConversationList(name: "Соня", message: nil, date: Date(), online: true, hasUnreadMessage: true)
         conversationLists.append(item)
         conversationLists.append(item1)
         conversationLists.append(item3)

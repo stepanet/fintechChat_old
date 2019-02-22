@@ -28,15 +28,18 @@ class ConversationTableViewCell: UITableViewCell {
     }
     
    public func dataCell(_ conversationLists: ConversationCellConfiguration) {
-        
-        nameLbl.text = conversationLists.name
-    
 
+        nameLbl.text = conversationLists.name
     
         if let second = conversationLists.date?.timeIntervalSince1970  {
             let timestampDate = Date(timeIntervalSince1970: second)
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm"
+
+            if ConversationTableViewCell.daysBetween(start: Date(), end: conversationLists.date!) < 0 {
+                dateFormatter.dateFormat = "dd MMM"
+            } else {
+                dateFormatter.dateFormat = "HH:mm"
+            }
             dateLbl.text = dateFormatter.string(from: timestampDate as Date)
         }
 
