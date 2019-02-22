@@ -146,5 +146,11 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         self.present(alertController, animated: true, completion: nil)
     }
     
+    
+    @IBAction func closeProfileView(_ sender: UIBarButtonItem) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
