@@ -13,7 +13,7 @@ class ConversationsListViewController: UIViewController {
     var conversationLists = [ConversationList]()
     var conversationListsOnline = [ConversationList]()
     var conversationListsHistory = [ConversationList]()
-    var conversation = [ConversationList]()
+    var conversationData = [ConversationList]()
     
 
     override func viewDidLoad() {
@@ -53,28 +53,24 @@ extension ConversationsListViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.section, indexPath.row)
-        
-        
-        
-        conversation = [conversationLists[indexPath.row]]
-        
-        //_ = self.navigationController?.popToRootViewController(animated: true)
-        //performSegue(withIdentifier: "showDetails", sender: self)
-        //showConversationViewController(conversation)
-    
+
+        if indexPath.section == 0{
+           conversationData = [conversationListsOnline[indexPath.row]]
+        } else {
+        conversationData = [conversationListsHistory[indexPath.row]]
+        }
+     
+        _ = self.navigationController?.popToRootViewController(animated: true)
+        performSegue(withIdentifier: "showDetails", sender: self)
     }
     
     
     //подготовка данных для пересылки во вьюконтроллер
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-
         if let destination = segue.destination as? ConversationViewController {
-            
-            destination.conversationList = conversationLists
+            destination.conversationData = conversationData
 
-            print("segue.ConversationViewController")
         }
 
     }
@@ -137,20 +133,6 @@ extension ConversationsListViewController: UITableViewDataSource {
                 conversationListsHistory.append(i)
             }
         }
-    }
-    
-    
-
-    func showConversationViewController(_ conversationList: ConversationList) {
-        
-        let conversationViewController = ConversationViewController()
-        
-        //в переменную conversationList контроллера ConversationViewController передаем данные
-        conversationViewController.conversationList = [conversationList]
-        
-        //обьявить и показать контроллер
-        let navController = UINavigationController(rootViewController: conversationViewController)
-        present(navController, animated: true, completion: nil)
     }
     
 }
