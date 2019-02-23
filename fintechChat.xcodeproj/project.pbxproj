@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B2236EC222141F400561112 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2236EB222141F300561112 /* ConversationViewController.swift */; };
 		3B2DDB42221E0619005D5272 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2DDB41221E0619005D5272 /* ConversationsListViewController.swift */; };
 		3B2DDB44221E0A25005D5272 /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2DDB43221E0A25005D5272 /* ConversationTableViewCell.swift */; };
 		3B2DDB46221E0C3C005D5272 /* ConversationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2DDB45221E0C3C005D5272 /* ConversationsList.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B2236EB222141F300561112 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		3B2DDB41221E0619005D5272 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		3B2DDB43221E0A25005D5272 /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		3B2DDB45221E0C3C005D5272 /* ConversationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsList.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				3BEF8BC4220B73AC00641B2B /* AppDelegate.swift */,
 				3BEF8BC8220B73AC00641B2B /* Main.storyboard */,
+				3B2236EB222141F300561112 /* ConversationViewController.swift */,
 				3B2DDB41221E0619005D5272 /* ConversationsListViewController.swift */,
 				3B2DDB45221E0C3C005D5272 /* ConversationsList.swift */,
 				3B2DDB43221E0A25005D5272 /* ConversationTableViewCell.swift */,
@@ -146,6 +149,7 @@
 			files = (
 				3B2DDB44221E0A25005D5272 /* ConversationTableViewCell.swift in Sources */,
 				3B3ADE912214BEBF000D97B5 /* ProfileViewController.swift in Sources */,
+				3B2236EC222141F400561112 /* ConversationViewController.swift in Sources */,
 				3B2DDB46221E0C3C005D5272 /* ConversationsList.swift in Sources */,
 				3BEF8BC5220B73AC00641B2B /* AppDelegate.swift in Sources */,
 				3B2DDB42221E0619005D5272 /* ConversationsListViewController.swift in Sources */,

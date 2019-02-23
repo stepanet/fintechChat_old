@@ -43,6 +43,10 @@ class ConversationTableViewCell: UITableViewCell {
             dateLbl.text = dateFormatter.string(from: timestampDate as Date)
         }
 
+        if conversationLists.hasUnreadMessage {
+            messageLbl.font = UIFont.boldSystemFont(ofSize: 17)
+        }
+    
         if conversationLists.message == nil {
             messageLbl.text = "No messages yet"
             messageLbl.textColor = .gray

@@ -13,6 +13,7 @@ class ConversationsListViewController: UIViewController {
     var conversationLists = [ConversationList]()
     var conversationListsOnline = [ConversationList]()
     var conversationListsHistory = [ConversationList]()
+    var conversation = [ConversationList]()
     
 
     override func viewDidLoad() {
@@ -25,7 +26,7 @@ class ConversationsListViewController: UIViewController {
 }
 
 
-extension ConversationsListViewController: UITabBarDelegate {
+extension ConversationsListViewController: UITableViewDelegate {
     
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -50,6 +51,34 @@ extension ConversationsListViewController: UITabBarDelegate {
 
 extension ConversationsListViewController: UITableViewDataSource {
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.section, indexPath.row)
+        
+        
+        
+        conversation = [conversationLists[indexPath.row]]
+        
+        //_ = self.navigationController?.popToRootViewController(animated: true)
+        //performSegue(withIdentifier: "showDetails", sender: self)
+        //showConversationViewController(conversation)
+    
+    }
+    
+    
+    //подготовка данных для пересылки во вьюконтроллер
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+
+        if let destination = segue.destination as? ConversationViewController {
+            
+            destination.conversationList = conversationLists
+
+            print("segue.ConversationViewController")
+        }
+
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
@@ -65,7 +94,7 @@ extension ConversationsListViewController: UITableViewDataSource {
             switch indexPath.section {
             case 0:
                 let itemCellOnline = conversationListsOnline[indexPath.row]
-                cell.backgroundColor = UIColor(named: "yellowColor")
+                cell.backgroundColor = UIColor(named: "littelYellow")
                 cell.dataCell(itemCellOnline)
                 break
             case 1:
@@ -110,5 +139,18 @@ extension ConversationsListViewController: UITableViewDataSource {
         }
     }
     
+    
+
+    func showConversationViewController(_ conversationList: ConversationList) {
+        
+        let conversationViewController = ConversationViewController()
+        
+        //в переменную conversationList контроллера ConversationViewController передаем данные
+        conversationViewController.conversationList = [conversationList]
+        
+        //обьявить и показать контроллер
+        let navController = UINavigationController(rootViewController: conversationViewController)
+        present(navController, animated: true, completion: nil)
+    }
     
 }
