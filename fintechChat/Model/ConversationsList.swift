@@ -17,6 +17,10 @@ protocol ConversationCellConfiguration {
     var hasUnreadMessage: Bool {get set}
 }
 
+protocol MessageCellConfiguration {
+    var text: String? {get set}
+}
+
 struct ConversationList: ConversationCellConfiguration {
     var name: String?
     var message: String? 
@@ -25,4 +29,8 @@ struct ConversationList: ConversationCellConfiguration {
     var hasUnreadMessage: Bool
 }
 
+
+//struct MessageList: MessageCellConfiguration {
+//    var text: String?
+//}
 
