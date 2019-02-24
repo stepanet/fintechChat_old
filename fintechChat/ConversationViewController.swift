@@ -10,21 +10,18 @@ import UIKit
 
 class ConversationViewController: UIViewController {
     
-    struct MessageLists: MessageCellConfiguration {
-        var text: String?
-    }
-    
+
     var conversationData = [ConversationList]()
     var messageLists = [MessageLists]()
 
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadMessage()
-
         self.navigationItem.title = conversationData[0].name
-        // Do any additional setup after loading the view.
+
     }
 
 }
@@ -56,13 +53,8 @@ extension ConversationViewController: UITableViewDataSource {
             
             cell.messageText.text = text
             return cell
-            
         }
-        
-
-        
     }
-    
     
     func loadMessage() {
         let item = MessageLists(text: "привет")
@@ -73,7 +65,5 @@ extension ConversationViewController: UITableViewDataSource {
         messageLists.append(item1)
         messageLists.append(item2)
         messageLists.append(item3)
-
     }
-    
 }

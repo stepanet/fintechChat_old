@@ -30,7 +30,8 @@ struct ConversationList: ConversationCellConfiguration {
 }
 
 
-//struct MessageList: MessageCellConfiguration {
-//    var text: String?
-//}
+struct MessageLists: MessageCellConfiguration {
+    var text: String?
+}
+
 

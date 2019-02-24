@@ -13,6 +13,7 @@ class ConversationTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var messageLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var cellViewContent: UIView!
     
     
 
