@@ -31,22 +31,14 @@ extension ConversationsListViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        switch section {
-        case  0:
-              return "Online"
-        case  1:
-             return "History"
-        default:
-            break
-        }
-        return ""
+        return section == 0 ? "Online" : "History"
+
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-    
-    
+
 }
 
 extension ConversationsListViewController: UITableViewDataSource {
@@ -54,9 +46,9 @@ extension ConversationsListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         if indexPath.section == 0{
-           conversationData = [conversationListsOnline[indexPath.row]]
+            conversationData = [conversationListsOnline[indexPath.row]]
         } else {
-        conversationData = [conversationListsHistory[indexPath.row]]
+            conversationData = [conversationListsHistory[indexPath.row]]
         }
      
         _ = self.navigationController?.popToRootViewController(animated: true)
@@ -74,10 +66,7 @@ extension ConversationsListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
-            return conversationListsOnline.count
-        }
-        return conversationListsHistory.count
+            return section == 0 ? conversationListsOnline.count : conversationListsHistory.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -157,7 +146,6 @@ extension ConversationsListViewController: UITableViewDataSource {
         conversationLists.append(item20)
         conversationLists.append(item21)
 
-        
         
         for i in conversationLists {
             if i.online {
