@@ -221,62 +221,62 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" estimatedRowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qhg-xb-COd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qhg-xb-COd">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageCell" rowHeight="100" id="VbL-KT-Jmu" customClass="MessageTableViewCell" customModule="fintechChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageCell" id="VbL-KT-Jmu" customClass="MessageTableViewCell" customModule="fintechChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VbL-KT-Jmu" id="PqQ-SG-hEb">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="always" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="gNQ-Gf-Y6B">
-                                                    <rect key="frame" x="15" y="11" width="240" height="78"/>
-                                                    <color key="backgroundColor" name="littelYellow"/>
-                                                    <inset key="scrollIndicatorInsets" minX="30" minY="0.0" maxX="10" maxY="0.0"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFS-vP-9EZ">
+                                                    <rect key="frame" x="16" y="4" width="240" height="36"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="gNQ-Gf-Y6B" firstAttribute="top" secondItem="PqQ-SG-hEb" secondAttribute="topMargin" id="NQ6-1n-fjM"/>
-                                                <constraint firstItem="gNQ-Gf-Y6B" firstAttribute="centerY" secondItem="PqQ-SG-hEb" secondAttribute="centerY" id="NyX-0a-iAC"/>
-                                                <constraint firstItem="gNQ-Gf-Y6B" firstAttribute="leading" secondItem="PqQ-SG-hEb" secondAttribute="leadingMargin" id="OAq-dZ-0J6"/>
-                                                <constraint firstItem="gNQ-Gf-Y6B" firstAttribute="width" secondItem="PqQ-SG-hEb" secondAttribute="width" multiplier="3:4" id="TGh-xA-vcd"/>
+                                                <constraint firstItem="QFS-vP-9EZ" firstAttribute="width" secondItem="PqQ-SG-hEb" secondAttribute="width" multiplier="3:4" id="1ow-5Z-Yj4"/>
+                                                <constraint firstAttribute="bottom" secondItem="QFS-vP-9EZ" secondAttribute="bottom" constant="4" id="4Kb-gK-6df"/>
+                                                <constraint firstItem="QFS-vP-9EZ" firstAttribute="top" secondItem="PqQ-SG-hEb" secondAttribute="top" constant="4" id="ELI-ib-avE"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QFS-vP-9EZ" secondAttribute="trailing" constant="20" symbolic="YES" id="JLa-Kf-byt"/>
+                                                <constraint firstItem="QFS-vP-9EZ" firstAttribute="leading" secondItem="PqQ-SG-hEb" secondAttribute="leading" constant="16" id="oeG-dC-Lbe"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="messageText" destination="gNQ-Gf-Y6B" id="dJl-Hu-DZS"/>
+                                            <outlet property="messageText" destination="QFS-vP-9EZ" id="9vu-c5-sdY"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyMessageCell" rowHeight="100" id="CuK-an-oad" customClass="MyMessageTableViewCell" customModule="fintechChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="128" width="320" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyMessageCell" id="CuK-an-oad" customClass="MyMessageTableViewCell" customModule="fintechChat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CuK-an-oad" id="Snx-gu-Lcc">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="HcV-4u-smo">
-                                                    <rect key="frame" x="65" y="11" width="240" height="78"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <inset key="scrollIndicatorInsets" minX="30" minY="0.0" maxX="10" maxY="0.0"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjx-B8-WkS">
+                                                    <rect key="frame" x="64" y="4" width="240" height="36"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="HcV-4u-smo" firstAttribute="top" secondItem="Snx-gu-Lcc" secondAttribute="topMargin" id="UMN-iK-cKB"/>
-                                                <constraint firstAttribute="trailing" secondItem="HcV-4u-smo" secondAttribute="trailing" constant="15" id="bHJ-At-0uQ"/>
-                                                <constraint firstItem="HcV-4u-smo" firstAttribute="centerY" secondItem="Snx-gu-Lcc" secondAttribute="centerY" id="mj2-lf-CV5"/>
-                                                <constraint firstItem="HcV-4u-smo" firstAttribute="width" secondItem="Snx-gu-Lcc" secondAttribute="width" multiplier="3:4" id="qFS-En-OyS"/>
+                                                <constraint firstItem="Tjx-B8-WkS" firstAttribute="top" secondItem="Snx-gu-Lcc" secondAttribute="top" constant="4" id="4qB-np-fUD"/>
+                                                <constraint firstAttribute="bottom" secondItem="Tjx-B8-WkS" secondAttribute="bottom" constant="4" id="DTx-Bk-Xd5"/>
+                                                <constraint firstItem="Tjx-B8-WkS" firstAttribute="width" secondItem="Snx-gu-Lcc" secondAttribute="width" multiplier="3:4" id="ETC-xN-qn4"/>
+                                                <constraint firstItem="Tjx-B8-WkS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Snx-gu-Lcc" secondAttribute="leading" constant="20" symbolic="YES" id="evF-2n-kiY"/>
+                                                <constraint firstAttribute="trailing" secondItem="Tjx-B8-WkS" secondAttribute="trailing" constant="16" id="mhe-wT-klX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="messageText" destination="HcV-4u-smo" id="w7M-j3-EKL"/>
+                                            <outlet property="messageText" destination="Tjx-B8-WkS" id="qDo-HQ-IPV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -334,9 +334,6 @@
         </namedColor>
         <namedColor name="darkColor">
             <color red="0.096000000834465027" green="0.14800000190734863" blue="0.25900000333786011" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="littelYellow">
-            <color red="1" green="1" blue="0.73299998044967651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="yellowColor">
             <color red="0.97200000286102295" green="0.87000000476837158" blue="0.33700001239776611" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

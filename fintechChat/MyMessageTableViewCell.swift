@@ -10,15 +10,16 @@ import UIKit
 
 class MyMessageTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var messageText: UITextView!
+    @IBOutlet weak var messageText: UILabel!
     
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        messageText.layer.cornerRadius = 15
+        messageText.layer.cornerRadius = 5
         messageText.clipsToBounds = true
+        
         
     }
 

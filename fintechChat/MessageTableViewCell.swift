@@ -10,7 +10,7 @@ import UIKit
 
 class MessageTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var messageText: UITextView!
+    @IBOutlet weak var messageText: UILabel!
     
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,7 +24,7 @@ class MessageTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        messageText.layer.cornerRadius = 15
+        messageText.layer.cornerRadius = 5
         messageText.clipsToBounds = true
         
     }

@@ -84,6 +84,7 @@ extension ConversationsListViewController: UITableViewDataSource {
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? ConversationTableViewCell {
             
+            //вместо переиспользования ячейки
             cell.backgroundColor = UIColor.white
             
             switch indexPath.section {
@@ -108,9 +109,6 @@ extension ConversationsListViewController: UITableViewDataSource {
     
     func loadData() {
         
-        
-        
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         
@@ -131,6 +129,11 @@ extension ConversationsListViewController: UITableViewDataSource {
         let item14 = ConversationList(name: "Звезда8", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-15 11:21:01"), online: true, hasUnreadMessage: false)
         let item15 = ConversationList(name: "Звезда9", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-25 11:21:01"), online: false, hasUnreadMessage: false)
         let item16 = ConversationList(name: "Звезда10", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-05 11:21:01"), online: false, hasUnreadMessage: false)
+        let item17 = ConversationList(name: "Маша", message: "Привет ", date: Date(), online: true, hasUnreadMessage: true)
+        let item18 = ConversationList(name: "Даша", message: "Привет ", date: Date(), online: true, hasUnreadMessage: true)
+        let item19 = ConversationList(name: "Саша", message: "Привет ", date: Date(), online: true, hasUnreadMessage: true)
+        let item20 = ConversationList(name: "ПростоМария", message: "Привет ", date: Date(), online: true, hasUnreadMessage: true)
+        let item21 = ConversationList(name: "Кардебалет", message: "Привет ", date: Date(), online: true, hasUnreadMessage: true)
         
         conversationLists.append(item)
         conversationLists.append(item1)
@@ -148,6 +151,11 @@ extension ConversationsListViewController: UITableViewDataSource {
         conversationLists.append(item14)
         conversationLists.append(item15)
         conversationLists.append(item16)
+        conversationLists.append(item17)
+        conversationLists.append(item18)
+        conversationLists.append(item19)
+        conversationLists.append(item20)
+        conversationLists.append(item21)
 
         
         
@@ -158,9 +166,6 @@ extension ConversationsListViewController: UITableViewDataSource {
                 conversationListsHistory.append(i)
             }
         }
-        
-        self.tableView.reloadData()
-        
         
     }
     
