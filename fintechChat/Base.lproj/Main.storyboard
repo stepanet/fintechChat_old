@@ -252,7 +252,7 @@
                                             <outlet property="messageText" destination="QFS-vP-9EZ" id="9vu-c5-sdY"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyMessageCell" id="CuK-an-oad" customClass="MyMessageTableViewCell" customModule="fintechChat" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyMessageCell" id="CuK-an-oad" customClass="MessageTableViewCell" customModule="fintechChat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CuK-an-oad" id="Snx-gu-Lcc">
@@ -276,7 +276,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="messageText" destination="Tjx-B8-WkS" id="qDo-HQ-IPV"/>
+                                            <outlet property="messageText" destination="Tjx-B8-WkS" id="9JR-CY-6Fg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
