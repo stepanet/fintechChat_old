@@ -35,16 +35,25 @@
                                 <rect key="frame" x="80" y="164" width="160" height="30"/>
                                 <color key="backgroundColor" name="littelYellow"/>
                                 <state key="normal" title="Светлая тема"/>
+                                <connections>
+                                    <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="VqN-55-InF"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tru-sv-oLI">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tru-sv-oLI">
                                 <rect key="frame" x="80" y="317" width="160" height="30"/>
                                 <color key="backgroundColor" name="darkColor"/>
                                 <state key="normal" title="Темная тема"/>
+                                <connections>
+                                    <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="F7d-Xq-WIZ"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyE-EB-wpt">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyE-EB-wpt">
                                 <rect key="frame" x="80" y="481" width="160" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.87402923056899806" blue="0.61457146606090818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Шампань"/>
+                                <connections>
+                                    <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="EUo-FB-xhU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -10,10 +10,12 @@ import UIKit
 
 class ThemesViewController: UIViewController {
     
+    let theme = ThemeManager.currentTheme()
     
     @IBOutlet weak var ligthThemeBtn: UIButton!
     @IBOutlet weak var darkThemeBtn: UIButton!
     @IBOutlet weak var shampanThemeBtn: UIButton!
+    
     
 
 
@@ -21,7 +23,7 @@ class ThemesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupBtn()
+        setupBtnAndView()
         
     }
     
@@ -30,8 +32,10 @@ class ThemesViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    fileprivate func setupBtn() {
+    fileprivate func setupBtnAndView() {
         // Do any additional setup after loading the view.
+        
+        self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
         
         ligthThemeBtn.layer.cornerRadius = 5
         darkThemeBtn.layer.cornerRadius = 5
@@ -41,5 +45,27 @@ class ThemesViewController: UIViewController {
         shampanThemeBtn.clipsToBounds = true
     }
     
+    @IBAction func changeThemeAction(_ sender: UIButton) {
+        
+        switch sender.tag {
+        case 0:
+            print("ligth")
+            UserDefaults.standard.set(".ligth", forKey: "theme")
+            ThemeManager.applyTheme(theme: .ligth)
+            
+        case 1:
+            print("dark")
+            UserDefaults.standard.set(".dark", forKey: "theme")
+            ThemeManager.applyTheme(theme: .dark)
+        case 2:
+            print("shampan")
+            UserDefaults.standard.set(".shampan", forKey: "theme")
+            ThemeManager.applyTheme(theme: .shampan)
+        default:
+            break
+        }
 
+        self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
+    }
+    
 }

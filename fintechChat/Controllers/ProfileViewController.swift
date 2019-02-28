@@ -61,6 +61,8 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
             case imageViewAndPhotoBtn = 40
             case editBtn = 18
         }
+        
+        self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
 
         profileImageView.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue //radiusUI
         profileImageView.clipsToBounds = true
