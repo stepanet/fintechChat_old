@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3B17B99D2228820500D944F7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B17B99B2228820500D944F7 /* Settings.storyboard */; };
 		3B17B9A1222883D600D944F7 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17B9A0222883D600D944F7 /* ThemesViewController.swift */; };
-		3B17B9A4222884C500D944F7 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B17B9A2222884C500D944F7 /* Profile.storyboard */; };
 		3B17B9A6222888B200D944F7 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17B9A5222888B200D944F7 /* ThemeManager.swift */; };
 		3B2236EC222141F400561112 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2236EB222141F300561112 /* ConversationViewController.swift */; };
 		3B2DDB42221E0619005D5272 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2DDB41221E0619005D5272 /* ConversationsListViewController.swift */; };
@@ -26,7 +25,6 @@
 /* Begin PBXFileReference section */
 		3B17B99C2228820500D944F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = fintechChat/Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		3B17B9A0222883D600D944F7 /* ThemesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewController.swift; sourceTree = "<group>"; };
-		3B17B9A3222884C500D944F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = fintechChat/Storyboard/Base.lproj/Profile.storyboard; sourceTree = "<group>"; };
 		3B17B9A5222888B200D944F7 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		3B2236EB222141F300561112 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		3B2DDB41221E0619005D5272 /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
@@ -58,7 +56,6 @@
 			children = (
 				3BEF8BC8220B73AC00641B2B /* Main.storyboard */,
 				3BEF8BCD220B73AE00641B2B /* LaunchScreen.storyboard */,
-				3B17B9A2222884C500D944F7 /* Profile.storyboard */,
 				3B17B99B2228820500D944F7 /* Settings.storyboard */,
 			);
 			path = Storyboard;
@@ -175,7 +172,6 @@
 			files = (
 				3BEF8BCF220B73AE00641B2B /* LaunchScreen.storyboard in Resources */,
 				3BEF8BCC220B73AE00641B2B /* Assets.xcassets in Resources */,
-				3B17B9A4222884C500D944F7 /* Profile.storyboard in Resources */,
 				3BEF8BCA220B73AC00641B2B /* Main.storyboard in Resources */,
 				3B17B99D2228820500D944F7 /* Settings.storyboard in Resources */,
 			);
@@ -209,14 +205,6 @@
 				3B17B99C2228820500D944F7 /* Base */,
 			);
 			name = Settings.storyboard;
-			sourceTree = "<group>";
-		};
-		3B17B9A2222884C500D944F7 /* Profile.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3B17B9A3222884C500D944F7 /* Base */,
-			);
-			name = Profile.storyboard;
 			sourceTree = "<group>";
 		};
 		3BEF8BC8220B73AC00641B2B /* Main.storyboard */ = {
