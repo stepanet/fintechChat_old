@@ -33,7 +33,7 @@ class ThemesViewController: UIViewController {
     }
     
     fileprivate func setupBtnAndView() {
-        // Do any additional setup after loading the view.
+
         
         self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
         
@@ -50,16 +50,13 @@ class ThemesViewController: UIViewController {
         switch sender.tag {
         case 0:
             print("ligth")
-            UserDefaults.standard.set(".ligth", forKey: "theme")
             ThemeManager.applyTheme(theme: .ligth)
             
         case 1:
             print("dark")
-            UserDefaults.standard.set(".dark", forKey: "theme")
             ThemeManager.applyTheme(theme: .dark)
         case 2:
             print("shampan")
-            UserDefaults.standard.set(".shampan", forKey: "theme")
             ThemeManager.applyTheme(theme: .shampan)
         default:
             break

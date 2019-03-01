@@ -33,24 +33,30 @@
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DH0-Bp-5v6">
                                 <rect key="frame" x="80" y="164" width="160" height="30"/>
-                                <color key="backgroundColor" name="littelYellow"/>
-                                <state key="normal" title="Светлая тема"/>
+                                <color key="backgroundColor" red="0.56854259969999998" green="0.57249450680000002" blue="0.58038955930000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Светлая тема">
+                                    <color key="titleColor" name="yellowColor"/>
+                                </state>
                                 <connections>
                                     <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="VqN-55-InF"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tru-sv-oLI">
                                 <rect key="frame" x="80" y="317" width="160" height="30"/>
-                                <color key="backgroundColor" name="darkColor"/>
-                                <state key="normal" title="Темная тема"/>
+                                <color key="backgroundColor" red="0.56854259969999998" green="0.57249450680000002" blue="0.58038955930000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Темная тема">
+                                    <color key="titleColor" name="yellowColor"/>
+                                </state>
                                 <connections>
                                     <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="F7d-Xq-WIZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyE-EB-wpt">
                                 <rect key="frame" x="80" y="481" width="160" height="30"/>
-                                <color key="backgroundColor" red="1" green="0.87402923056899806" blue="0.61457146606090818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Шампань"/>
+                                <color key="backgroundColor" red="0.56854259969999998" green="0.57249450680000002" blue="0.58038955930000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Шампань">
+                                    <color key="titleColor" name="yellowColor"/>
+                                </state>
                                 <connections>
                                     <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="EUo-FB-xhU"/>
                                 </connections>
@@ -86,11 +92,8 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="darkColor">
-            <color red="0.096000000834465027" green="0.14800000190734863" blue="0.25900000333786011" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
-        <namedColor name="littelYellow">
-            <color red="1" green="1" blue="0.73299998044967651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="yellowColor">
+            <color red="0.97200000286102295" green="0.87000000476837158" blue="0.33700001239776611" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>

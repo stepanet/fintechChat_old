@@ -17,19 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        if let theme = userDefaults.object(forKey: "theme") {
-            print(theme)
-                switch theme as? String {
-                case ".ligth":
-                    ThemeManager.applyTheme(theme: .ligth)
-                case ".dark":
-                    print("dark theme selected")
-                    ThemeManager.applyTheme(theme: .dark)
-                case ".shampan":
-                    ThemeManager.applyTheme(theme: .shampan)
-                default:
-                    break
-                }
+            if let storedTheme = (UserDefaults.standard.value(forKey: SelectedThemeKey) as AnyObject).integerValue {
+                ThemeManager.applyTheme(theme: Theme(rawValue: storedTheme)!)
+
         }
 
         return true
