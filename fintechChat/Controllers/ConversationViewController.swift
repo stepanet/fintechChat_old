@@ -21,6 +21,7 @@ class ConversationViewController: UIViewController {
         
         loadMessage()
         self.navigationItem.title = conversationData[0].name
+        self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
 
     }
 
