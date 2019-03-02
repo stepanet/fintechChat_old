@@ -74,11 +74,19 @@ extension ConversationsListViewController: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? ConversationTableViewCell {
             
             //вместо переиспользования ячейки
-            cell.backgroundColor = UIColor.white
+            //cell.backgroundColor = UIColor.white
+            cell.backgroundColor = ThemeManager.currentTheme().backgroundColor
+            cell.nameLbl.textColor = ThemeManager.currentTheme().titleTextColor
+            cell.messageLbl.textColor = ThemeManager.currentTheme().titleTextColor
+            cell.dateLbl.textColor = ThemeManager.currentTheme().titleTextColor
+            
             
             switch indexPath.section {
             case 0:
                 let itemCellOnline = conversationListsOnline[indexPath.row]
+                cell.nameLbl.textColor = ThemeManager.currentTheme().subtitleTextColor
+                cell.messageLbl.textColor = ThemeManager.currentTheme().subtitleTextColor
+                cell.dateLbl.textColor = ThemeManager.currentTheme().subtitleTextColor
                 cell.backgroundColor = UIColor(named: "littelYellow")
                 cell.dataCell(itemCellOnline)
                 break
@@ -98,6 +106,7 @@ extension ConversationsListViewController: UITableViewDataSource {
     
     func loadData() {
         
+        self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         

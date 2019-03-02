@@ -15,9 +15,6 @@ class ThemesViewController: UIViewController {
     @IBOutlet weak var ligthThemeBtn: UIButton!
     @IBOutlet weak var darkThemeBtn: UIButton!
     @IBOutlet weak var shampanThemeBtn: UIButton!
-    
-    
-
 
     
     override func viewDidLoad() {

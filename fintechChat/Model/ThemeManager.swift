@@ -14,14 +14,14 @@ enum Theme: Int {
     
     case ligth, dark, shampan
     
-    var mainColor: UIColor {
+    var mainColor: UIColor {   //
         switch self {
         case .ligth:
-            return UIColor(named: "blueColor")!
+            return UIColor(named: "redColor")!
         case .dark:
-            return UIColor(named: "darkColor")!
+            return UIColor(named: "redColor")! //whiteColor
         case .shampan:
-            return UIColor(named: "littelYellow")!
+            return UIColor(named: "blueColor")!
         }
     }
 
@@ -36,10 +36,10 @@ enum Theme: Int {
         }
     }
     
-    var backgroundColor: UIColor {
+    var backgroundColor: UIColor {  //цвет фона
         switch self {
         case .ligth:
-            return UIColor(named: "blueColor")!
+            return UIColor(named: "whiteColor")!
         case .dark:
             return UIColor(named: "darkColor")!
         case .shampan:
@@ -47,14 +47,14 @@ enum Theme: Int {
         }
     }
     
-    var secondaryColor: UIColor {
+    var secondaryColor: UIColor {  //цвет кнопок навигации
         switch self {
         case .ligth:
-            return UIColor(named: "blueColor")!
+            return UIColor(named: "blackColor")! //blackColor
         case .dark:
-            return UIColor(named: "darkColor")!
+            return UIColor(named: "whiteColor")!
         case .shampan:
-            return UIColor(named: "littelYellow")!
+            return UIColor(named: "whiteColor")!
 
         }
     }
@@ -62,23 +62,35 @@ enum Theme: Int {
     var titleTextColor: UIColor {
         switch self {
         case .ligth:
-            return UIColor(named: "blueColor")!
+            return UIColor(named: "blackColor")! //blackColor
         case .dark:
-            return UIColor(named: "darkColor")!
+            return UIColor(named: "whiteColor")!
         case .shampan:
-            return UIColor(named: "littelYellow")!
+            return UIColor(named: "blueColor")!
 
         }
     }
     var subtitleTextColor: UIColor {
         switch self {
         case .ligth:
+            return UIColor(named: "blackColor")!
+        case .dark:
+            return UIColor(named: "blackColor")!
+        case .shampan:
+            return UIColor(named: "blackColor")!
+
+        }
+    }
+    
+    var editBtn: UIColor {
+        switch self {
+        case .ligth:
             return UIColor(named: "blueColor")!
         case .dark:
             return UIColor(named: "darkColor")!
         case .shampan:
-            return UIColor(named: "littelYellow")!
-
+            return UIColor(named: "blueColor")!
+            
         }
     }
 }
@@ -105,8 +117,8 @@ class ThemeManager {
         sharedApplication.delegate?.window??.tintColor = theme.mainColor
         
         UINavigationBar.appearance().barStyle = theme.barStyle
+        UINavigationBar.appearance().tintColor = theme.secondaryColor
+        UINavigationBar.appearance().backgroundColor = theme.backgroundColor
         UITabBar.appearance().barStyle = theme.barStyle
-//        UISwitch.appearance().onTintColor = theme.mainColor.withAlphaComponent(0.3)
-//        UISwitch.appearance().thumbTintColor = theme.mainColor
     }
 }

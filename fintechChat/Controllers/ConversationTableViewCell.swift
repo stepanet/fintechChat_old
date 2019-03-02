@@ -19,6 +19,7 @@ class ConversationTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
         // Initialization code
     }
 
@@ -29,8 +30,10 @@ class ConversationTableViewCell: UITableViewCell {
     }
     
    public func dataCell(_ conversationLists: ConversationCellConfiguration) {
-
+    
+        
         nameLbl.text = conversationLists.name
+
     
         if let second = conversationLists.date?.timeIntervalSince1970  {
             let timestampDate = Date(timeIntervalSince1970: second)

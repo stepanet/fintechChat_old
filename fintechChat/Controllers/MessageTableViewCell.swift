@@ -11,6 +11,7 @@ import UIKit
 class MessageTableViewCell: UITableViewCell {
 
     @IBOutlet weak var messageText: UILabel!
+    @IBOutlet weak var view: UIView!
     
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -22,13 +23,19 @@ class MessageTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        setupTheme()
+    }
+    
+    
+    fileprivate func setupTheme() {
+
         
         messageText.layer.cornerRadius = 5
         messageText.clipsToBounds = true
-        
+        self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        self.messageText.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        self.messageText.textColor = ThemeManager.currentTheme().titleTextColor
     }
-    
 
 
 }

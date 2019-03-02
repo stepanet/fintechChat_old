@@ -37,13 +37,13 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         setupUI()
         
         //не знаем точные размеры вью, поэтому берем размеры кнопки из Main.storyboard
-        print(editProfileBtn.frame)
+        //print(editProfileBtn.frame)
     }
     
     
     override func viewDidAppear(_ animated: Bool) {
         //уже известны точные размеры вью и размеры кнопки
-            print(editProfileBtn.frame)
+        //print(editProfileBtn.frame)
     }
     
     
@@ -59,23 +59,29 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         
         enum cornerRadius: CGFloat {
             case imageViewAndPhotoBtn = 40
-            case editBtn = 18
+            case editBtn = 5
         }
         
         self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        profileNameLbl.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        profileNameLbl.textColor = ThemeManager.currentTheme().titleTextColor
+        aboutProfileTextView.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        aboutProfileTextView.textColor = ThemeManager.currentTheme().titleTextColor
+        
 
         profileImageView.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue //radiusUI
         profileImageView.clipsToBounds = true
         
         takePicturesForProfile.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue
         takePicturesForProfile.clipsToBounds = true
+        takePicturesForProfile.backgroundColor = ThemeManager.currentTheme().editBtn
 
         editProfileBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
         editProfileBtn.clipsToBounds = true
-        editProfileBtn.tintColor = .black
+        editProfileBtn.tintColor = ThemeManager.currentTheme().titleTextColor
         editProfileBtn.layer.borderWidth = 1
-        editProfileBtn.layer.borderColor = UIColor.black.cgColor
-        editProfileBtn.backgroundColor = .white
+        editProfileBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor//UIColor.black.cgColor
+        editProfileBtn.backgroundColor = ThemeManager.currentTheme().backgroundColor
     }
     
  

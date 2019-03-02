@@ -19,14 +19,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorInsetReference="fromAutomaticInsets" rowHeight="67" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="g3G-sR-I7e">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorInsetReference="fromAutomaticInsets" rowHeight="67" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g3G-sR-I7e">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <color key="separatorColor" name="darkColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="separatorInset" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="67" id="5m7-JV-Dxc" customClass="ConversationTableViewCell" customModule="fintechChat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="67"/>
+                                        <rect key="frame" x="0.0" y="28" width="320" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5m7-JV-Dxc" id="rvT-qw-2PC">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="66.5"/>
@@ -78,7 +77,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="g3G-sR-I7e" firstAttribute="trailing" secondItem="54m-6w-tiv" secondAttribute="trailing" id="Fdv-0L-YKL"/>
                             <constraint firstItem="g3G-sR-I7e" firstAttribute="top" secondItem="54m-6w-tiv" secondAttribute="top" id="XKa-uH-N22"/>
@@ -94,7 +92,6 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Profile" image="profile" style="done" id="zxr-Ga-hEJ">
-                            <color key="tintColor" name="darkColor"/>
                             <connections>
                                 <segue destination="q1E-8R-bCk" kind="presentation" identifier="ShowDetails" id="aBM-hk-fmm"/>
                             </connections>
@@ -163,6 +160,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageText" destination="QFS-vP-9EZ" id="9vu-c5-sdY"/>
+                                            <outlet property="view" destination="PqQ-SG-hEb" id="pXt-1u-9aJ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MyMessageCell" id="CuK-an-oad" customClass="MessageTableViewCell" customModule="fintechChat" customModuleProvider="target">
@@ -190,6 +188,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="messageText" destination="Tjx-B8-WkS" id="9JR-CY-6Fg"/>
+                                            <outlet property="view" destination="Snx-gu-Lcc" id="fag-jG-ScQ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -246,7 +245,7 @@
                                 <rect key="frame" x="16" y="368" width="288" height="67"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <color key="textColor" name="darkColor"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="246" verticalCompressionResistancePriority="753" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tdk-fc-srJ">
@@ -254,20 +253,16 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Исчерпавший свою удачу капитан Джек Воробей обнаруживает, что за ним охотится его старый неприятель, ужасный капитан Салазар и его призрачные пираты.</string>
-                                <color key="textColor" name="darkColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnW-3w-3u6">
                                 <rect key="frame" x="16" y="521" width="288" height="39"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <color key="tintColor" name="darkColor"/>
                                 <state key="normal" title="Редактировать"/>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4o-ha-Io8">
                                 <rect key="frame" x="224" y="280" width="80" height="80"/>
-                                <color key="backgroundColor" name="blueColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="QKy-3U-EzQ"/>
                                     <constraint firstAttribute="height" constant="80" id="nXC-3v-zKS"/>
@@ -342,12 +337,6 @@
         <image name="placeholder-user" width="600" height="600"/>
         <image name="profile" width="17.280000686645508" height="17.280000686645508"/>
         <image name="slr-camera-2-xxl" width="96" height="96"/>
-        <namedColor name="blueColor">
-            <color red="0.24705882352941178" green="0.47058823529411764" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="darkColor">
-            <color red="0.096000000834465027" green="0.14800000190734863" blue="0.25900000333786011" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-        </namedColor>
         <namedColor name="yellowColor">
             <color red="0.97200000286102295" green="0.87000000476837158" blue="0.33700001239776611" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
