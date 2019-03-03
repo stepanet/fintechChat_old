@@ -17,9 +17,9 @@ enum Theme: Int {
     var mainColor: UIColor {   //
         switch self {
         case .ligth:
-            return UIColor(named: "redColor")!
+            return UIColor(named: "blackColor")!
         case .dark:
-            return UIColor(named: "redColor")! //whiteColor
+            return UIColor(named: "blackColor")! //whiteColor
         case .shampan:
             return UIColor(named: "blueColor")!
         }
@@ -62,7 +62,7 @@ enum Theme: Int {
     var titleTextColor: UIColor {
         switch self {
         case .ligth:
-            return UIColor(named: "blackColor")! //blackColor
+            return UIColor(named: "blackColor")!
         case .dark:
             return UIColor(named: "whiteColor")!
         case .shampan:

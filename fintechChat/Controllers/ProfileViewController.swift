@@ -150,7 +150,10 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         alertController.addAction(actionPhoto)
         alertController.addAction(actionLibrary)
         alertController.addAction(actionCancel)
-        alertController.addAction(deletePhotoProfile)
+        if self.profileImageView.image != UIImage(named: "placeholder-user") {
+            alertController.addAction(deletePhotoProfile)
+            
+        }
         self.present(alertController, animated: true, completion: nil)
     }
     
