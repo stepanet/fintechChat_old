@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3B17B99D2228820500D944F7 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B17B99B2228820500D944F7 /* Settings.storyboard */; };
-		3B17B9A1222883D600D944F7 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17B9A0222883D600D944F7 /* ThemesViewController.swift */; };
 		3B17B9A6222888B200D944F7 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17B9A5222888B200D944F7 /* ThemeManager.swift */; };
 		3B2236EC222141F400561112 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2236EB222141F300561112 /* ConversationViewController.swift */; };
 		3B2DDB42221E0619005D5272 /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2DDB41221E0619005D5272 /* ConversationsListViewController.swift */; };
@@ -17,6 +16,9 @@
 		3B3ADE912214BEBF000D97B5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3ADE902214BEBF000D97B5 /* ProfileViewController.swift */; };
 		3BB73B7E22215D1B00EB5FA8 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB73B7D22215D1B00EB5FA8 /* MessageTableViewCell.swift */; };
 		3BCD0B6A2229F7DE0028A768 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBDC58A2229F5DE00880D79 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		3BDA63E8222D0E5800D381D8 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDA63E7222D0E5800D381D8 /* ThemesViewController.m */; };
+		3BDA63EB222D0FCD00D381D8 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDA63EA222D0FCD00D381D8 /* Themes.m */; };
+		3BDA63EE222D49CC00D381D8 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17B9A0222883D600D944F7 /* ThemesViewController.swift */; };
 		3BEF8BC5220B73AC00641B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEF8BC4220B73AC00641B2B /* AppDelegate.swift */; };
 		3BEF8BCA220B73AC00641B2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BEF8BC8220B73AC00641B2B /* Main.storyboard */; };
 		3BEF8BCC220B73AE00641B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BEF8BCB220B73AE00641B2B /* Assets.xcassets */; };
@@ -34,6 +36,12 @@
 		3B3ADE902214BEBF000D97B5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3BB73B7D22215D1B00EB5FA8 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		3BBDC58A2229F5DE00880D79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3BDA63E5222D0E5700D381D8 /* fintechChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fintechChat-Bridging-Header.h"; sourceTree = "<group>"; };
+		3BDA63E6222D0E5800D381D8 /* ThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewController.h; sourceTree = "<group>"; };
+		3BDA63E7222D0E5800D381D8 /* ThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
+		3BDA63E9222D0FCD00D381D8 /* Themes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Themes.h; sourceTree = "<group>"; };
+		3BDA63EA222D0FCD00D381D8 /* Themes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Themes.m; sourceTree = "<group>"; };
+		3BDA63EC222D106C00D381D8 /* ThemesViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewControllerDelegate.h; sourceTree = "<group>"; };
 		3BEF8BC1220B73AC00641B2B /* fintechChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fintechChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BEF8BC4220B73AC00641B2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BEF8BC9220B73AC00641B2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -73,6 +81,8 @@
 				3BB73B7D22215D1B00EB5FA8 /* MessageTableViewCell.swift */,
 				3B3ADE902214BEBF000D97B5 /* ProfileViewController.swift */,
 				3B17B9A0222883D600D944F7 /* ThemesViewController.swift */,
+				3BDA63E5222D0E5700D381D8 /* fintechChat-Bridging-Header.h */,
+				3BDA63ED222D121900D381D8 /* ObjC */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -92,6 +102,18 @@
 				3BBDC58A2229F5DE00880D79 /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3BDA63ED222D121900D381D8 /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				3BDA63E9222D0FCD00D381D8 /* Themes.h */,
+				3BDA63EA222D0FCD00D381D8 /* Themes.m */,
+				3BDA63EC222D106C00D381D8 /* ThemesViewControllerDelegate.h */,
+				3BDA63E6222D0E5800D381D8 /* ThemesViewController.h */,
+				3BDA63E7222D0E5800D381D8 /* ThemesViewController.m */,
+			);
+			path = ObjC;
 			sourceTree = "<group>";
 		};
 		3BEF8BB8220B73AC00641B2B = {
@@ -156,6 +178,7 @@
 				TargetAttributes = {
 					3BEF8BC0220B73AC00641B2B = {
 						CreatedOnToolsVersion = 10.2;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -197,12 +220,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BB73B7E22215D1B00EB5FA8 /* MessageTableViewCell.swift in Sources */,
+				3BDA63EB222D0FCD00D381D8 /* Themes.m in Sources */,
 				3B2DDB44221E0A25005D5272 /* ConversationTableViewCell.swift in Sources */,
-				3B17B9A1222883D600D944F7 /* ThemesViewController.swift in Sources */,
+				3BDA63E8222D0E5800D381D8 /* ThemesViewController.m in Sources */,
 				3B3ADE912214BEBF000D97B5 /* ProfileViewController.swift in Sources */,
 				3B2236EC222141F400561112 /* ConversationViewController.swift in Sources */,
 				3B17B9A6222888B200D944F7 /* ThemeManager.swift in Sources */,
 				3B2DDB46221E0C3C005D5272 /* ConversationsList.swift in Sources */,
+				3BDA63EE222D49CC00D381D8 /* ThemesViewController.swift in Sources */,
 				3BEF8BC5220B73AC00641B2B /* AppDelegate.swift in Sources */,
 				3B2DDB42221E0619005D5272 /* ConversationsListViewController.swift in Sources */,
 			);
@@ -358,6 +383,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7A2MDG26ZT;
 				INFOPLIST_FILE = fintechChat/Info.plist;
@@ -369,6 +395,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.stepanet.fintechChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG SHOWLOG";
+				SWIFT_OBJC_BRIDGING_HEADER = "fintechChat/Controllers/fintechChat-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -378,6 +406,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7A2MDG26ZT;
 				INFOPLIST_FILE = fintechChat/Info.plist;
@@ -388,6 +417,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.stepanet.fintechChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "fintechChat/Controllers/fintechChat-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

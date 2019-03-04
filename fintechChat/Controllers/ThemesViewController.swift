@@ -20,7 +20,7 @@ class ThemesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupBtnAndView()
+        setupBtnAndView() //for Krutanoff
         
     }
     

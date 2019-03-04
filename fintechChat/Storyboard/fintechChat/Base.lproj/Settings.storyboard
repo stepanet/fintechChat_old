@@ -15,7 +15,7 @@
         <scene sceneID="Rma-J6-t48">
             <objects>
                 <viewController id="Yxw-jp-ARG" customClass="ThemesViewController" customModule="fintechChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="UiR-HA-KAU">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="UiR-HA-KAU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -25,7 +25,7 @@
                                     <navigationItem title="Настройки" id="zr3-nb-mXd">
                                         <barButtonItem key="leftBarButtonItem" title="Закрыть" id="ici-dr-N7S">
                                             <connections>
-                                                <action selector="closeThemeView:" destination="Yxw-jp-ARG" id="Wdj-Zo-fls"/>
+                                                <action selector="closeThemeView:" destination="Yxw-jp-ARG" id="0k7-Yg-uO1"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -38,7 +38,7 @@
                                     <color key="titleColor" name="yellowColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="VqN-55-InF"/>
+                                    <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="pTQ-aB-Ujm"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tru-sv-oLI">
@@ -48,7 +48,7 @@
                                     <color key="titleColor" name="yellowColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="F7d-Xq-WIZ"/>
+                                    <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="hTm-Xt-scq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyE-EB-wpt">
@@ -58,11 +58,11 @@
                                     <color key="titleColor" name="yellowColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="EUo-FB-xhU"/>
+                                    <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="Tvt-d8-9eV"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="yellowColor"/>
                         <constraints>
                             <constraint firstItem="NTo-mA-Z8N" firstAttribute="top" secondItem="L0B-z2-PQe" secondAttribute="top" id="5aG-jW-6fE"/>
                             <constraint firstItem="NTo-mA-Z8N" firstAttribute="centerX" secondItem="DH0-Bp-5v6" secondAttribute="centerX" id="A62-ne-KeY"/>
@@ -81,9 +81,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="se8-tc-wH9"/>
                     <connections>
-                        <outlet property="darkThemeBtn" destination="tru-sv-oLI" id="N1r-La-c20"/>
-                        <outlet property="ligthThemeBtn" destination="DH0-Bp-5v6" id="8wT-SV-ttr"/>
-                        <outlet property="shampanThemeBtn" destination="gyE-EB-wpt" id="hJL-aZ-W2U"/>
+                        <outlet property="darkThemeBtn" destination="tru-sv-oLI" id="9wp-EL-hBO"/>
+                        <outlet property="ligthThemeBtn" destination="DH0-Bp-5v6" id="o4V-W7-JeC"/>
+                        <outlet property="shampanThemeBtn" destination="gyE-EB-wpt" id="cgA-QX-Hfg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IWi-Hh-riJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
