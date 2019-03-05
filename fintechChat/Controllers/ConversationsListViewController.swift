@@ -8,13 +8,16 @@
 
 import UIKit
 
-class ConversationsListViewController: UIViewController {
 
+
+class ConversationsListViewController: UIViewController {
+    @IBOutlet var tableView: UITableView!
+    
     var conversationLists = [ConversationList]()
     var conversationListsOnline = [ConversationList]()
     var conversationListsHistory = [ConversationList]()
     var conversationData = [ConversationList]()
-    var tableView = UITableView()
+
     
  
     override func viewDidLoad() {
@@ -23,6 +26,7 @@ class ConversationsListViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         loadData()
+
     }
 }
 
@@ -32,7 +36,6 @@ extension ConversationsListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         return section == 0 ? "Online" : "History"
-
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -45,7 +48,7 @@ extension ConversationsListViewController: UITableViewDataSource {
  
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        if indexPath.section == 0{
+        if indexPath.section == 0 {
             conversationData = [conversationListsOnline[indexPath.row]]
         } else {
             conversationData = [conversationListsHistory[indexPath.row]]
@@ -74,11 +77,10 @@ extension ConversationsListViewController: UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? ConversationTableViewCell {
             
             //вместо переиспользования ячейки
-            //cell.backgroundColor = UIColor.white
-            cell.backgroundColor = ThemeManager.currentTheme().backgroundColor
-            cell.nameLbl.textColor = ThemeManager.currentTheme().titleTextColor
-            cell.messageLbl.textColor = ThemeManager.currentTheme().titleTextColor
-            cell.dateLbl.textColor = ThemeManager.currentTheme().titleTextColor
+//            cell.backgroundColor = ThemeManager.currentTheme().backgroundColor
+//            cell.nameLbl.textColor = ThemeManager.currentTheme().titleTextColor
+//            cell.messageLbl.textColor = ThemeManager.currentTheme().titleTextColor
+//            cell.dateLbl.textColor = ThemeManager.currentTheme().titleTextColor
             
             
             switch indexPath.section {
@@ -92,6 +94,10 @@ extension ConversationsListViewController: UITableViewDataSource {
                 break
             case 1:
                 let itemCellHistory = conversationListsHistory[indexPath.row]
+                cell.backgroundColor = ThemeManager.currentTheme().backgroundColor
+                cell.nameLbl.textColor = ThemeManager.currentTheme().titleTextColor
+                cell.messageLbl.textColor = ThemeManager.currentTheme().titleTextColor
+                cell.dateLbl.textColor = ThemeManager.currentTheme().titleTextColor
                 cell.dataCell(itemCellHistory)
                 break
             default:
@@ -105,6 +111,10 @@ extension ConversationsListViewController: UITableViewDataSource {
 
     
     func loadData() {
+        
+        conversationLists.removeAll()
+        conversationListsOnline.removeAll()
+        conversationListsHistory.removeAll()
         
         self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
         let dateFormatter = DateFormatter()
@@ -164,5 +174,12 @@ extension ConversationsListViewController: UITableViewDataSource {
             }
         }
     }
+    
+
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
+    
     
 }

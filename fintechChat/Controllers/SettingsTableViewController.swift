@@ -10,19 +10,19 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
-    @IBOutlet var themeColorBtn: UIButton!
+    @IBOutlet var contentView: UIView!
     
+    @IBOutlet var titleLbl: UILabel!
+    @IBOutlet var cell: UITableViewCell!
+    
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       // themeColorBtn.layer.cornerRadius = 5
+    }
 
-    }
-    
-    @IBAction func themeOpenSetAction(_ sender: UIButton) {
-        
-    }
     
     @IBAction func closeView(_ sender: UIBarButtonItem) {
         
@@ -39,5 +39,17 @@ class SettingsTableViewController: UITableViewController {
         }
         
         
+    }
+    
+    override func viewWillLayoutSubviews() {
+                themeSetup()
+    }
+    
+    fileprivate func themeSetup() {
+       
+        contentView.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        tableView.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        titleLbl.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        titleLbl.textColor = ThemeManager.currentTheme().titleTextColor
     }
 }

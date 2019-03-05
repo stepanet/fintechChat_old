@@ -30,10 +30,8 @@ class ConversationTableViewCell: UITableViewCell {
     }
     
    public func dataCell(_ conversationLists: ConversationCellConfiguration) {
-    
-        
+            
         nameLbl.text = conversationLists.name
-
     
         if let second = conversationLists.date?.timeIntervalSince1970  {
             let timestampDate = Date(timeIntervalSince1970: second)
@@ -62,17 +60,8 @@ class ConversationTableViewCell: UITableViewCell {
         
     }
     
-    
     public static func daysBetween(start: Date, end: Date) -> Int {
         return Calendar.current.dateComponents([.day], from: start, to: end).day!
-    }
-    
-    override func prepareForReuse() {
-//        print("prepare`for Use")
-//        nameLbl.textColor = ThemeManager.currentTheme().titleTextColor
-//        messageLbl.textColor = ThemeManager.currentTheme().titleTextColor
-//        dateLbl.textColor = ThemeManager.currentTheme().titleTextColor
-
     }
 
 }
