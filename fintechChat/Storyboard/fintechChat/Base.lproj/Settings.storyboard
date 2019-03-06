@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yxw-jp-ARG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Yxw-jp-ARG">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.47"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -32,37 +32,39 @@
                                 </items>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DH0-Bp-5v6">
-                                <rect key="frame" x="80" y="164" width="160" height="30"/>
-                                <color key="backgroundColor" red="0.56854259969999998" green="0.57249450680000002" blue="0.58038955930000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="40" y="114" width="240" height="36"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="Светлая тема">
-                                    <color key="titleColor" name="yellowColor"/>
+                                    <color key="titleColor" name="darkColor"/>
                                 </state>
                                 <connections>
                                     <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="pTQ-aB-Ujm"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tru-sv-oLI">
-                                <rect key="frame" x="80" y="317" width="160" height="30"/>
-                                <color key="backgroundColor" red="0.56854259969999998" green="0.57249450680000002" blue="0.58038955930000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="40" y="200" width="240" height="36"/>
+                                <color key="backgroundColor" name="darkColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="Темная тема">
-                                    <color key="titleColor" name="yellowColor"/>
+                                    <color key="titleColor" name="whiteColor"/>
                                 </state>
                                 <connections>
                                     <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="hTm-Xt-scq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyE-EB-wpt">
-                                <rect key="frame" x="80" y="481" width="160" height="30"/>
-                                <color key="backgroundColor" red="0.56854259969999998" green="0.57249450680000002" blue="0.58038955930000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="40" y="286" width="240" height="36"/>
+                                <color key="backgroundColor" name="littelYellow"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="Шампань">
-                                    <color key="titleColor" name="yellowColor"/>
+                                    <color key="titleColor" name="darkColor"/>
                                 </state>
                                 <connections>
                                     <action selector="changeThemeAction:" destination="Yxw-jp-ARG" eventType="touchUpInside" id="Tvt-d8-9eV"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" name="yellowColor"/>
                         <constraints>
                             <constraint firstItem="NTo-mA-Z8N" firstAttribute="top" secondItem="L0B-z2-PQe" secondAttribute="top" id="5aG-jW-6fE"/>
                             <constraint firstItem="NTo-mA-Z8N" firstAttribute="centerX" secondItem="DH0-Bp-5v6" secondAttribute="centerX" id="A62-ne-KeY"/>
@@ -71,11 +73,11 @@
                             <constraint firstItem="NTo-mA-Z8N" firstAttribute="leading" secondItem="UiR-HA-KAU" secondAttribute="leading" id="Jrv-I6-pt1"/>
                             <constraint firstItem="tru-sv-oLI" firstAttribute="width" secondItem="DH0-Bp-5v6" secondAttribute="width" id="U4l-bK-nGZ"/>
                             <constraint firstItem="tru-sv-oLI" firstAttribute="centerX" secondItem="L0B-z2-PQe" secondAttribute="centerX" id="ZAV-Hy-g8X"/>
-                            <constraint firstItem="gyE-EB-wpt" firstAttribute="top" secondItem="tru-sv-oLI" secondAttribute="bottom" constant="134" id="bRq-Yg-gOe"/>
-                            <constraint firstItem="tru-sv-oLI" firstAttribute="top" secondItem="DH0-Bp-5v6" secondAttribute="bottom" constant="123" id="dAs-Sx-4Z6"/>
-                            <constraint firstItem="DH0-Bp-5v6" firstAttribute="top" secondItem="NTo-mA-Z8N" secondAttribute="bottom" constant="100" id="eUD-ar-LUh"/>
+                            <constraint firstItem="gyE-EB-wpt" firstAttribute="top" secondItem="tru-sv-oLI" secondAttribute="bottom" constant="50" id="bRq-Yg-gOe"/>
+                            <constraint firstItem="tru-sv-oLI" firstAttribute="top" secondItem="DH0-Bp-5v6" secondAttribute="bottom" constant="50" id="dAs-Sx-4Z6"/>
+                            <constraint firstItem="DH0-Bp-5v6" firstAttribute="top" secondItem="NTo-mA-Z8N" secondAttribute="bottom" constant="50" id="eUD-ar-LUh"/>
                             <constraint firstItem="gyE-EB-wpt" firstAttribute="centerX" secondItem="L0B-z2-PQe" secondAttribute="centerX" id="rUi-j6-twK"/>
-                            <constraint firstItem="DH0-Bp-5v6" firstAttribute="width" secondItem="UiR-HA-KAU" secondAttribute="width" multiplier="2/4" id="udG-Ei-7nd"/>
+                            <constraint firstItem="DH0-Bp-5v6" firstAttribute="width" secondItem="UiR-HA-KAU" secondAttribute="width" multiplier="3/4" id="udG-Ei-7nd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="L0B-z2-PQe"/>
                     </view>
@@ -92,8 +94,14 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="yellowColor">
-            <color red="0.97200000286102295" green="0.87000000476837158" blue="0.33700001239776611" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        <namedColor name="darkColor">
+            <color red="0.096000000834465027" green="0.14800000190734863" blue="0.25900000333786011" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="littelYellow">
+            <color red="1" green="1" blue="0.73299998044967651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="whiteColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

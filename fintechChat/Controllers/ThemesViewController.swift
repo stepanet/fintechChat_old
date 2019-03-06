@@ -40,6 +40,16 @@ class ThemesViewController: UIViewController {
         ligthThemeBtn.clipsToBounds = true
         darkThemeBtn.clipsToBounds = true
         shampanThemeBtn.clipsToBounds = true
+        
+        ligthThemeBtn.layer.borderWidth = 1
+        ligthThemeBtn.layer.borderColor = ThemeManager.currentTheme().subtitleTextColor.cgColor
+        
+        darkThemeBtn.layer.borderWidth = 1
+        darkThemeBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor
+        
+        shampanThemeBtn.layer.borderWidth = 1
+        shampanThemeBtn.layer.borderColor = ThemeManager.currentTheme().subtitleTextColor.cgColor
+        
     }
     
     @IBAction func changeThemeAction(_ sender: UIButton) {

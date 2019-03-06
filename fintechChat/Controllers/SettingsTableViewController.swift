@@ -9,15 +9,14 @@
 import UIKit
 
 class SettingsTableViewController: UITableViewController {
-
+    @IBOutlet var imageCell: UIImageView!
+    
     @IBOutlet var contentView: UIView!
     
     @IBOutlet var titleLbl: UILabel!
     @IBOutlet var cell: UITableViewCell!
     
-    
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,14 +30,10 @@ class SettingsTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.section, indexPath.row)
-        
         if indexPath.section == 0 && indexPath.row == 0 {
            
             self.performSegue(withIdentifier: "ColorThemeView", sender: self)
         }
-        
-        
     }
     
     override func viewWillLayoutSubviews() {
@@ -51,5 +46,6 @@ class SettingsTableViewController: UITableViewController {
         tableView.backgroundColor = ThemeManager.currentTheme().backgroundColor
         titleLbl.backgroundColor = ThemeManager.currentTheme().backgroundColor
         titleLbl.textColor = ThemeManager.currentTheme().titleTextColor
+
     }
 }

@@ -28,7 +28,6 @@ class MessageTableViewCell: UITableViewCell {
     
     
     fileprivate func setupTheme() {
-
         
         messageText.layer.cornerRadius = 5
         messageText.clipsToBounds = true

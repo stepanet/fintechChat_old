@@ -70,6 +70,7 @@
                     <connections>
                         <outlet property="cell" destination="OIs-Es-buX" id="iCt-7R-3QC"/>
                         <outlet property="contentView" destination="KaL-46-Lgf" id="fLL-m8-fNa"/>
+                        <outlet property="imageCell" destination="kkD-5v-w9C" id="W9z-yS-7Cj"/>
                         <outlet property="titleLbl" destination="5Kp-WK-ntb" id="7Yg-RR-aYl"/>
                         <segue destination="39N-FS-tq5" kind="presentation" identifier="ColorThemeView" modalTransitionStyle="flipHorizontal" id="kUD-in-BXf"/>
                     </connections>

@@ -99,8 +99,8 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
                 return
             }
              picker.sourceType = .camera
-        case .photoLibrary:
-            picker.sourceType = .photoLibrary
+            case .photoLibrary:
+                picker.sourceType = .photoLibrary
         }
         present(picker, animated: true, completion: nil)
 
