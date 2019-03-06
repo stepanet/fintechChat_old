@@ -12,10 +12,13 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var takePicturesForProfile: UIButton!
-    @IBOutlet weak var profileNameLbl: UILabel!
+    @IBOutlet var profileNameTxt: UITextField!
+    
     @IBOutlet weak var aboutProfileTextView: UITextView!
-    @IBOutlet weak var editProfileBtn: UIButton!
-
+    @IBOutlet weak var gcdBtn: UIButton!
+    @IBOutlet var operationBtn: UIButton!
+    @IBOutlet var editBtn: UIButton!
+    
     
     enum ImageSource {
         case photoLibrary
@@ -62,9 +65,13 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
             case editBtn = 5
         }
         
+        gcdBtn.isHidden = true
+        operationBtn.isHidden = true
+        editBtn.isHidden = false
+        
         self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
-        profileNameLbl.backgroundColor = ThemeManager.currentTheme().backgroundColor
-        profileNameLbl.textColor = ThemeManager.currentTheme().titleTextColor
+        profileNameTxt.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        profileNameTxt.textColor = ThemeManager.currentTheme().titleTextColor
         aboutProfileTextView.backgroundColor = ThemeManager.currentTheme().backgroundColor
         aboutProfileTextView.textColor = ThemeManager.currentTheme().titleTextColor
         
@@ -76,12 +83,26 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         takePicturesForProfile.clipsToBounds = true
         takePicturesForProfile.backgroundColor = ThemeManager.currentTheme().editBtn
 
-        editProfileBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
-        editProfileBtn.clipsToBounds = true
-        editProfileBtn.tintColor = ThemeManager.currentTheme().titleTextColor
-        editProfileBtn.layer.borderWidth = 1
-        editProfileBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor//UIColor.black.cgColor
-        editProfileBtn.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        gcdBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
+        gcdBtn.clipsToBounds = true
+        gcdBtn.tintColor = ThemeManager.currentTheme().titleTextColor
+        gcdBtn.layer.borderWidth = 1
+        gcdBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor//UIColor.black.cgColor
+        gcdBtn.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        
+        operationBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
+        operationBtn.clipsToBounds = true
+        operationBtn.tintColor = ThemeManager.currentTheme().titleTextColor
+        operationBtn.layer.borderWidth = 1
+        operationBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor//UIColor.black.cgColor
+        operationBtn.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        
+        editBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
+        editBtn.clipsToBounds = true
+        editBtn.tintColor = ThemeManager.currentTheme().titleTextColor
+        editBtn.layer.borderWidth = 1
+        editBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor//UIColor.black.cgColor
+        editBtn.backgroundColor = ThemeManager.currentTheme().backgroundColor
     }
     
  
@@ -161,6 +182,32 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     @IBAction func closeProfileView(_ sender: UIBarButtonItem) {
         
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func editData(_ sender: UIButton) {
+        
+        editBtn.isHidden = true
+        gcdBtn.isHidden = false
+        operationBtn.isHidden = false
+        
+    }
+    
+    @IBAction func safeData(_ sender: UIButton) {
+       
+        editBtn.isHidden = false
+        gcdBtn.isHidden = true
+        operationBtn.isHidden = true
+        
+        switch sender.tag {
+        case 0:
+            print(gcdBtn.titleLabel?.text)
+        case 1:
+            print(operationBtn.titleLabel?.text!)
+            
+        default:
+            break
+        }
+        
     }
     
 }
