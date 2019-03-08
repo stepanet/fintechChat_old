@@ -8,6 +8,13 @@
 
 import UIKit
 
+class QueueChoice {
+    let queueGlobal = DispatchQueue.global()
+    let queueMain = DispatchQueue.main
+    let operation = OperationQueue.main
+}
+
+
 class ProfileViewController: UIViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
 
     @IBOutlet weak var profileImageView: UIImageView!
@@ -18,6 +25,11 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     @IBOutlet weak var gcdBtn: UIButton!
     @IBOutlet var operationBtn: UIButton!
     @IBOutlet var editBtn: UIButton!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    
+    
+    var saveDataOnMemory = SaveData()
+    let queue = QueueChoice()
     
     
     enum ImageSource {
@@ -29,24 +41,26 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         //невозможно. еще не определены view, subview, переменные
-        //print(editProfileBtn.frame)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //настроим интерфейс
-        setupUI()
-        
-        //не знаем точные размеры вью, поэтому берем размеры кнопки из Main.storyboard
-        //print(editProfileBtn.frame)
+        loadProfileData()
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        //настроим интерфейс
+        setupUI()
+        btnUnHidden()
+
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
+        
         //уже известны точные размеры вью и размеры кнопки
-        //print(editProfileBtn.frame)
     }
     
     
@@ -55,7 +69,13 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         takePhotoProfile(cameraOff: false)
     }
 
-
+    
+    private func loadProfileData() {
+        queue.queueMain.async {
+            self.profileImageView.image = ReadWriteData.getImage(nameOfFile: "userprofile.jpg")
+        }
+    }
+    
     private func setupUI() {
     
         //можно было сделать через user defined runtime attributes, но здесь более наглядно  и понятно и редактировать удобней
@@ -64,12 +84,10 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
             case imageViewAndPhotoBtn = 40
             case editBtn = 5
         }
-        
-        gcdBtn.isHidden = true
-        operationBtn.isHidden = true
-        editBtn.isHidden = false
+
         
         self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
+        profileNameTxt.isEnabled = false
         profileNameTxt.backgroundColor = ThemeManager.currentTheme().backgroundColor
         profileNameTxt.textColor = ThemeManager.currentTheme().titleTextColor
         aboutProfileTextView.backgroundColor = ThemeManager.currentTheme().backgroundColor
@@ -78,7 +96,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
         profileImageView.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue //radiusUI
         profileImageView.clipsToBounds = true
-        
+
         takePicturesForProfile.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue
         takePicturesForProfile.clipsToBounds = true
         takePicturesForProfile.backgroundColor = ThemeManager.currentTheme().editBtn
@@ -139,7 +157,11 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         if let selectedImage = selectImageFromPicker {
             profileImageView.image = selectedImage
         }
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: {
+            self.btnEnable()
+            self.btnHidden()
+            self.setupUI()
+        })
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -159,12 +181,15 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         let actionPhoto = UIAlertAction(title: titleForCamera , style: .default) { (action) in
             
             self.handleSelectProfileImageView(.camera)
+
         }
         let actionLibrary = UIAlertAction(title: "Библиотека", style: .default) { (action) in
             self.handleSelectProfileImageView(.photoLibrary)
+
         }
         let deletePhotoProfile = UIAlertAction(title: "Удалить фото", style: .destructive) { (action) in
             self.profileImageView.image = UIImage(named: "placeholder-user")
+
         }
         let actionCancel = UIAlertAction(title: "Отмена", style: .cancel) { (action) in
         }
@@ -184,31 +209,121 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         dismiss(animated: true, completion: nil)
     }
     
+    
+    //открываем возможность редактировать профиль
     @IBAction func editData(_ sender: UIButton) {
-        
-        editBtn.isHidden = true
-        gcdBtn.isHidden = false
-        operationBtn.isHidden = false
-        
+        self.profileNameTxt.isEnabled = true
+        self.btnHidden()
+        self.btnDisable()
+    }
+
+
+    //если начато редактирование - активировать кнопки записи
+    @IBAction func editActionStart(_ sender: Any) {
+        self.btnEnable()
     }
     
     @IBAction func safeData(_ sender: UIButton) {
-       
+
+        let selectedImage = self.profileImageView.image!
+        self.activityIndicator.startAnimating()
+  
+        switch sender.tag {
+        case 0:
+            self.btnDisable()
+            //save data try
+            
+            queue.queueGlobal.async {
+                self.queue.queueGlobal.async {
+                    ReadWriteData.saveImageDocumentDirectory(nameOfFile: "userprofile.jpg", selectedImage: selectedImage)
+                }
+                self.saveData()
+            }
+        case 1:
+                self.btnDisable()
+                //save data try
+                queue.queueGlobal.async {
+                    self.saveData()
+                }
+                default:
+                    break
+            }
+
+    }
+    
+
+    //safe data
+    fileprivate func saveData() {
+        let queue = QueueChoice()
+        for i in 1...30000 {
+            print(i)
+            if i == 30000 {
+                queue.queueMain.async {
+                    
+                    //для проверки ошибки записи
+                    let randomInt = Int.random(in: 0...1)
+                    if randomInt == 1 {
+                        self.saveDataOnMemory.saveData = false
+                    }
+                    
+                    self.btnAfterSave()
+                    self.showAlert(textMessage: self.saveDataOnMemory.textAlertFunc())
+                }
+            }
+        }
+    }
+    
+    
+    
+    //button and activity state
+    fileprivate func btnAfterSave() {
+        self.btnEnable()
+        self.btnUnHidden()
+        self.activityIndicator.stopAnimating()
+    }
+    
+    //safe button disable
+    fileprivate func btnDisable() {
+        self.gcdBtn.isEnabled = false
+        self.operationBtn.isEnabled = false
+    }
+    
+    //safe button disable
+    fileprivate func btnEnable() {
+        self.gcdBtn.isEnabled = true
+        self.operationBtn.isEnabled = true
+    }
+    
+    //
+    fileprivate func btnHidden() {
+        editBtn.isHidden = true
+        gcdBtn.isHidden = false
+        operationBtn.isHidden = false
+    }
+
+    //
+    fileprivate func btnUnHidden() {
         editBtn.isHidden = false
         gcdBtn.isHidden = true
         operationBtn.isHidden = true
-        
-        switch sender.tag {
-        case 0:
-            print(gcdBtn.titleLabel?.text)
-        case 1:
-            print(operationBtn.titleLabel?.text!)
-            
-        default:
-            break
-        }
-        
     }
     
+    //алерт успешно / неуспешно
+    func showAlert(textMessage: String) {
+        let alertController = UIAlertController(title: nil, message: textMessage, preferredStyle: .alert)
+        let actionSave = UIAlertAction(title: "ОК" , style: .default) { (action) in
+            
+        }
+        let actionRepeat = UIAlertAction(title: "Повторить" , style: .default) { (action) in
+            self.saveDataOnMemory.saveData = true
+            self.saveData()
+        }
+            alertController.addAction(actionSave)
+        if !saveDataOnMemory.saveData {
+            alertController.addAction(actionRepeat)
+        }
+        self.present(alertController, animated: true, completion: nil)
+    }
+
 }
 

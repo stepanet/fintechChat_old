@@ -21,6 +21,7 @@
 		3BDA63E8222D0E5800D381D8 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDA63E7222D0E5800D381D8 /* ThemesViewController.m */; };
 		3BDA63EB222D0FCD00D381D8 /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDA63EA222D0FCD00D381D8 /* Themes.m */; };
 		3BDA63EE222D49CC00D381D8 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17B9A0222883D600D944F7 /* ThemesViewController.swift */; };
+		3BE998112232D1E600185AEF /* ReadWriteDataToDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE998102232D1E500185AEF /* ReadWriteDataToDisk.swift */; };
 		3BEF8BC5220B73AC00641B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEF8BC4220B73AC00641B2B /* AppDelegate.swift */; };
 		3BEF8BCA220B73AC00641B2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BEF8BC8220B73AC00641B2B /* Main.storyboard */; };
 		3BEF8BCC220B73AE00641B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BEF8BCB220B73AE00641B2B /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		3BDA63E9222D0FCD00D381D8 /* Themes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Themes.h; sourceTree = "<group>"; };
 		3BDA63EA222D0FCD00D381D8 /* Themes.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Themes.m; sourceTree = "<group>"; };
 		3BDA63EC222D106C00D381D8 /* ThemesViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewControllerDelegate.h; sourceTree = "<group>"; };
+		3BE998102232D1E500185AEF /* ReadWriteDataToDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteDataToDisk.swift; sourceTree = "<group>"; };
 		3BEF8BC1220B73AC00641B2B /* fintechChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fintechChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BEF8BC4220B73AC00641B2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3BEF8BC9220B73AC00641B2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			children = (
 				3B3C0C46222DCDE60009E917 /* SettingTableView.storyboard */,
 				3BEF8BC8220B73AC00641B2B /* Main.storyboard */,
+				3BE998102232D1E500185AEF /* ReadWriteDataToDisk.swift */,
 				3BEF8BCD220B73AE00641B2B /* LaunchScreen.storyboard */,
 				3B17B99B2228820500D944F7 /* Settings.storyboard */,
 			);
@@ -231,6 +234,7 @@
 				3B2DDB44221E0A25005D5272 /* ConversationTableViewCell.swift in Sources */,
 				3BDA63E8222D0E5800D381D8 /* ThemesViewController.m in Sources */,
 				3B3ADE912214BEBF000D97B5 /* ProfileViewController.swift in Sources */,
+				3BE998112232D1E600185AEF /* ReadWriteDataToDisk.swift in Sources */,
 				3B2236EC222141F400561112 /* ConversationViewController.swift in Sources */,
 				3B17B9A6222888B200D944F7 /* ThemeManager.swift in Sources */,
 				3B2DDB46221E0C3C005D5272 /* ConversationsList.swift in Sources */,
@@ -288,7 +292,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -349,7 +353,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;

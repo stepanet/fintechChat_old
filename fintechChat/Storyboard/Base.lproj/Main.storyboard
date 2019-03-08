@@ -280,6 +280,9 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editActionStart:" destination="cgX-rv-1w6" eventType="editingDidBegin" id="I6N-CJ-r8I"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4o-ha-Io8">
                                 <rect key="frame" x="224" y="280" width="80" height="80"/>
@@ -295,11 +298,17 @@
                                     <action selector="tekePIctureBtnAction:" destination="cgX-rv-1w6" eventType="touchUpInside" id="BIk-LN-Uv8"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="esS-dt-pLM">
+                                <rect key="frame" x="142" y="302" width="37" height="37"/>
+                                <color key="color" red="1" green="0.15385301270000001" blue="0.2282891916" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="80f-JN-ZmA" firstAttribute="top" secondItem="JfC-zb-jem" secondAttribute="bottom" constant="8" symbolic="YES" id="5aL-lg-bNp"/>
+                            <constraint firstItem="esS-dt-pLM" firstAttribute="centerX" secondItem="5ks-cS-8Sj" secondAttribute="centerX" id="8O6-GR-BnX"/>
                             <constraint firstItem="u4o-ha-Io8" firstAttribute="trailing" secondItem="JfC-zb-jem" secondAttribute="trailing" id="AGj-CH-4b9"/>
+                            <constraint firstItem="esS-dt-pLM" firstAttribute="centerY" secondItem="5ks-cS-8Sj" secondAttribute="centerY" constant="4.5" id="DRW-or-Vlx"/>
                             <constraint firstItem="80f-JN-ZmA" firstAttribute="trailing" secondItem="tdk-fc-srJ" secondAttribute="trailing" id="Dgr-e2-1wf"/>
                             <constraint firstItem="glP-Xj-078" firstAttribute="leading" secondItem="pnW-3w-3u6" secondAttribute="trailing" constant="8" symbolic="YES" id="DyZ-G4-2b3"/>
                             <constraint firstItem="tdk-fc-srJ" firstAttribute="top" secondItem="80f-JN-ZmA" secondAttribute="bottom" constant="8" symbolic="YES" id="Fgq-oj-aXP"/>
@@ -335,6 +344,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="aboutProfileTextView" destination="tdk-fc-srJ" id="F87-5c-ut2"/>
+                        <outlet property="activityIndicator" destination="esS-dt-pLM" id="KLL-Wt-PFT"/>
                         <outlet property="editBtn" destination="hNr-pM-eNC" id="T81-ts-jXD"/>
                         <outlet property="gcdBtn" destination="pnW-3w-3u6" id="0dg-BW-GLC"/>
                         <outlet property="operationBtn" destination="glP-Xj-078" id="4MC-iY-gcS"/>

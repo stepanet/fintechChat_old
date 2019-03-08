@@ -35,5 +35,20 @@ struct MessageLists: MessageCellConfiguration {
 }
 
 
+protocol SaveDataProtocol {
+    var saveData: Bool {get set}
+    var textAlert: String? {get}
+}
+
+struct SaveData: SaveDataProtocol {
+    
+    var saveData: Bool = false
+    var textAlert: String?
+    
+    mutating func textAlertFunc() -> String {
+        return self.saveData == true ?  "данные сохранены" : "данные не удалось записать"
+    }
+}
+
 
 
