@@ -46,12 +46,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         aboutProfileTextView.delegate = self
         profileNameTxt.delegate = self
         loadProfileData()
-//        queueTest.nameOfFile = "profileAbout.txt"
-//        print(queueTest.txtREadfile())
-//        queueTest.nameOfFile = "profileName.txt"
-//        print(queueTest.txtREadfile())
-        
-        
 
     }
     
@@ -65,7 +59,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         //уже известны точные размеры вью и размеры кнопки
     }
     
@@ -118,9 +111,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     }
     
     private func setupUI() {
-    
-        //можно было сделать через user defined runtime attributes, но здесь более наглядно  и понятно и редактировать удобней
-        
+
         enum cornerRadius: CGFloat {
             case imageViewAndPhotoBtn = 40
             case editBtn = 5
@@ -268,7 +259,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     
     
     //открываем возможность редактировать профиль
-
     @IBAction func editData(_ sender: UIButton) {
         self.fieldProfileEnable()
         self.btnEditHidden()
@@ -297,22 +287,20 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         self.btnSaveEnable()
     }
     
+ 
+    
     //сохраняем данные
     @IBAction func safeData(_ sender: UIButton) {
-        self.activityIndicator.startAnimating()
         self.btnSaveDisable()
         let selectedImage = self.profileImageView.image!
         let text = profileNameTxt.text!
         let textAbout = aboutProfileTextView.text!
         
-
-  
         switch sender.tag {
         case 0:
             self.btnSaveDisable()
             //save data try
-            
-            //новый код
+
             if self.saveDataOnMemory.saveProfileName {
                 queueTest.nameOfFile = "profileName.txt"
                 queueTest.text = text
@@ -325,7 +313,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
                 queueTest.txtWriteFile()
             }
             
-            
             if self.saveDataOnMemory.savePhoto {
                 queueTest.nameOfFile = "userprofile.jpg"
                 queueTest.selectedImage = selectedImage
@@ -333,7 +320,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
             }
             
             queue.queueGlobal.async {
-                self.saveData()
+                self.saveDataStart()
                 self.loadProfileData()
             }
             
@@ -342,7 +329,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
                 self.btnSaveDisable()
                 //save data try
                 queue.queueGlobal.async {
-                    self.saveData()
+                    self.saveDataStart()
                     self.loadProfileData()
                 }
                 default:
@@ -353,11 +340,15 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     
 
     //safe data
-    fileprivate func saveData() {
+    fileprivate func saveDataStart() {
+        print(Thread.current)
         self.btnSaveDisable()
-        for i in 1...150000 {
+        for i in 1...50000 {
+            queue.queueMain.async {
+                self.activityIndicator.startAnimating()
+            }
             print(i)
-            if i == 150000 {
+            if i == 50000 {
                 queue.queueMain.async {
                     
                     self.btnAfterSave()
@@ -367,12 +358,11 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         }
         
         self.fieldProfileDisable()
+        print("fieldProfileDisable")
         queue.queueMain.async {
             self.activityIndicator.stopAnimating()
         }
     }
-    
-    
     
     //button and activity state
     fileprivate func btnAfterSave() {
@@ -417,7 +407,11 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         }
         let actionRepeat = UIAlertAction(title: "Повторить" , style: .default) { (action) in
             self.saveDataOnMemory.saveData = true
-            self.saveData()
+            self.queue.queueGlobal.async {
+                self.saveDataStart()
+                self.loadProfileData()
+            }
+
         }
             alertController.addAction(actionSave)
         if !saveDataOnMemory.saveData {
