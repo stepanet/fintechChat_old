@@ -87,8 +87,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         }
     }
     
-    
-    
+
     @IBAction func tekePIctureBtnAction(_ sender: UIButton) {
         print("Выбери изображение профиля")
         takePhotoProfile(cameraOff: false)
@@ -96,22 +95,26 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
     
     private func loadProfileData() {
-        
-        //old version
-        //queue.queueMain.async {
-            //self.profileImageView.image = ReadWriteData.getImage(nameOfFile: "userprofile.jpg")
-            //self.profileNameTxt.text = ReadWriteData.txtReadFile(nameOfFile: "profileName.txt")
-            //self.aboutProfileTextView.text = ReadWriteData.txtReadFile(nameOfFile: "profileAbout.txt")
-        //}
-        
+
+        var profileNameTxt:String?
+        var aboutProfileTextView:String?
+        var profileImageView:UIImage
         
         //new version - using class
         queueTest.nameOfFile = "profileName.txt"
-        self.profileNameTxt.text =  queueTest.txtREadfile()
+        profileNameTxt =  queueTest.txtREadfile()
         queueTest.nameOfFile = "profileAbout.txt"
-        self.aboutProfileTextView.text = queueTest.txtREadfile()
+        aboutProfileTextView = queueTest.txtREadfile()
         queueTest.nameOfFile = "userprofile.jpg"
-        self.profileImageView.image = queueTest.getImage()
+        profileImageView = queueTest.getImage()
+        
+        queue.queueMain.async {
+            self.profileNameTxt.text =  profileNameTxt
+            self.aboutProfileTextView.text = aboutProfileTextView
+            self.profileImageView.image = profileImageView
+        }
+
+
     }
     
     private func setupUI() {
@@ -296,36 +299,18 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     
     //сохраняем данные
     @IBAction func safeData(_ sender: UIButton) {
-
+        self.activityIndicator.startAnimating()
+        self.btnSaveDisable()
         let selectedImage = self.profileImageView.image!
         let text = profileNameTxt.text!
         let textAbout = aboutProfileTextView.text!
-        self.activityIndicator.startAnimating()
+        
+
   
         switch sender.tag {
         case 0:
             self.btnSaveDisable()
             //save data try
-            
-            
-            //старый код
-//            queue.queueGlobal.async {
-//                self.queue.queueGlobal.async {
-//                    //если изменили фото то сохраним
-//                    if self.saveDataOnMemory.savePhoto {
-//                        ReadWriteData.saveImageDocumentDirectory(nameOfFile: "userprofile.jpg", selectedImage: selectedImage)
-//                    }
-//                    if self.saveDataOnMemory.saveProfileName {
-//                        ReadWriteData.txtWriteFile(nameOfFile: "profileName.txt", text: text)
-//                    }
-//                    //если изменили данные о пользователе - сохраним
-//                    if self.saveDataOnMemory.saveAbout  {
-//                        ReadWriteData.txtWriteFile(nameOfFile: "profileAbout.txt", text: textAbout)
-//                    }
-//                }
-//                self.saveData()
-//                self.loadProfileData()
-//            }
             
             //новый код
             if self.saveDataOnMemory.saveProfileName {
@@ -347,12 +332,10 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
                 queueTest.saveImage()
             }
             
-            //self.saveData()  уберем генерацию ошибок
-            self.btnAfterSave() //saveData()
-            self.saveDataOnMemory.saveData = true //saveData()
-            self.showAlert(textMessage: self.saveDataOnMemory.textAlertFunc()) //saveData()
-            self.fieldProfileDisable() //saveData() 
-            self.loadProfileData()
+            queue.queueGlobal.async {
+                self.saveData()
+                self.loadProfileData()
+            }
             
             
         case 1:
@@ -360,6 +343,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
                 //save data try
                 queue.queueGlobal.async {
                     self.saveData()
+                    self.loadProfileData()
                 }
                 default:
                     break
@@ -370,16 +354,11 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
     //safe data
     fileprivate func saveData() {
-        for i in 1...30000 {
+        self.btnSaveDisable()
+        for i in 1...150000 {
             print(i)
-            if i == 30000 {
+            if i == 150000 {
                 queue.queueMain.async {
-                    
-                    //для проверки ошибки записи
-                    let randomInt = Int.random(in: 0...1)
-                    if randomInt == 1 {
-                        self.saveDataOnMemory.saveData = false
-                    }
                     
                     self.btnAfterSave()
                     self.showAlert(textMessage: self.saveDataOnMemory.textAlertFunc())
@@ -388,6 +367,9 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         }
         
         self.fieldProfileDisable()
+        queue.queueMain.async {
+            self.activityIndicator.stopAnimating()
+        }
     }
     
     
@@ -396,16 +378,18 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     fileprivate func btnAfterSave() {
         self.btnSaveEnable()
         self.btnEditUnHidden()
-        self.activityIndicator.stopAnimating()
     }
     
     //safe button disable
     fileprivate func btnSaveDisable() {
-        self.gcdBtn.isEnabled = false
-        self.operationBtn.isEnabled = false
+        queue.queueMain.async {
+            self.gcdBtn.isEnabled = false
+            self.operationBtn.isEnabled = false
+        }
+
     }
     
-    //safe button disable
+    //safe button enable
     fileprivate func btnSaveEnable() {
         self.gcdBtn.isEnabled = true
         self.operationBtn.isEnabled = true
