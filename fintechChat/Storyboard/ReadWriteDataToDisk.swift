@@ -10,21 +10,8 @@ import Foundation
 
 public class ReadWriteData {
     
-    
-    
-    ////Create Directory :
-    class func createDirectory(){
-        print(#function)
-        let fileManager = FileManager.default
-        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("customDirectory")
-        if !fileManager.fileExists(atPath: paths){
-            try! fileManager.createDirectory(atPath: paths, withIntermediateDirectories: true, attributes: nil)
-        }else{
-            print("Already dictionary created.")
-        }
-    }
 
-//Save Image At Document Directory :
+//сохранить изображение
     class func saveImageDocumentDirectory(nameOfFile: String, selectedImage: UIImage){
 
         let fileManager = FileManager.default
@@ -34,38 +21,76 @@ public class ReadWriteData {
         let imageData = image.jpegData(compressionQuality: 0.75)
         fileManager.createFile(atPath: paths as String, contents: imageData, attributes: nil)
 }
-    
-    
-////Get Document Directory Path :
-class func getDirectoryPath() -> String {
-    let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-    let documentsDirectory = paths[0]
-    print(documentsDirectory)
-    return documentsDirectory
-}
 
-////Get Image from Document Directory :
+
+//получить файл из директории
     class func getImage(nameOfFile: String) -> UIImage {
-
     let fileManager = FileManager.default
-    let imagePath = (self.getDirectoryPath() as NSString).appendingPathComponent(nameOfFile)
+    let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(nameOfFile)
     if fileManager.fileExists(atPath: imagePath){
-        print(UIImage(contentsOfFile: imagePath) as Any)
         return UIImage(contentsOfFile: imagePath)!
     }else{
-        print("No Image")
         return UIImage(named: "placeholder-user.jpg")!
     }
 }
+   
+//удалить файл из директории
+    class func removeImage(nameOfFile:String) {
+    let fileManager = FileManager.default
+    let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+    guard let dirPath = paths.first else { return }
+    let filePath = "\(dirPath)/\(nameOfFile)"
+        do {
+            try fileManager.removeItem(atPath: filePath)
+        } catch let error as NSError {
+            print(error.debugDescription)
+        }}
+    
+  
+//пишем данные в текст
+    class func txtWriteFile(nameOfFile: String, text: String) {
+        
+    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        let fileURL = dir.appendingPathComponent(nameOfFile)
+        do {
+            try text.write(to: fileURL, atomically: false, encoding: .utf8)
+        }
+        catch {/* обработчик ошибок */}
+    }
+    }
 
-////Delete Directory :
-//func deleteDirectory(){
-//    let fileManager = NSFileManager.defaultManager()
-//    let paths = (NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as NSString).stringByAppendingPathComponent(“customDirectory”)
-//    if fileManager.fileExistsAtPath(paths){
-//        try! fileManager.removeItemAtPath(paths)
-//    }else{
-//        print(“Something wronge.”)
-//    }
-//}
+//читаем текстовые файлы
+    class func txtReadFile(nameOfFile: String) -> String {
+
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent(nameOfFile)
+                    do {
+                        return try String(contentsOf: fileURL, encoding: .utf8)
+                    }
+                    catch {/* обработчик ошибок */}
+
+            }
+        return "Имя не доступно"
+    }
+    
+    
+    
+    
+    class QueueChoiceTest {
+        var nameOfFile: String
+        var text: String
+        let queueGlobal = DispatchQueue.global()
+        let queueMain = DispatchQueue.main
+        let operation = OperationQueue.main
+        
+        init (nameOfFile: String = "", text: String = ""){
+            self.nameOfFile = nameOfFile
+            self.text = text
+        }
+        
+        func txtREadfile(nameOfFile: String) -> String {
+            
+                return nameOfFile
+            }
+        }
 }

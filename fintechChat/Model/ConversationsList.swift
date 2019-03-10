@@ -37,12 +37,18 @@ struct MessageLists: MessageCellConfiguration {
 
 protocol SaveDataProtocol {
     var saveData: Bool {get set}
+    var savePhoto: Bool {get set}
+    var saveProfileName: Bool {get set}
+    var saveAbout: Bool {get set}
     var textAlert: String? {get}
 }
 
 struct SaveData: SaveDataProtocol {
     
     var saveData: Bool = false
+    var savePhoto: Bool = false
+    var saveProfileName: Bool = false
+    var saveAbout: Bool = false
     var textAlert: String?
     
     mutating func textAlertFunc() -> String {
