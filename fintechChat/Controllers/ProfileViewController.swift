@@ -8,15 +8,6 @@
 
 import UIKit
 
-class QueueChoice {
-    let queueGlobal = DispatchQueue.global()
-    let queueMain = DispatchQueue.main
-    let operation = OperationQueue.main
-    
-    
-}
-
-
 class ProfileViewController: UIViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate  {
 
     @IBOutlet weak var profileImageView: UIImageView!
@@ -31,8 +22,9 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     
     
     var saveDataOnMemory = SaveData()
-    let queue = QueueChoice()
+    let queue = ReadWriteData.QueueChoice()
     let queueTest = ReadWriteData.QueueChoiceTest()
+    
     
     
     
@@ -54,7 +46,10 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         aboutProfileTextView.delegate = self
         profileNameTxt.delegate = self
         loadProfileData()
-        print(queueTest.txtREadfile(nameOfFile: "fsdfsdfs"))
+//        queueTest.nameOfFile = "profileAbout.txt"
+//        print(queueTest.txtREadfile())
+//        queueTest.nameOfFile = "profileName.txt"
+//        print(queueTest.txtREadfile())
         
         
 
@@ -101,11 +96,22 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
     
     private func loadProfileData() {
-        queue.queueMain.async {
-            self.profileImageView.image = ReadWriteData.getImage(nameOfFile: "userprofile.jpg")
-            self.profileNameTxt.text = ReadWriteData.txtReadFile(nameOfFile: "profileName.txt")
-            self.aboutProfileTextView.text = ReadWriteData.txtReadFile(nameOfFile: "profileAbout.txt")
-        }
+        
+        //old version
+        //queue.queueMain.async {
+            //self.profileImageView.image = ReadWriteData.getImage(nameOfFile: "userprofile.jpg")
+            //self.profileNameTxt.text = ReadWriteData.txtReadFile(nameOfFile: "profileName.txt")
+            //self.aboutProfileTextView.text = ReadWriteData.txtReadFile(nameOfFile: "profileAbout.txt")
+        //}
+        
+        
+        //new version - using class
+        queueTest.nameOfFile = "profileName.txt"
+        self.profileNameTxt.text =  queueTest.txtREadfile()
+        queueTest.nameOfFile = "profileAbout.txt"
+        self.aboutProfileTextView.text = queueTest.txtREadfile()
+        queueTest.nameOfFile = "userprofile.jpg"
+        self.profileImageView.image = queueTest.getImage()
     }
     
     private func setupUI() {
@@ -301,23 +307,53 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
             self.btnSaveDisable()
             //save data try
             
-            queue.queueGlobal.async {
-                self.queue.queueGlobal.async {
-                    //если изменили фото то сохраним
-                    if self.saveDataOnMemory.savePhoto {
-                        ReadWriteData.saveImageDocumentDirectory(nameOfFile: "userprofile.jpg", selectedImage: selectedImage)
-                    }
-                    if self.saveDataOnMemory.saveProfileName {
-                        ReadWriteData.txtWriteFile(nameOfFile: "profileName.txt", text: text)
-                    }
-                    //если изменили данные о пользователе - сохраним
-                    if self.saveDataOnMemory.saveAbout  {
-                        ReadWriteData.txtWriteFile(nameOfFile: "profileAbout.txt", text: textAbout)
-                    }
-                }
-                self.saveData()
-                self.loadProfileData()
+            
+            //старый код
+//            queue.queueGlobal.async {
+//                self.queue.queueGlobal.async {
+//                    //если изменили фото то сохраним
+//                    if self.saveDataOnMemory.savePhoto {
+//                        ReadWriteData.saveImageDocumentDirectory(nameOfFile: "userprofile.jpg", selectedImage: selectedImage)
+//                    }
+//                    if self.saveDataOnMemory.saveProfileName {
+//                        ReadWriteData.txtWriteFile(nameOfFile: "profileName.txt", text: text)
+//                    }
+//                    //если изменили данные о пользователе - сохраним
+//                    if self.saveDataOnMemory.saveAbout  {
+//                        ReadWriteData.txtWriteFile(nameOfFile: "profileAbout.txt", text: textAbout)
+//                    }
+//                }
+//                self.saveData()
+//                self.loadProfileData()
+//            }
+            
+            //новый код
+            if self.saveDataOnMemory.saveProfileName {
+                queueTest.nameOfFile = "profileName.txt"
+                queueTest.text = text
+                queueTest.txtWriteFile()
             }
+            
+            if self.saveDataOnMemory.saveAbout  {
+                queueTest.nameOfFile = "profileAbout.txt"
+                queueTest.text = textAbout
+                queueTest.txtWriteFile()
+            }
+            
+            
+            if self.saveDataOnMemory.savePhoto {
+                queueTest.nameOfFile = "userprofile.jpg"
+                queueTest.selectedImage = selectedImage
+                queueTest.saveImage()
+            }
+            
+            //self.saveData()  уберем генерацию ошибок
+            self.btnAfterSave() //saveData()
+            self.saveDataOnMemory.saveData = true //saveData()
+            self.showAlert(textMessage: self.saveDataOnMemory.textAlertFunc()) //saveData()
+            self.fieldProfileDisable() //saveData() 
+            self.loadProfileData()
+            
             
         case 1:
                 self.btnSaveDisable()
@@ -334,7 +370,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
     //safe data
     fileprivate func saveData() {
-        let queue = QueueChoice()
         for i in 1...30000 {
             print(i)
             if i == 30000 {
