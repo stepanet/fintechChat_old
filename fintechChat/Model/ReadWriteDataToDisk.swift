@@ -18,7 +18,7 @@ public class ReadWriteData {
     }
     
     
-    
+    //начало класса
     
     class QueueChoiceTest {
         var nameOfFile: String
@@ -26,7 +26,8 @@ public class ReadWriteData {
         var selectedImage: UIImage
         let queueGlobal = DispatchQueue.global()
         let queueMain = DispatchQueue.main
-        let operation = OperationQueue.main
+        let operationQueue = OperationQueue()
+        let operationProfile = OperationProfile()
         let queue = DispatchQueue(label: "test thread")
         
         init (nameOfFile: String = "", text: String = "", selectedImage: UIImage = UIImage(named: "placeholder-user.jpg")!){
@@ -35,6 +36,12 @@ public class ReadWriteData {
             self.selectedImage = selectedImage
         }
         
+        class OperationProfile: Operation {
+            override func main() {
+                print(Thread.current)
+            }
+        }
+
         
         //считываем данные из текстовых файлов
         func txtREadfile() -> String {
@@ -66,7 +73,7 @@ public class ReadWriteData {
         }
         
         //пишем текст в файл
-        func txtWriteFile() {
+    func txtWriteFile() {
             
             if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
                 let fileURL = dir.appendingPathComponent(nameOfFile)
@@ -83,17 +90,20 @@ public class ReadWriteData {
         
         //сохраняем изображение
         func saveImage() {
+            self.queue.sync {
+                let fileManager = FileManager.default
+                let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(nameOfFile)
+                print(paths)
+                let imageData = selectedImage.jpegData(compressionQuality: 0.75)
             
-            let fileManager = FileManager.default
-            let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(nameOfFile)
-            print(paths)
-            let imageData = selectedImage.jpegData(compressionQuality: 0.75)
-            fileManager.createFile(atPath: paths as String, contents: imageData, attributes: nil)
+                fileManager.createFile(atPath: paths as String, contents: imageData, attributes: nil)
+            }
         }
         
         
     }
-    
+    //конец класса QueueChoiceTest
+
     
     ////удалить файл из директории
     class func removeImage(nameOfFile:String) {

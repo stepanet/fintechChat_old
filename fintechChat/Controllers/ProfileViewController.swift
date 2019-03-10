@@ -319,7 +319,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
                 queueTest.saveImage()
             }
             
-            queue.queueGlobal.async {
+            queue.queueGlobal.sync {
                 self.saveDataStart()
                 self.loadProfileData()
             }
@@ -327,15 +327,43 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
             
         case 1:
                 self.btnSaveDisable()
-                //save data try
-                queue.queueGlobal.async {
+                queueTest.operationQueue.addOperation {
+                    if self.saveDataOnMemory.saveProfileName {
+                        self.queueTest.nameOfFile = "profileName.txt"
+                        self.queueTest.text = text
+                        self.queueTest.txtWriteFile()
+                        self.saveDataStart()
+                        //self.loadProfileData()
+                    }
+                }
+                queueTest.operationQueue.addOperation {
+                    if self.saveDataOnMemory.saveAbout {
+                        self.queueTest.nameOfFile = "profileAbout.txt"
+                        self.queueTest.text = textAbout
+                        self.queueTest.txtWriteFile()
+                        self.saveDataStart()
+                        //self.loadProfileData()
+                    }
+                }
+            
+                queueTest.operationQueue.addOperation {
+                if self.saveDataOnMemory.savePhoto {
+                    self.queueTest.nameOfFile = "userprofile.jpg"
+                    self.queueTest.selectedImage = selectedImage
+                    self.queueTest.saveImage()
+                    self.saveDataStart()
+                    //self.loadProfileData()
+                }
+            }
+            
+                queueTest.operationQueue.addOperation {
                     self.saveDataStart()
                     self.loadProfileData()
-                }
-                default:
+            }
+            
+            default:
                     break
             }
-
     }
     
 
@@ -343,14 +371,14 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     fileprivate func saveDataStart() {
         print(Thread.current)
         self.btnSaveDisable()
-        for i in 1...50000 {
+        for i in 1...5 {
             queue.queueMain.async {
                 self.activityIndicator.startAnimating()
             }
             print(i)
-            if i == 50000 {
+            if i == 5 {
                 queue.queueMain.async {
-                    
+                    self.saveDataOnMemory.saveData = true
                     self.btnAfterSave()
                     self.showAlert(textMessage: self.saveDataOnMemory.textAlertFunc())
                 }
@@ -408,13 +436,14 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         let actionRepeat = UIAlertAction(title: "Повторить" , style: .default) { (action) in
             self.saveDataOnMemory.saveData = true
             self.queue.queueGlobal.async {
+                
                 self.saveDataStart()
                 self.loadProfileData()
             }
 
         }
             alertController.addAction(actionSave)
-        if !saveDataOnMemory.saveData {
+        if saveDataOnMemory.saveData {
             alertController.addAction(actionRepeat)
         }
         self.present(alertController, animated: true, completion: nil)
