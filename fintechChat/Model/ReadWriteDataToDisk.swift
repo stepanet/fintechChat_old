@@ -24,11 +24,13 @@ public class ReadWriteData {
         var nameOfFile: String
         var text: String
         var selectedImage: UIImage
-        let queueGlobal = DispatchQueue.global()
-        let queueMain = DispatchQueue.main
-        let operationQueue = OperationQueue()
+        let queueGlobal = DispatchQueue.global()  //глобальная очередь
+        let queueMain = DispatchQueue.main        //главная очередь
+        let queue = DispatchQueue(label: "test thread") //последовательная очередь
+        let cuncurrentQueue = DispatchQueue(label: "com.app.queue",  qos: .background, attributes: .concurrent) //параллельная очередь
+        let operationQueue = OperationQueue()     
         let operationProfile = OperationProfile()
-        let queue = DispatchQueue(label: "test thread")
+        
         
         init (nameOfFile: String = "", text: String = "", selectedImage: UIImage = UIImage(named: "placeholder-user.jpg")!){
             self.nameOfFile = nameOfFile
