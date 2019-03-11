@@ -63,14 +63,14 @@ public class ReadWriteData {
         //забираем изображение из файла
         func getImage() -> UIImage {
 
-           // return self.queue.sync {
+           return self.queue.sync {
                 let fileManager = FileManager.default
                 let imagePath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(nameOfFile)
                 if fileManager.fileExists(atPath: imagePath){
                     return UIImage(contentsOfFile: imagePath)!
                 }else{
                     return UIImage(named: "placeholder-user.jpg")!
-                //}
+                }
             }
         }
         
@@ -92,10 +92,11 @@ public class ReadWriteData {
         
         //сохраняем изображение
         func saveImage() {
-            self.queue.sync {
+            
                 let fileManager = FileManager.default
                 let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(nameOfFile)
                 print(paths)
+            self.queue.sync {
                 let imageData = selectedImage.jpegData(compressionQuality: 0.75)
             
                 fileManager.createFile(atPath: paths as String, contents: imageData, attributes: nil)

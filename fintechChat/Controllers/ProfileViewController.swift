@@ -24,10 +24,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     var saveDataOnMemory = SaveData()
     let queue = ReadWriteData.QueueChoice()
     let queueTest = ReadWriteData.QueueChoiceTest()
-    
-    
-    
-    
+  
     enum ImageSource {
         case photoLibrary
         case camera
@@ -46,6 +43,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         aboutProfileTextView.delegate = self
         profileNameTxt.delegate = self
         loadProfileData()
+        //activityIndicator.startAnimating()
 
     }
     
@@ -55,7 +53,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         setupUI()
         btnEditUnHidden()
         fieldProfileDisable()
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,7 +83,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         takePhotoProfile(cameraOff: false)
     }
 
-    
+    //подгрузим данные в профиль
     private func loadProfileData() {
 
         var profileNameTxt:String?
@@ -94,24 +91,23 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         var profileImageView:UIImage
         
         //new version - using class
-        queueTest.nameOfFile = "profileName.txt"
-        profileNameTxt =  queueTest.txtREadfile()
-        queueTest.nameOfFile = "profileAbout.txt"
-        aboutProfileTextView = queueTest.txtREadfile()
-        queueTest.nameOfFile = "userprofile.jpg"
-        profileImageView = queueTest.getImage()
+        
+            queueTest.nameOfFile = "profileName.txt"
+            profileNameTxt =  self.queueTest.txtREadfile()
+            queueTest.nameOfFile = "profileAbout.txt"
+            aboutProfileTextView = self.queueTest.txtREadfile()
+            queueTest.nameOfFile = "userprofile.jpg"
+            profileImageView = self.queueTest.getImage()
+
         
         queue.queueMain.async {
             self.profileNameTxt.text =  profileNameTxt
             self.aboutProfileTextView.text = aboutProfileTextView
             self.profileImageView.image = profileImageView
         }
-
-
     }
     
     private func setupUI() {
-
         enum cornerRadius: CGFloat {
             case imageViewAndPhotoBtn = 40
             case editBtn = 5
@@ -253,7 +249,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     
     //Следим если юзер начал набирать текст или делать изменения
     func textViewDidBeginEditing(_ textView: UITextView) {
-        
         self.btnSaveEnable()
     }
     
@@ -286,21 +281,19 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     @IBAction func editActionStart(_ sender: Any) {
         self.btnSaveEnable()
     }
-    
- 
-    
+
     //сохраняем данные
     @IBAction func safeData(_ sender: UIButton) {
+        print("self.activityIndicator.startAnimating()")
+        self.activityIndicator.startAnimating()
         self.btnSaveDisable()
         let selectedImage = self.profileImageView.image!
         let text = profileNameTxt.text!
         let textAbout = aboutProfileTextView.text!
-        
+
         switch sender.tag {
         case 0:
-            self.btnSaveDisable()
-            //save data try
-
+           
             if self.saveDataOnMemory.saveProfileName {
                 queueTest.nameOfFile = "profileName.txt"
                 queueTest.text = text
@@ -319,75 +312,65 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
                 queueTest.saveImage()
             }
             
-            queue.queueGlobal.sync {
+            queue.queueGlobal.async {
                 self.saveDataStart()
                 self.loadProfileData()
             }
-            
+
             
         case 1:
-                self.btnSaveDisable()
-                queueTest.operationQueue.addOperation {
-                    if self.saveDataOnMemory.saveProfileName {
-                        self.queueTest.nameOfFile = "profileName.txt"
-                        self.queueTest.text = text
-                        self.queueTest.txtWriteFile()
-                        self.saveDataStart()
-                        //self.loadProfileData()
-                    }
+            queueTest.operationQueue.addOperation {
+                if self.saveDataOnMemory.saveProfileName {
+                    self.queueTest.nameOfFile = "profileName.txt"
+                    self.queueTest.text = text
+                    self.queueTest.txtWriteFile()
                 }
-                queueTest.operationQueue.addOperation {
-                    if self.saveDataOnMemory.saveAbout {
-                        self.queueTest.nameOfFile = "profileAbout.txt"
-                        self.queueTest.text = textAbout
-                        self.queueTest.txtWriteFile()
-                        self.saveDataStart()
-                        //self.loadProfileData()
-                    }
-                }
+            }
             
-                queueTest.operationQueue.addOperation {
+        queueTest.operationQueue.waitUntilAllOperationsAreFinished()
+            queueTest.operationQueue.addOperation {
+                if self.saveDataOnMemory.saveAbout {
+                    self.queueTest.nameOfFile = "profileAbout.txt"
+                    self.queueTest.text = textAbout
+                    self.queueTest.txtWriteFile()
+                }
+            }
+            queueTest.operationQueue.waitUntilAllOperationsAreFinished()
+            queueTest.operationQueue.addOperation {
                 if self.saveDataOnMemory.savePhoto {
                     self.queueTest.nameOfFile = "userprofile.jpg"
                     self.queueTest.selectedImage = selectedImage
                     self.queueTest.saveImage()
-                    self.saveDataStart()
-                    //self.loadProfileData()
                 }
             }
-            
-                queueTest.operationQueue.addOperation {
-                    self.saveDataStart()
-                    self.loadProfileData()
+            queueTest.operationQueue.waitUntilAllOperationsAreFinished()
+            queueTest.operationQueue.addOperation {
+                self.saveDataStart()
+                self.loadProfileData()
             }
             
             default:
                     break
             }
+
     }
-    
+
 
     //safe data
     fileprivate func saveDataStart() {
-        print(Thread.current)
-        self.btnSaveDisable()
-        for i in 1...5 {
-            queue.queueMain.async {
-                self.activityIndicator.startAnimating()
-            }
+        for i in 1...150000 {
             print(i)
-            if i == 5 {
+            if i == 150000 {
+                self.saveDataOnMemory.saveData = true
+                self.btnAfterSave()
                 queue.queueMain.async {
-                    self.saveDataOnMemory.saveData = true
-                    self.btnAfterSave()
                     self.showAlert(textMessage: self.saveDataOnMemory.textAlertFunc())
                 }
             }
         }
         
         self.fieldProfileDisable()
-        print("fieldProfileDisable")
-        queue.queueMain.async {
+        queueTest.queueMain.async {
             self.activityIndicator.stopAnimating()
         }
     }
@@ -400,17 +383,17 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     
     //safe button disable
     fileprivate func btnSaveDisable() {
-        queue.queueMain.async {
+
             self.gcdBtn.isEnabled = false
             self.operationBtn.isEnabled = false
-        }
-
     }
     
     //safe button enable
     fileprivate func btnSaveEnable() {
-        self.gcdBtn.isEnabled = true
-        self.operationBtn.isEnabled = true
+        queueTest.queueMain.async {
+            self.gcdBtn.isEnabled = true
+            self.operationBtn.isEnabled = true
+        }
     }
     
     //
@@ -422,9 +405,11 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
     //
     fileprivate func btnEditUnHidden() {
-        editBtn.isHidden = false
-        gcdBtn.isHidden = true
-        operationBtn.isHidden = true
+        queueTest.queueMain.async {
+            self.editBtn.isHidden = false
+            self.gcdBtn.isHidden = true
+            self.operationBtn.isHidden = true
+        }
     }
     
     //алерт успешно / неуспешно
@@ -433,19 +418,19 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         let actionSave = UIAlertAction(title: "ОК" , style: .default) { (action) in
             
         }
-        let actionRepeat = UIAlertAction(title: "Повторить" , style: .default) { (action) in
-            self.saveDataOnMemory.saveData = true
-            self.queue.queueGlobal.async {
-                
-                self.saveDataStart()
-                self.loadProfileData()
-            }
-
-        }
+//        let actionRepeat = UIAlertAction(title: "Повторить" , style: .default) { (action) in
+//            self.saveDataOnMemory.saveData = true
+//            self.queue.queueGlobal.async {
+//
+//                self.saveDataStart()
+//                self.loadProfileData()
+//            }
+//
+//        }
             alertController.addAction(actionSave)
-        if saveDataOnMemory.saveData {
-            alertController.addAction(actionRepeat)
-        }
+//        if saveDataOnMemory.saveData {
+//            alertController.addAction(actionRepeat)
+//        }
         self.present(alertController, animated: true, completion: nil)
     }
 

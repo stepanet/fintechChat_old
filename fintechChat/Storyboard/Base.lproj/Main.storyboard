@@ -310,7 +310,7 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="esS-dt-pLM">
-                                <rect key="frame" x="142" y="439" width="37" height="37"/>
+                                <rect key="frame" x="141.5" y="438.5" width="37" height="37"/>
                                 <color key="color" red="1" green="0.15385301270000001" blue="0.2282891916" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
                         </subviews>
