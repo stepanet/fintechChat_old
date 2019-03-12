@@ -17,10 +17,6 @@ public class ReadWriteData {
         let operation = OperationQueue.main
     }
     
-    
-    
-    
-    
     class GCDDataManager {
         var nameOfFile: String
         var text: String
