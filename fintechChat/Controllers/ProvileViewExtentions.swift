@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-extension ProfileViewController {
+extension ProfileViewController:  UIImagePickerControllerDelegate, UINavigationControllerDelegate, {
     
  private func setupUI() {
         enum cornerRadius: CGFloat {
@@ -47,5 +47,95 @@ extension ProfileViewController {
         editBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor//UIColor.black.cgColor
         editBtn.backgroundColor = ThemeManager.currentTheme().backgroundColor
     }    
+    
+    
+      //выбор фотографии в профайл
+    func handleSelectProfileImageView(_ source: ImageSource){
+
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+  
+        switch source {
+            case .camera:
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+                takePhotoProfile(cameraOff: true)
+                return
+            }
+             picker.sourceType = .camera
+            case .photoLibrary:
+                picker.sourceType = .photoLibrary
+        }
+        
+        present(picker, animated: true, completion: {
+            self.fieldProfileEnable()
+        })
+
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var selectImageFromPicker:UIImage?
+
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            selectImageFromPicker = editedImage
+        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
+            selectImageFromPicker = originalImage
+        }
+        if let selectedImage = selectImageFromPicker {
+            profileImageView.image = selectedImage
+            self.saveDataOnMemory.savePhoto = true
+            
+        }
+        dismiss(animated: true, completion: {
+            self.btnSaveEnable()
+            self.fieldProfileEnable()
+            self.btnEditHidden()
+            self.setupUI()
+        })
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+
+    private func takePhotoProfile(cameraOff: Bool) {
+        
+        var titleForCamera = "Фото"
+        
+        if cameraOff {
+            titleForCamera = "Камера не доступна"
+        }
+        
+        let alertController = UIAlertController(title: "", message: "Выберите фотографию для профиля", preferredStyle: .actionSheet)
+        let actionPhoto = UIAlertAction(title: titleForCamera , style: .default) { (action) in
+            self.handleSelectProfileImageView(.camera)
+        }
+        let actionLibrary = UIAlertAction(title: "Библиотека", style: .default) { (action) in
+            self.handleSelectProfileImageView(.photoLibrary)
+        }
+        let deletePhotoProfile = UIAlertAction(title: "Удалить фото", style: .destructive) { (action) in
+            let selectedImage = UIImage(named: "placeholder-user")
+            self.profileImageView.image = selectedImage
+            self.saveDataOnMemory.savePhoto = false
+            self.queue.queueGlobal.async {
+                ReadWriteData.removeImage(nameOfFile: "userprofile.jpg")
+            }
+            self.btnSaveEnable()
+
+        }
+        let actionCancel = UIAlertAction(title: "Отмена", style: .cancel) { (action) in
+        }
+        alertController.addAction(actionPhoto)
+        alertController.addAction(actionLibrary)
+        alertController.addAction(actionCancel)
+        
+        if self.profileImageView.image != UIImage(named: "placeholder-user") {
+            alertController.addAction(deletePhotoProfile)
+        }
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     
 }
