@@ -419,6 +419,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
             
         }
         let actionRepeat = UIAlertAction(title: "Повторить" , style: .default) { (action) in
+            self.activityIndicator.startAnimating()
             self.saveDataOnMemory.saveData = true
             self.gcdQueue.queueMain.async {
                 self.saveDataStart()
