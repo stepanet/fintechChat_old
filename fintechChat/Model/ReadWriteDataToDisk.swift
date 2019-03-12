@@ -10,7 +10,7 @@ import Foundation
 
 public class ReadWriteData {
 
-
+    //сдается мне мусорок ты :)
     class QueueChoice {
         let queueGlobal = DispatchQueue.global()
         let queueMain = DispatchQueue.main
