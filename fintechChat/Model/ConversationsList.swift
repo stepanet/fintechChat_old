@@ -32,6 +32,8 @@ struct ConversationList: ConversationCellConfiguration {
 
 struct MessageLists: MessageCellConfiguration {
     var text: String?
+    var fromUser: String?
+    var toUser: String?
 }
 
 

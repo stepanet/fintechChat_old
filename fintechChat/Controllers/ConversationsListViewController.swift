@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 
 
@@ -17,12 +18,40 @@ class ConversationsListViewController: UIViewController {
     var conversationListsOnline = [ConversationList]()
     var conversationListsHistory = [ConversationList]()
     var conversationData = [ConversationList]()
+    
+    let MessageServiceType = "tinkoff-chat"
+    var myPeerId: MCPeerID!
+    var session: MCSession!
+    
+    
+    var serviceAdvertiser: MCNearbyServiceAdvertiser!
+    var serviceBrowser: MCNearbyServiceBrowser!
 
     
- 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        myPeerId = MCPeerID(displayName: UIDevice.current.name + "DmP")
+        
+        //Делаем устройство видимым для других
+        serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: MessageServiceType)
+        //Ищем другие устройства
+        serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: MessageServiceType)
+        
+        
+        session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: .required)
+        session.delegate = self
+        
+        
+        //включаем видимость
+        serviceAdvertiser.delegate = self
+        serviceAdvertiser.startAdvertisingPeer()
+        
+        
+        //включаем поиск
+        serviceBrowser.delegate = self
+        serviceBrowser.startBrowsingForPeers()
         
         
         tableView.rowHeight = UITableView.automaticDimension
@@ -30,6 +59,13 @@ class ConversationsListViewController: UIViewController {
         loadData()
 
     }
+    
+    deinit {
+       serviceAdvertiser.stopAdvertisingPeer()
+       serviceBrowser.stopBrowsingForPeers()
+    }
+    
+    
 }
 
 extension ConversationsListViewController: UITableViewDelegate {
@@ -114,6 +150,7 @@ extension ConversationsListViewController: UITableViewDataSource {
         
         self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
         
+        /*
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         
@@ -169,12 +206,144 @@ extension ConversationsListViewController: UITableViewDataSource {
             } else {
                 conversationListsHistory.append(i)
             }
-        }
+
+        } */
     }
 
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
     }
+}
+
+extension ConversationsListViewController : MCNearbyServiceAdvertiserDelegate {
+    
+    //Узнаем, что видимость не включилась
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
+        print("didNotStartAdvertisingPeer: \(error)")
+    }
+    
+    
+    //Получили приглашение
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+       print("didReceiveInvitationFromPeer \(peerID)")
+        
+        if session.connectedPeers.contains(peerID) {
+            invitationHandler(false, nil)
+        } else {
+            invitationHandler(true, session)
+        }
+    }
+}
+
+extension ConversationsListViewController : MCNearbyServiceBrowserDelegate {
+    //что то пошло не так
+    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+        print("didNotStartBrowsingForPeers: \(error)")
+    }
+    
+    
+    //кого то нашли
+    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
+        print("нашли участника: \(peerID)")
+        print("пригласили участника: \(peerID)")
+        //зовем к себе
+        browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
+    }
+    
+    
+    //кто то пропал
+    func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        print("потеряли участника: \(peerID)")
+        
+
+        if let index = conversationListsOnline.firstIndex(where: { $0.name == peerID.displayName }) {
+            conversationListsHistory.append(conversationListsOnline[index])
+            conversationListsOnline.remove(at: index)
+        }
+
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+    }
+    
+}
+
+
+extension ConversationsListViewController: MCSessionDelegate {
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        
+        
+        let index = conversationListsOnline.firstIndex(where: { $0.name == peerID.displayName })
+        let indexHistory = conversationListsHistory.firstIndex(where: { $0.name == peerID.displayName })
+        
+        print("index = \(index)", "indexHistory = \(indexHistory)")
+        
+        if state.rawValue == 2 {
+            print("участник \(peerID) изменил состояние: \(state.rawValue)")
+
+            if self.conversationLists.contains(where: { $0.name == peerID.displayName }) {
+                    print("aaaaaaaaaaaaaaa уже есть такой")
+                if (indexHistory != nil) {
+                    conversationListsHistory.remove(at: indexHistory!)
+                }
+            } else {
+                    print("ffffffffffff нет такого")
+                    if (indexHistory != nil) {
+                        conversationListsHistory.remove(at: indexHistory!)
+                    }
+                    let item21 = ConversationList(name: peerID.displayName, message: nil, date: Date(), online: true, hasUnreadMessage: true)
+                    self.conversationListsOnline.append(item21)
+            }
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        print("didReceiveData: \(data)")
+        let str = String(data: data, encoding: .utf8)!
+        print(str)
+        let index = conversationListsOnline.firstIndex(where: { $0.name == peerID.displayName })
+        print("index didReceiveData = \(index)")
+        if str.count > 0 {
+            self.conversationListsOnline.remove(at: index!)
+            let item = ConversationList(name: peerID.displayName, message: str, date: Date(), online: true, hasUnreadMessage: true)
+            self.conversationListsOnline.append(item)
+        }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        //self.delegate?.textChanged(manager: self, text: str)
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        print("didReceiveStream")
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        print("didStartReceivingResourceWithName")
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        print("didFinishReceivingResourceWithName")
+    }
+    
+    
+    func sendText(text: String, peerID: MCPeerID) {
+        if session.connectedPeers.count > 0 {
+            do {
+                try self.session.send(text.data(using: .utf8)!, toPeers: [peerID], with: .reliable)
+            }
+            catch let error {
+               print("Ошибка отправки: \(error)")
+            }
+        }
+    }
+
+    
     
     
 }
