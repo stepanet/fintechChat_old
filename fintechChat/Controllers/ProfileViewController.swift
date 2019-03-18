@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, UITextFieldDelegate  {
+class ProfileViewController: UIViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate,
+    UITextViewDelegate, UITextFieldDelegate  {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var takePicturesForProfile: UIButton!
@@ -22,12 +23,10 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     
     
     var saveDataOnMemory = SaveData()
-    let queue = ReadWriteData.QueueChoice()
-    let queueTest = ReadWriteData.QueueChoiceTest()
+    let operationQueue = ReadWriteData.OperationDataManager()
+    let gcdQueue = ReadWriteData.GCDDataManager()
     
-    
-    
-    
+  
     enum ImageSource {
         case photoLibrary
         case camera
@@ -46,7 +45,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         aboutProfileTextView.delegate = self
         profileNameTxt.delegate = self
         loadProfileData()
-
     }
     
     
@@ -55,7 +53,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         setupUI()
         btnEditUnHidden()
         fieldProfileDisable()
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,7 +83,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         takePhotoProfile(cameraOff: false)
     }
 
-    
+    //подгрузим данные в профиль
     private func loadProfileData() {
 
         var profileNameTxt:String?
@@ -94,66 +91,20 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         var profileImageView:UIImage
         
         //new version - using class
-        queueTest.nameOfFile = "profileName.txt"
-        profileNameTxt =  queueTest.txtREadfile()
-        queueTest.nameOfFile = "profileAbout.txt"
-        aboutProfileTextView = queueTest.txtREadfile()
-        queueTest.nameOfFile = "userprofile.jpg"
-        profileImageView = queueTest.getImage()
         
-        queue.queueMain.async {
+            gcdQueue.nameOfFile = "profileName.txt"
+            profileNameTxt =  self.gcdQueue.txtREadfile()
+            gcdQueue.nameOfFile = "profileAbout.txt"
+            aboutProfileTextView = self.gcdQueue.txtREadfile()
+            gcdQueue.nameOfFile = "userprofile.jpg"
+            profileImageView = self.gcdQueue.getImage()
+
+        
+        gcdQueue.queueMain.async {
             self.profileNameTxt.text =  profileNameTxt
             self.aboutProfileTextView.text = aboutProfileTextView
             self.profileImageView.image = profileImageView
         }
-
-
-    }
-    
-    private func setupUI() {
-
-        enum cornerRadius: CGFloat {
-            case imageViewAndPhotoBtn = 40
-            case editBtn = 5
-        }
-
-        
-        view.backgroundColor = ThemeManager.currentTheme().backgroundColor
-        
-        profileNameTxt.backgroundColor = ThemeManager.currentTheme().backgroundColor
-        profileNameTxt.textColor = ThemeManager.currentTheme().titleTextColor
-        
-        aboutProfileTextView.backgroundColor = ThemeManager.currentTheme().backgroundColor
-        aboutProfileTextView.textColor = ThemeManager.currentTheme().titleTextColor
-        
-
-        profileImageView.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue //radiusUI
-        profileImageView.clipsToBounds = true
-
-        takePicturesForProfile.layer.cornerRadius = cornerRadius.imageViewAndPhotoBtn.rawValue
-        takePicturesForProfile.clipsToBounds = true
-        takePicturesForProfile.backgroundColor = ThemeManager.currentTheme().editBtn
-
-        gcdBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
-        gcdBtn.clipsToBounds = true
-        gcdBtn.tintColor = ThemeManager.currentTheme().titleTextColor
-        gcdBtn.layer.borderWidth = 1
-        gcdBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor//UIColor.black.cgColor
-        gcdBtn.backgroundColor = ThemeManager.currentTheme().backgroundColor
-        
-        operationBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
-        operationBtn.clipsToBounds = true
-        operationBtn.tintColor = ThemeManager.currentTheme().titleTextColor
-        operationBtn.layer.borderWidth = 1
-        operationBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor//UIColor.black.cgColor
-        operationBtn.backgroundColor = ThemeManager.currentTheme().backgroundColor
-        
-        editBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
-        editBtn.clipsToBounds = true
-        editBtn.tintColor = ThemeManager.currentTheme().titleTextColor
-        editBtn.layer.borderWidth = 1
-        editBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor//UIColor.black.cgColor
-        editBtn.backgroundColor = ThemeManager.currentTheme().backgroundColor
     }
     
  
@@ -163,7 +114,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
-  
+
         switch source {
             case .camera:
             guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
@@ -174,7 +125,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
             case .photoLibrary:
                 picker.sourceType = .photoLibrary
         }
-        
+
         present(picker, animated: true, completion: {
             self.fieldProfileEnable()
         })
@@ -182,7 +133,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
+
         var selectImageFromPicker:UIImage?
 
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
@@ -193,7 +144,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         if let selectedImage = selectImageFromPicker {
             profileImageView.image = selectedImage
             self.saveDataOnMemory.savePhoto = true
-            
+
         }
         dismiss(animated: true, completion: {
             self.btnSaveEnable()
@@ -206,16 +157,16 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
+
 
     private func takePhotoProfile(cameraOff: Bool) {
-        
+
         var titleForCamera = "Фото"
-        
+
         if cameraOff {
             titleForCamera = "Камера не доступна"
         }
-        
+
         let alertController = UIAlertController(title: "", message: "Выберите фотографию для профиля", preferredStyle: .actionSheet)
         let actionPhoto = UIAlertAction(title: titleForCamera , style: .default) { (action) in
             self.handleSelectProfileImageView(.camera)
@@ -227,8 +178,8 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
             let selectedImage = UIImage(named: "placeholder-user")
             self.profileImageView.image = selectedImage
             self.saveDataOnMemory.savePhoto = false
-            self.queue.queueGlobal.async {
-                ReadWriteData.removeImage(nameOfFile: "userprofile.jpg")
+            self.gcdQueue.queueGlobal.async {
+                self.gcdQueue.removeImage(nameOfFile: "userprofile.jpg")
             }
             self.btnSaveEnable()
 
@@ -238,7 +189,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         alertController.addAction(actionPhoto)
         alertController.addAction(actionLibrary)
         alertController.addAction(actionCancel)
-        
+
         if self.profileImageView.image != UIImage(named: "placeholder-user") {
             alertController.addAction(deletePhotoProfile)
         }
@@ -253,7 +204,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     
     //Следим если юзер начал набирать текст или делать изменения
     func textViewDidBeginEditing(_ textView: UITextView) {
-        
         self.btnSaveEnable()
     }
     
@@ -274,7 +224,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     
     //делаем поля не доступными для редактирования
     fileprivate func fieldProfileDisable() {
-        queue.queueMain.async {
+        gcdQueue.queueMain.async {
             self.profileNameTxt.isEnabled = false
             self.aboutProfileTextView.isEditable = false
             self.takePicturesForProfile.isEnabled = false
@@ -286,80 +236,96 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     @IBAction func editActionStart(_ sender: Any) {
         self.btnSaveEnable()
     }
-    
- 
-    
+
     //сохраняем данные
     @IBAction func safeData(_ sender: UIButton) {
+        print("self.activityIndicator.startAnimating()")
+        self.activityIndicator.startAnimating()
         self.btnSaveDisable()
         let selectedImage = self.profileImageView.image!
         let text = profileNameTxt.text!
         let textAbout = aboutProfileTextView.text!
-        
+
         switch sender.tag {
         case 0:
-            self.btnSaveDisable()
-            //save data try
-
+           
             if self.saveDataOnMemory.saveProfileName {
-                queueTest.nameOfFile = "profileName.txt"
-                queueTest.text = text
-                queueTest.txtWriteFile()
+                gcdQueue.nameOfFile = "profileName.txt"
+                gcdQueue.text = text
+                gcdQueue.txtWriteFile()
             }
             
             if self.saveDataOnMemory.saveAbout  {
-                queueTest.nameOfFile = "profileAbout.txt"
-                queueTest.text = textAbout
-                queueTest.txtWriteFile()
+                gcdQueue.nameOfFile = "profileAbout.txt"
+                gcdQueue.text = textAbout
+                gcdQueue.txtWriteFile()
             }
             
             if self.saveDataOnMemory.savePhoto {
-                queueTest.nameOfFile = "userprofile.jpg"
-                queueTest.selectedImage = selectedImage
-                queueTest.saveImage()
+                gcdQueue.nameOfFile = "userprofile.jpg"
+                gcdQueue.selectedImage = selectedImage
+                gcdQueue.saveImage()
             }
             
-            queue.queueGlobal.async {
+            gcdQueue.queueGlobal.async {
+                self.saveDataStart()
+                self.loadProfileData()
+            }
+
+            
+        case 1:
+            operationQueue.operationQueue.addOperation {
+                if self.saveDataOnMemory.saveProfileName {
+                    self.operationQueue.nameOfFile = "profileName.txt"
+                    self.operationQueue.text = text
+                    self.operationQueue.txtWriteFile()
+                }
+            }
+            
+        operationQueue.operationQueue.waitUntilAllOperationsAreFinished()
+            operationQueue.operationQueue.addOperation {
+                if self.saveDataOnMemory.saveAbout {
+                    self.operationQueue.nameOfFile = "profileAbout.txt"
+                    self.operationQueue.text = textAbout
+                    self.operationQueue.txtWriteFile()
+                    
+                }
+            }
+            operationQueue.operationQueue.waitUntilAllOperationsAreFinished()
+            operationQueue.operationQueue.addOperation {
+                if self.saveDataOnMemory.savePhoto {
+                    self.operationQueue.nameOfFile = "userprofile.jpg"
+                    self.operationQueue.selectedImage = selectedImage
+                    self.operationQueue.saveImage()
+                }
+            }
+            operationQueue.operationQueue.waitUntilAllOperationsAreFinished()
+            operationQueue.operationQueue.addOperation {
                 self.saveDataStart()
                 self.loadProfileData()
             }
             
-            
-        case 1:
-                self.btnSaveDisable()
-                //save data try
-                queue.queueGlobal.async {
-                    self.saveDataStart()
-                    self.loadProfileData()
-                }
-                default:
+            default:
                     break
             }
-
     }
-    
 
     //safe data
     fileprivate func saveDataStart() {
-        print(Thread.current)
-        self.btnSaveDisable()
-        for i in 1...50000 {
-            queue.queueMain.async {
-                self.activityIndicator.startAnimating()
-            }
+        for i in 1...150000 {
             print(i)
-            if i == 50000 {
-                queue.queueMain.async {
-                    
-                    self.btnAfterSave()
+            if i == 150000 {
+                //self.saveDataOnMemory.saveData = true
+                //self.btnAfterSave()
+                gcdQueue.queueMain.async {
                     self.showAlert(textMessage: self.saveDataOnMemory.textAlertFunc())
                 }
             }
         }
         
         self.fieldProfileDisable()
-        print("fieldProfileDisable")
-        queue.queueMain.async {
+        gcdQueue.queueMain.async {
+            self.btnAfterSave()
             self.activityIndicator.stopAnimating()
         }
     }
@@ -372,17 +338,17 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     
     //safe button disable
     fileprivate func btnSaveDisable() {
-        queue.queueMain.async {
+
             self.gcdBtn.isEnabled = false
             self.operationBtn.isEnabled = false
-        }
-
     }
     
     //safe button enable
     fileprivate func btnSaveEnable() {
-        self.gcdBtn.isEnabled = true
-        self.operationBtn.isEnabled = true
+        gcdQueue.queueMain.async {
+            self.gcdBtn.isEnabled = true
+            self.operationBtn.isEnabled = true
+        }
     }
     
     //
@@ -394,9 +360,11 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
     //
     fileprivate func btnEditUnHidden() {
-        editBtn.isHidden = false
-        gcdBtn.isHidden = true
-        operationBtn.isHidden = true
+        gcdQueue.queueMain.async {
+            self.editBtn.isHidden = false
+            self.gcdBtn.isHidden = true
+            self.operationBtn.isHidden = true
+        }
     }
     
     //алерт успешно / неуспешно
@@ -406,8 +374,9 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
             
         }
         let actionRepeat = UIAlertAction(title: "Повторить" , style: .default) { (action) in
+            self.activityIndicator.startAnimating()
             self.saveDataOnMemory.saveData = true
-            self.queue.queueGlobal.async {
+            self.gcdQueue.queueMain.async {
                 self.saveDataStart()
                 self.loadProfileData()
             }

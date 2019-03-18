@@ -11,6 +11,8 @@ import UIKit
 class ThemesViewController: UIViewController {
     
     let theme = ThemeManager.currentTheme()
+    let saveTheme = ReadWriteData.GCDDataManager()
+    
     
     @IBOutlet weak var ligthThemeBtn: UIButton!
     @IBOutlet weak var darkThemeBtn: UIButton!
@@ -58,16 +60,24 @@ class ThemesViewController: UIViewController {
         case 0:
             print("ligth")
             ThemeManager.applyTheme(theme: .ligth)
-            
+            saveTheme.text = ".ligth"
         case 1:
             print("dark")
             ThemeManager.applyTheme(theme: .dark)
+            saveTheme.text = ".dark"
         case 2:
             print("shampan")
             ThemeManager.applyTheme(theme: .shampan)
+            saveTheme.text = ".shampan"
         default:
             break
         }
+        
+        saveTheme.queueGlobal.async {
+            self.saveTheme.nameOfFile = "theme.txt"
+            self.saveTheme.txtWriteFile()
+        }
+
 
         self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
     }
