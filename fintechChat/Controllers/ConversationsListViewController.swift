@@ -314,6 +314,7 @@ extension ConversationsListViewController: MCSessionDelegate {
             self.conversationListsOnline.append(item)
         }
         DispatchQueue.main.async {
+            self.conversationListsOnline.sort(by: { $0.date!.compare($1.date!) == .orderedDescending })
             self.tableView.reloadData()
         }
         //self.delegate?.textChanged(manager: self, text: str)
