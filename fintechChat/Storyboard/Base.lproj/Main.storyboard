@@ -198,7 +198,7 @@
                                     <outlet property="delegate" destination="GHQ-eW-2Tz" id="4xQ-wn-ZRX"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ozc-oM-7TD" customClass="ConversationTableViewCell" customModule="fintechChat" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ozc-oM-7TD">
                                 <rect key="frame" x="0.0" y="508" width="320" height="60"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yQV-Us-0JC">
@@ -207,11 +207,11 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHT-qj-jbB">
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHT-qj-jbB">
                                         <rect key="frame" x="229" y="10" width="83" height="30"/>
                                         <color key="backgroundColor" name="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="83" id="guP-k6-UgS"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="guP-k6-UgS"/>
                                         </constraints>
                                         <state key="normal" title="Отправить">
                                             <color key="titleColor" name="darkColor"/>
@@ -228,6 +228,7 @@
                                 </subviews>
                                 <color key="backgroundColor" name="darkColor"/>
                                 <constraints>
+                                    <constraint firstItem="yQV-Us-0JC" firstAttribute="width" secondItem="Ozc-oM-7TD" secondAttribute="height" multiplier="71:20" id="DNV-4O-0bd"/>
                                     <constraint firstItem="yQV-Us-0JC" firstAttribute="leading" secondItem="Ozc-oM-7TD" secondAttribute="leadingMargin" id="Tp0-uy-u9d"/>
                                     <constraint firstItem="yQV-Us-0JC" firstAttribute="top" secondItem="Ozc-oM-7TD" secondAttribute="top" constant="10" id="XeM-gp-Tv9"/>
                                     <constraint firstItem="yQV-Us-0JC" firstAttribute="top" secondItem="QHT-qj-jbB" secondAttribute="top" id="goE-H0-f82"/>

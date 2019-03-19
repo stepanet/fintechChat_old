@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MultipeerConnectivity
 
 class ConversationViewController: UIViewController {
     
@@ -15,7 +16,7 @@ class ConversationViewController: UIViewController {
     var messageLists = [MessageLists]()
     var fromUser: String?
     var toUser: String?
-    var session: String?
+    var session: MCSession!
     
     @IBOutlet weak var messageTxtField: UITextField!
     @IBOutlet weak var sendMessageBtn: UIButton!
@@ -26,14 +27,9 @@ class ConversationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        if messageLists.isEmpty {
-//            self.navigationItem.title = conversationData[0].name
-//        } else {
-//            self.navigationItem.title = messageLists[0].fromUser
-//        }
         self.navigationItem.title = fromUser
         
-        
+        print("session", session)
         
         self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
         self.tableView.backgroundColor = ThemeManager.currentTheme().backgroundColor
@@ -60,9 +56,6 @@ extension ConversationViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //if indexPath.row % 2 == 0 {
-        
-
         if (messageLists[indexPath.row].toUser == fromUser ) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MessageTableViewCell
             let text = messageLists[indexPath.row].text
@@ -86,6 +79,25 @@ extension ConversationViewController: UITableViewDataSource {
     func addDataToArrayMsg(text: String, fromUser: String, toUser: String){
         let item = MessageLists(text: text,fromUser: fromUser,toUser: fromUser )
         messageLists.append(item)
+        //sendText(text: text, peerID: session!.connectedPeers)
+    }
+    
+    
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        print("didReceiveData: \(data)")
+        let str = String(data: data, encoding: .utf8)!
+        print(str)
+    }
+    
+    func sendText(text: String, peerID: MCPeerID) {
+        if session.connectedPeers.count > 0 {
+            do {
+                try self.session.send(text.data(using: .utf8)!, toPeers: [peerID], with: .reliable)
+            }
+            catch let error {
+                print("Ошибка отправки: \(error)")
+            }
+        }
     }
     
     

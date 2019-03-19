@@ -93,6 +93,7 @@ extension ConversationsListViewController: UITableViewDataSource {
             destination.messageLists = messageLists
             destination.fromUser = fromUser
             destination.toUser = myPeerId.displayName
+            destination.session = session
             destination.conversationData = conversationData
         }
     }
