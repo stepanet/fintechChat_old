@@ -10,12 +10,16 @@ import UIKit
 import MultipeerConnectivity
 
 class ConversationViewController: UIViewController {
-    
 
     var conversationData = [ConversationList]()
     var messageLists = [MessageLists]()
-    var fromUser: String?
-    var toUser: String?
+    
+    var fromUser: String?  //от кого пришло сообщение
+    var fromUserPeer: MCPeerID!
+
+    var toUserPeer: MCPeerID!
+    var toUser: String?    //кому пришло сообщение
+
     var session: MCSession!
     
     @IBOutlet weak var messageTxtField: UITextField!
@@ -27,10 +31,10 @@ class ConversationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = fromUser
+        self.navigationItem.title = toUser
         
-        print("session", session)
-        
+        session.delegate = self
+
         self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
         self.tableView.backgroundColor = ThemeManager.currentTheme().backgroundColor
     }
@@ -39,9 +43,10 @@ class ConversationViewController: UIViewController {
         if (messageTxtField.text?.count)! > 0 {
             
             //добавим сообщение в массив
-//            addDataToArrayMsg(text: messageTxtField.text!, fromUser: fromUser!, toUser: toUser!)
-//
-//            tableView.reloadData()
+            addDataToArrayMsg(text: messageTxtField.text!, fromUser: fromUser!, toUser: toUser!)
+            sendText(text: messageTxtField.text!, peerID: toUserPeer)
+            print(messageLists)
+            tableView.reloadData()
         }
     }
 }
@@ -49,53 +54,66 @@ class ConversationViewController: UIViewController {
 extension ConversationViewController: UITableViewDelegate {
 }
 
-
-extension ConversationViewController: UITableViewDataSource {
+extension ConversationViewController: UITableViewDataSource, MCSessionDelegate {
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+           let str = String(data: data, encoding: .utf8)!
+           DispatchQueue.main.async {
+                self.addDataToArrayMsg(text: str, fromUser: self.fromUser!, toUser: self.toUser!)
+                self.tableView.reloadData()
+            }
+    }
+    
+    
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        print(#function)
+    }
+    
+    func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
+        print(#function)
+    }
+    
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, with progress: Progress) {
+        print(#function)
+    }
+    
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {
+        print(#function)
+    }
+    
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messageLists.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if (messageLists[indexPath.row].toUser == fromUser ) {
+
+        if (messageLists[indexPath.row].toUser == session.myPeerID.displayName ) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MessageTableViewCell
             let text = messageLists[indexPath.row].text
-            
             cell.messageText.text = text
             return cell
-            
         } else {
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageTableViewCell
             let text = messageLists[indexPath.row].text
-            
             cell.messageText.text = text
             return cell
         }
     }
     
-    
-    
-    
+ 
     func addDataToArrayMsg(text: String, fromUser: String, toUser: String){
-        let item = MessageLists(text: text,fromUser: fromUser,toUser: fromUser )
+        //добавим сообщение в массив
+        let item = MessageLists(text: text,fromUser: fromUser, toUser: toUser )
         messageLists.append(item)
-        
-        //хотелось бы отослать пиру, но болт Ж) не работае пока что
-        //sendText(text: text, peerID: session!.connectedPeers)
-    }
-    
-    
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        print("didReceiveData: \(data)")
-        let str = String(data: data, encoding: .utf8)!
-        print(str)
     }
     
     func sendText(text: String, peerID: MCPeerID) {
+        print(peerID.displayName)
         if session.connectedPeers.count > 0 {
+            print("УРА УРА УРА что-то пошло ")
             do {
-                try self.session.send(text.data(using: .utf8)!, toPeers: [peerID], with: .reliable)
+                try session.send(text.data(using: .utf8)!, toPeers: [peerID], with: .reliable)
             }
             catch let error {
                 print("Ошибка отправки: \(error)")
@@ -103,6 +121,13 @@ extension ConversationViewController: UITableViewDataSource {
         }
     }
     
+}
+
+
+
+
+
+//MARK: ЛУКЬЯНЕНКО - ЧЕРНОВИК
     
 //    //подготовка данных для пересылки во вьюконтроллер
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -113,8 +138,8 @@ extension ConversationViewController: UITableViewDataSource {
     
     
     
-    func loadMessage() {
-        /*
+         /*   func loadMessage() {
+
         let item = MessageLists(text: "привет",fromUser: "Вася",toUser: "Петя" )
         let item1 = MessageLists(text: "привет",fromUser: "Вася1",toUser: "Петя1" )
         let item2 = MessageLists(text: "как дела?",fromUser: "Вася2",toUser: "Петя2" )
@@ -127,6 +152,5 @@ extension ConversationViewController: UITableViewDataSource {
         messageLists.append(item3)
         messageLists.append(item4)
         messageLists.append(item5)
-    */
-    }
-}
+
+    }    */

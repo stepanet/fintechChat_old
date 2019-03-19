@@ -28,7 +28,9 @@ class ConversationsListViewController: UIViewController {
     let MessageServiceType = "tinkoff-chat"
     var myPeerId: MCPeerID!
     var session: MCSession!
+    
     var fromUser: String?
+    var fromUserPeer: MCPeerID!
     
     var serviceAdvertiser: MCNearbyServiceAdvertiser!
     var serviceBrowser: MCNearbyServiceBrowser!
@@ -65,7 +67,14 @@ class ConversationsListViewController: UIViewController {
        serviceAdvertiser.stopAdvertisingPeer()
        serviceBrowser.stopBrowsingForPeers()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        session.delegate = self
+    }
 }
+
+
+
 
 extension ConversationsListViewController: UITableViewDelegate {
     
@@ -97,9 +106,15 @@ extension ConversationsListViewController: UITableViewDataSource {
     //подготовка данных для пересылки во вьюконтроллер
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ConversationViewController {
+            
             destination.messageLists = messageLists
-            destination.fromUser = fromUser
-            destination.toUser = myPeerId.displayName
+            
+            destination.fromUser = myPeerId.displayName
+            destination.fromUserPeer = myPeerId
+            
+            destination.toUser = fromUserPeer.displayName
+            destination.toUserPeer = fromUserPeer
+
             destination.session = session
             destination.conversationData = conversationData
         }
@@ -191,6 +206,7 @@ extension ConversationsListViewController: UITableViewDataSource {
     }
 }
 
+
 extension ConversationsListViewController : MCNearbyServiceAdvertiserDelegate {
     
     //Узнаем, что видимость не включилась
@@ -223,6 +239,8 @@ extension ConversationsListViewController : MCNearbyServiceBrowserDelegate {
         print("нашли участника: \(peerID)")
         print("пригласили участника: \(peerID)")
         //зовем к себе
+        
+       // fromUserPeer = peerID  //это пир кто к нам подключился
         browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
     }
     
@@ -254,7 +272,7 @@ extension ConversationsListViewController: MCSessionDelegate {
 
         if state.rawValue == 2 {
             print("участник \(peerID) изменил состояние: \(state.rawValue)")
-            fromUser = peerID.displayName
+            fromUserPeer = peerID
             if self.conversationListsOnline.contains(where: { $0.name == peerID.displayName }) {
                 if (indexHistory != nil) {
                     
@@ -277,16 +295,16 @@ extension ConversationsListViewController: MCSessionDelegate {
     }
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        print("didReceiveData: \(data)")
+        print("22222didReceiveData222222: \(data)")
         let str = String(data: data, encoding: .utf8)!
         print(str)
         let index = conversationListsOnline.firstIndex(where: { $0.name == peerID.displayName })
         
         if str.count > 0 {
+            //убираем из массива, чтобы видеть последнее сообщение 
             self.conversationListsOnline.remove(at: index!)
             let itemMessage = MessageLists(text: str ,fromUser: peerID.displayName, toUser: myPeerId.displayName )
             let item = ConversationList(name: peerID.displayName, message: str, date: Date(), online: true, hasUnreadMessage: true)
-            self.sendText(text: str, peerID: peerID)
             self.messageLists.append(itemMessage)
             self.conversationListsOnline.append(item)
         }

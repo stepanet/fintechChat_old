@@ -61,4 +61,21 @@ struct SaveData: SaveDataProtocol {
 }
 
 
+class MessageListClass: MessageCellConfiguration {
+    //хочу доступ к массиву из всего проекта
+    var array = [MessageLists]()
+    var text: String?
+    var fromUser: String?
+    var toUser: String?
+    
+    
+    func saveDataToArray(text: String, fromUser: String, toUSer: String) {
+        let item = MessageLists(text: text, fromUser: fromUser, toUser: toUSer)
+        array.append(item)
+    }
+    
+}
+
+
+
 
