@@ -133,7 +133,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qhg-xb-COd">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="445"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MessageCell" id="VbL-KT-Jmu" customClass="MessageTableViewCell" customModule="fintechChat" customModuleProvider="target">
@@ -171,7 +171,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjx-B8-WkS">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tjx-B8-WkS">
                                                     <rect key="frame" x="64" y="4" width="240" height="36"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -198,13 +198,54 @@
                                     <outlet property="delegate" destination="GHQ-eW-2Tz" id="4xQ-wn-ZRX"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ozc-oM-7TD" customClass="ConversationTableViewCell" customModule="fintechChat" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="508" width="320" height="60"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yQV-Us-0JC">
+                                        <rect key="frame" x="8" y="10" width="213" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHT-qj-jbB">
+                                        <rect key="frame" x="229" y="10" width="83" height="30"/>
+                                        <color key="backgroundColor" name="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="83" id="guP-k6-UgS"/>
+                                        </constraints>
+                                        <state key="normal" title="Отправить">
+                                            <color key="titleColor" name="darkColor"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="sendMsgActionBtn:" destination="GHQ-eW-2Tz" eventType="touchUpInside" id="RB7-vG-V91"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="darkColor"/>
+                                <constraints>
+                                    <constraint firstItem="yQV-Us-0JC" firstAttribute="leading" secondItem="Ozc-oM-7TD" secondAttribute="leadingMargin" id="Tp0-uy-u9d"/>
+                                    <constraint firstItem="yQV-Us-0JC" firstAttribute="top" secondItem="Ozc-oM-7TD" secondAttribute="top" constant="10" id="XeM-gp-Tv9"/>
+                                    <constraint firstItem="yQV-Us-0JC" firstAttribute="top" secondItem="QHT-qj-jbB" secondAttribute="top" id="goE-H0-f82"/>
+                                    <constraint firstItem="QHT-qj-jbB" firstAttribute="trailing" secondItem="Ozc-oM-7TD" secondAttribute="trailingMargin" id="kCL-uh-6YJ"/>
+                                    <constraint firstAttribute="height" constant="60" id="pqH-GO-NT5"/>
+                                    <constraint firstItem="QHT-qj-jbB" firstAttribute="leading" secondItem="yQV-Us-0JC" secondAttribute="trailing" constant="8" symbolic="YES" id="vcY-aV-DRx"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Qhg-xb-COd" firstAttribute="trailing" secondItem="8mQ-cf-BFV" secondAttribute="trailing" id="8p0-5h-N0w"/>
+                            <constraint firstItem="Ozc-oM-7TD" firstAttribute="top" secondItem="Qhg-xb-COd" secondAttribute="bottom" constant="-1" id="BPU-V5-z9b"/>
+                            <constraint firstItem="Ozc-oM-7TD" firstAttribute="leading" secondItem="8mQ-cf-BFV" secondAttribute="leading" id="Me7-0f-YFp"/>
                             <constraint firstItem="Qhg-xb-COd" firstAttribute="top" secondItem="8mQ-cf-BFV" secondAttribute="top" id="Rez-fN-JfY"/>
                             <constraint firstItem="Qhg-xb-COd" firstAttribute="leading" secondItem="8mQ-cf-BFV" secondAttribute="leading" id="Srb-lS-zbH"/>
-                            <constraint firstItem="Qhg-xb-COd" firstAttribute="bottom" secondItem="8mQ-cf-BFV" secondAttribute="bottom" id="v0z-g9-ydD"/>
+                            <constraint firstItem="8mQ-cf-BFV" firstAttribute="trailing" secondItem="Ozc-oM-7TD" secondAttribute="trailing" id="fKU-jC-2n6"/>
+                            <constraint firstAttribute="bottom" secondItem="Ozc-oM-7TD" secondAttribute="bottom" id="htR-Hb-naY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8mQ-cf-BFV"/>
                     </view>
@@ -212,6 +253,8 @@
                         <barButtonItem key="backBarButtonItem" title="Мои чаты" id="OW4-CZ-RYE"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="messageTxtField" destination="yQV-Us-0JC" id="7f5-ca-1kW"/>
+                        <outlet property="sendMessageBtn" destination="QHT-qj-jbB" id="q9f-Tu-cfx"/>
                         <outlet property="tableView" destination="Qhg-xb-COd" id="rlo-s0-nwl"/>
                     </connections>
                 </viewController>
@@ -392,6 +435,9 @@
         <image name="slr-camera-2-xxl" width="96" height="96"/>
         <namedColor name="darkColor">
             <color red="0.096000000834465027" green="0.14800000190734863" blue="0.25900000333786011" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+        <namedColor name="whiteColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="yellowColor">
             <color red="0.97200000286102295" green="0.87000000476837158" blue="0.33700001239776611" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

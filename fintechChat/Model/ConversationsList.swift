@@ -19,6 +19,8 @@ protocol ConversationCellConfiguration {
 
 protocol MessageCellConfiguration {
     var text: String? {get set}
+    var fromUser: String? {get set}
+    var toUser: String? {get set}
 }
 
 struct ConversationList: ConversationCellConfiguration {

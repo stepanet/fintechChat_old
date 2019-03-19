@@ -13,22 +13,43 @@ class ConversationViewController: UIViewController {
 
     var conversationData = [ConversationList]()
     var messageLists = [MessageLists]()
-
+    var fromUser: String?
+    var toUser: String?
+    var session: String?
+    
+    @IBOutlet weak var messageTxtField: UITextField!
+    @IBOutlet weak var sendMessageBtn: UIButton!
+    
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadMessage()
-        self.navigationItem.title = conversationData[0].name
+//        if messageLists.isEmpty {
+//            self.navigationItem.title = conversationData[0].name
+//        } else {
+//            self.navigationItem.title = messageLists[0].fromUser
+//        }
+        self.navigationItem.title = fromUser
+        
+        
+        
         self.view.backgroundColor = ThemeManager.currentTheme().backgroundColor
         self.tableView.backgroundColor = ThemeManager.currentTheme().backgroundColor
     }
 
+    @IBAction func sendMsgActionBtn(_ sender: UIButton) {
+        if (messageTxtField.text?.count)! > 0 {
+            
+            addDataToArrayMsg(text: messageTxtField.text!, fromUser: fromUser!, toUser: toUser!)
+            
+            tableView.reloadData()
+        }
+    }
 }
 
 extension ConversationViewController: UITableViewDelegate {
-   
 }
 
 
@@ -39,9 +60,11 @@ extension ConversationViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row % 2 == 0 {
+        //if indexPath.row % 2 == 0 {
+        
 
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageTableViewCell
+        if (messageLists[indexPath.row].toUser == fromUser ) {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MessageTableViewCell
             let text = messageLists[indexPath.row].text
             
             cell.messageText.text = text
@@ -49,7 +72,7 @@ extension ConversationViewController: UITableViewDataSource {
             
         } else {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MyMessageCell", for: indexPath) as! MessageTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageTableViewCell
             let text = messageLists[indexPath.row].text
             
             cell.messageText.text = text
@@ -57,7 +80,26 @@ extension ConversationViewController: UITableViewDataSource {
         }
     }
     
+    
+    
+    
+    func addDataToArrayMsg(text: String, fromUser: String, toUser: String){
+        let item = MessageLists(text: text,fromUser: fromUser,toUser: fromUser )
+        messageLists.append(item)
+    }
+    
+    
+//    //подготовка данных для пересылки во вьюконтроллер
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destination = segue.destination as? ConversationListViewController {
+//            destination.messageLists = messageLists
+//        }
+//    }
+    
+    
+    
     func loadMessage() {
+        /*
         let item = MessageLists(text: "привет",fromUser: "Вася",toUser: "Петя" )
         let item1 = MessageLists(text: "привет",fromUser: "Вася1",toUser: "Петя1" )
         let item2 = MessageLists(text: "как дела?",fromUser: "Вася2",toUser: "Петя2" )
@@ -70,5 +112,6 @@ extension ConversationViewController: UITableViewDataSource {
         messageLists.append(item3)
         messageLists.append(item4)
         messageLists.append(item5)
+    */
     }
 }

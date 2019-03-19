@@ -9,77 +9,67 @@
 import UIKit
 import MultipeerConnectivity
 
-
-
 class ConversationsListViewController: UIViewController {
+
+    
     @IBOutlet var tableView: UITableView!
     
     var conversationLists = [ConversationList]()
     var conversationListsOnline = [ConversationList]()
     var conversationListsHistory = [ConversationList]()
     var conversationData = [ConversationList]()
+    var messageLists = [MessageLists]()
     
     let MessageServiceType = "tinkoff-chat"
     var myPeerId: MCPeerID!
     var session: MCSession!
-    
+    var fromUser: String?
     
     var serviceAdvertiser: MCNearbyServiceAdvertiser!
     var serviceBrowser: MCNearbyServiceBrowser!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        myPeerId = MCPeerID(displayName: UIDevice.current.name + "DmP")
+        myPeerId = MCPeerID(displayName: UIDevice.current.name + "DmitryPyatin")
         
         //Делаем устройство видимым для других
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: MessageServiceType)
         //Ищем другие устройства
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: MessageServiceType)
         
-        
         session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: .required)
         session.delegate = self
-        
         
         //включаем видимость
         serviceAdvertiser.delegate = self
         serviceAdvertiser.startAdvertisingPeer()
         
-        
         //включаем поиск
         serviceBrowser.delegate = self
         serviceBrowser.startBrowsingForPeers()
         
-        
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
         loadData()
-
     }
     
     deinit {
        serviceAdvertiser.stopAdvertisingPeer()
        serviceBrowser.stopBrowsingForPeers()
     }
-    
-    
 }
 
 extension ConversationsListViewController: UITableViewDelegate {
     
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
         return section == 0 ? "Online" : "History"
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
 }
 
 extension ConversationsListViewController: UITableViewDataSource {
@@ -99,14 +89,15 @@ extension ConversationsListViewController: UITableViewDataSource {
     
     //подготовка данных для пересылки во вьюконтроллер
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
         if let destination = segue.destination as? ConversationViewController {
+            destination.messageLists = messageLists
+            destination.fromUser = fromUser
+            destination.toUser = myPeerId.displayName
             destination.conversationData = conversationData
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
             return section == 0 ? conversationListsOnline.count : conversationListsHistory.count
     }
     
@@ -165,18 +156,7 @@ extension ConversationsListViewController: UITableViewDataSource {
         let item8 = ConversationList(name: "Звезда2", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-15 11:21:01"), online: true, hasUnreadMessage: true)
         let item9 = ConversationList(name: "Звезда3", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-25 11:21:01"), online: false, hasUnreadMessage: false)
         let item10 = ConversationList(name: "Звезда4", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-04 11:21:01"), online: false, hasUnreadMessage: true)
-        let item11 = ConversationList(name: "Звезда5", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-03 11:21:01"), online: true, hasUnreadMessage: false)
-        let item12 = ConversationList(name: "Звезда6", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-11 11:21:01"), online: false, hasUnreadMessage: false)
-        let item13 = ConversationList(name: "Звезда7", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-12 11:21:01"), online: false, hasUnreadMessage: false)
-        let item14 = ConversationList(name: "Звезда8", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-15 11:21:01"), online: true, hasUnreadMessage: false)
-        let item15 = ConversationList(name: "Звезда9", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-25 11:21:01"), online: false, hasUnreadMessage: false)
-        let item16 = ConversationList(name: "Звезда10", message: "Гори гори моя звезда", date: dateFormatter.date(from: "2019-01-05 11:21:01"), online: false, hasUnreadMessage: false)
-        let item17 = ConversationList(name: "Маша", message: "Привет ", date: Date(), online: true, hasUnreadMessage: true)
-        let item18 = ConversationList(name: "Даша", message: "Привет ", date: Date(), online: true, hasUnreadMessage: true)
-        let item19 = ConversationList(name: "Саша", message: "Привет ", date: Date(), online: true, hasUnreadMessage: true)
-        let item20 = ConversationList(name: "ПростоМария", message: "Привет ", date: Date(), online: true, hasUnreadMessage: true)
-        let item21 = ConversationList(name: "Кардебалет", message: "Привет ", date: Date(), online: true, hasUnreadMessage: true)
-        
+
         conversationLists.append(item)
         conversationLists.append(item1)
         conversationLists.append(item3)
@@ -187,19 +167,7 @@ extension ConversationsListViewController: UITableViewDataSource {
         conversationLists.append(item8)
         conversationLists.append(item9)
         conversationLists.append(item10)
-        conversationLists.append(item11)
-        conversationLists.append(item12)
-        conversationLists.append(item13)
-        conversationLists.append(item14)
-        conversationLists.append(item15)
-        conversationLists.append(item16)
-        conversationLists.append(item17)
-        conversationLists.append(item18)
-        conversationLists.append(item19)
-        conversationLists.append(item20)
-        conversationLists.append(item21)
 
-        
         for i in conversationLists {
             if i.online {
                 conversationListsOnline.append(i)
@@ -273,27 +241,25 @@ extension ConversationsListViewController : MCNearbyServiceBrowserDelegate {
 extension ConversationsListViewController: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         
-        
-        let index = conversationListsOnline.firstIndex(where: { $0.name == peerID.displayName })
+
         let indexHistory = conversationListsHistory.firstIndex(where: { $0.name == peerID.displayName })
-        
-        print("index = \(index)", "indexHistory = \(indexHistory)")
-        
+
         if state.rawValue == 2 {
             print("участник \(peerID) изменил состояние: \(state.rawValue)")
-
-            if self.conversationLists.contains(where: { $0.name == peerID.displayName }) {
-                    print("aaaaaaaaaaaaaaa уже есть такой")
+            fromUser = peerID.displayName
+            if self.conversationListsOnline.contains(where: { $0.name == peerID.displayName }) {
                 if (indexHistory != nil) {
+                    
                     conversationListsHistory.remove(at: indexHistory!)
                 }
             } else {
-                    print("ffffffffffff нет такого")
-                    if (indexHistory != nil) {
-                        conversationListsHistory.remove(at: indexHistory!)
-                    }
-                    let item21 = ConversationList(name: peerID.displayName, message: nil, date: Date(), online: true, hasUnreadMessage: true)
-                    self.conversationListsOnline.append(item21)
+                if (indexHistory != nil) {
+                    conversationListsOnline.append(conversationListsHistory[indexHistory!])
+                    conversationListsHistory.remove(at: indexHistory!)
+                } else {
+                let item = ConversationList(name: peerID.displayName, message: nil, date: Date(), online: true, hasUnreadMessage: true)
+                self.conversationListsOnline.append(item)
+                }
             }
             
             DispatchQueue.main.async {
@@ -307,17 +273,19 @@ extension ConversationsListViewController: MCSessionDelegate {
         let str = String(data: data, encoding: .utf8)!
         print(str)
         let index = conversationListsOnline.firstIndex(where: { $0.name == peerID.displayName })
-        print("index didReceiveData = \(index)")
+        
         if str.count > 0 {
             self.conversationListsOnline.remove(at: index!)
+            let itemMessage = MessageLists(text: str ,fromUser: peerID.displayName, toUser: myPeerId.displayName )
             let item = ConversationList(name: peerID.displayName, message: str, date: Date(), online: true, hasUnreadMessage: true)
+            self.sendText(text: str, peerID: peerID)
+            self.messageLists.append(itemMessage)
             self.conversationListsOnline.append(item)
         }
         DispatchQueue.main.async {
             self.conversationListsOnline.sort(by: { $0.date!.compare($1.date!) == .orderedDescending })
             self.tableView.reloadData()
         }
-        //self.delegate?.textChanged(manager: self, text: str)
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
