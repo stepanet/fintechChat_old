@@ -38,9 +38,10 @@ class ConversationViewController: UIViewController {
     @IBAction func sendMsgActionBtn(_ sender: UIButton) {
         if (messageTxtField.text?.count)! > 0 {
             
-            addDataToArrayMsg(text: messageTxtField.text!, fromUser: fromUser!, toUser: toUser!)
-            
-            tableView.reloadData()
+            //добавим сообщение в массив
+//            addDataToArrayMsg(text: messageTxtField.text!, fromUser: fromUser!, toUser: toUser!)
+//
+//            tableView.reloadData()
         }
     }
 }
@@ -79,6 +80,8 @@ extension ConversationViewController: UITableViewDataSource {
     func addDataToArrayMsg(text: String, fromUser: String, toUser: String){
         let item = MessageLists(text: text,fromUser: fromUser,toUser: fromUser )
         messageLists.append(item)
+        
+        //хотелось бы отослать пиру, но болт Ж) не работае пока что
         //sendText(text: text, peerID: session!.connectedPeers)
     }
     

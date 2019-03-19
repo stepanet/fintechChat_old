@@ -20,6 +20,11 @@ class ConversationsListViewController: UIViewController {
     var conversationData = [ConversationList]()
     var messageLists = [MessageLists]()
     
+    //let messageService = MultiPeerCommunicator()
+    //слияние газпрома и роснефти прошло успешно
+    //а евро тем временем в инвестициях = 72.98
+    
+    
     let MessageServiceType = "tinkoff-chat"
     var myPeerId: MCPeerID!
     var session: MCSession!
@@ -30,6 +35,8 @@ class ConversationsListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //messageService.delegate = self
         
         myPeerId = MCPeerID(displayName: UIDevice.current.name + "DmitryPyatin")
         
@@ -312,8 +319,4 @@ extension ConversationsListViewController: MCSessionDelegate {
             }
         }
     }
-
-    
-    
-    
 }

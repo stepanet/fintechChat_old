@@ -18,6 +18,8 @@
 		3B3C0C4A222DCE230009E917 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3C0C49222DCE230009E917 /* SettingsTableViewController.swift */; };
 		3B5D0F17223856A800612E4A /* Themes.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D0F13223856A800612E4A /* Themes.m */; };
 		3B5D0F18223856A800612E4A /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D0F14223856A800612E4A /* ThemesViewController.m */; };
+		3B5D9E962240DEA00016338B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D9E952240DEA00016338B /* Message.swift */; };
+		3B5D9E982240DF560016338B /* Communicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D9E972240DF560016338B /* Communicator.swift */; };
 		3BB73B7E22215D1B00EB5FA8 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB73B7D22215D1B00EB5FA8 /* MessageTableViewCell.swift */; };
 		3BCD0B6A2229F7DE0028A768 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BBDC58A2229F5DE00880D79 /* Foundation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		3BDA63EE222D49CC00D381D8 /* ThemesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17B9A0222883D600D944F7 /* ThemesViewController.swift */; };
@@ -47,6 +49,8 @@
 		3B5D0F15223856A800612E4A /* ThemesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemesViewController.h; sourceTree = "<group>"; };
 		3B5D0F16223856A800612E4A /* ThemesViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemesViewControllerDelegate.h; sourceTree = "<group>"; };
 		3B5D0F1A223856FE00612E4A /* fintechChat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fintechChat-Bridging-Header.h"; sourceTree = "<group>"; };
+		3B5D9E952240DEA00016338B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		3B5D9E972240DF560016338B /* Communicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communicator.swift; sourceTree = "<group>"; };
 		3BB73B7D22215D1B00EB5FA8 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		3BBDC58A2229F5DE00880D79 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3BE05EE322385A4A00CC1B36 /* ProveileViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProveileViewExtension.swift; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				3B17B9A5222888B200D944F7 /* ThemeManager.swift */,
+				3B5D9E972240DF560016338B /* Communicator.swift */,
+				3B5D9E952240DEA00016338B /* Message.swift */,
 				3B2DDB45221E0C3C005D5272 /* ConversationsList.swift */,
 				3BE998102232D1E500185AEF /* ReadWriteDataToDisk.swift */,
 				3BE998122235403600185AEF /* template.swift */,
@@ -246,6 +252,7 @@
 				3B5D0F18223856A800612E4A /* ThemesViewController.m in Sources */,
 				3BB73B7E22215D1B00EB5FA8 /* MessageTableViewCell.swift in Sources */,
 				3B2DDB44221E0A25005D5272 /* ConversationTableViewCell.swift in Sources */,
+				3B5D9E982240DF560016338B /* Communicator.swift in Sources */,
 				3B3ADE912214BEBF000D97B5 /* ProfileViewController.swift in Sources */,
 				3BE998112232D1E600185AEF /* ReadWriteDataToDisk.swift in Sources */,
 				3B2236EC222141F400561112 /* ConversationViewController.swift in Sources */,
@@ -256,6 +263,7 @@
 				3B3C0C4A222DCE230009E917 /* SettingsTableViewController.swift in Sources */,
 				3BDA63EE222D49CC00D381D8 /* ThemesViewController.swift in Sources */,
 				3BEF8BC5220B73AC00641B2B /* AppDelegate.swift in Sources */,
+				3B5D9E962240DEA00016338B /* Message.swift in Sources */,
 				3B2DDB42221E0619005D5272 /* ConversationsListViewController.swift in Sources */,
 				3BE998132235403700185AEF /* template.swift in Sources */,
 			);
