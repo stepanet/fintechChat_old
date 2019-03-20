@@ -40,17 +40,36 @@ class CoreData: NSObject {
         return coordinator
     }()
     
+    lazy var masterContext: NSManagedObjectContext = {
+        var masterContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType )
+        
+        //делаем ссылку на coordinatora или на другой NSManagedObjectContext
+        masterContext.persistentStoreCoordinator = self.persistentStoreCoordinator
+        masterContext.mergePolicy = NSOverwriteMergePolicy
+        return masterContext
+    }()
+    
     
     
     lazy var mainContext: NSManagedObjectContext = {
        var mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         
         //делаем ссылку на coordinatora или на другой NSManagedObjectContext
-        mainContext.persistentStoreCoordinator = self.persistentStoreCoordinator
+        //это когда только один конекст
+        //mainContext.persistentStoreCoordinator = self.persistentStoreCoordinator
         
-        
+        mainContext.parent = self.masterContext
         mainContext.mergePolicy = NSOverwriteMergePolicy
         return mainContext
+    }()
+    
+    lazy var saveContext: NSManagedObjectContext = {
+        var saveContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        
+        //делаем ссылку на coordinatora или на другой NSManagedObjectContext
+        saveContext.parent = self.mainContext
+        saveContext.mergePolicy = NSOverwriteMergePolicy
+        return saveContext
     }()
     
 }

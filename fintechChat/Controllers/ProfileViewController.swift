@@ -66,21 +66,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     }
     
     
-    //save method
-    typealias SaveCompletion = () -> Void
-    func performSave(with context: NSManagedObjectContext, completion: SaveCompletion? = nil){
-        
-        context.perform {
-            do {
-                try context.save()
-            } catch {
-                print("ContextSave error: \(error)")
-            }
-        }
-    }
-    
-    
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         //максимум 60 символов
         if (profileNameTxt.text?.count)! < 61 {
@@ -105,13 +90,19 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         let model = coreDate.managedObjectModel
         let user = AppUser.fetchRequest(model: model, templateName: "AppUser")
         let result =  try! coreDate.mainContext.fetch(user!)
-        print(result.first!.name ?? "error")
+        if result.isEmpty {
+            print("c o r e d a t a i s e m p t y ")
+            return
+        } else {
+            //print(result.first!.name ?? "error")
+            
+            let image = UIImage(data: (result.first?.image)!)
+            profileNameTxt.text =  result.first?.name
+            aboutProfileTextView.text = result.first?.about
+            profileImageView.image = image
+        }
         
-        let image = UIImage(data: (result.first?.image)!)
-        
-        profileNameTxt.text =  result.first?.name
-        aboutProfileTextView.text = result.first?.about
-        profileImageView.image = image
+
     }
     
  
@@ -257,10 +248,10 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         //work with coreData
         
         //очистим все
-        _ = AppUser.cleanDeleteAppUser(in: coreDate.mainContext)
+        _ = AppUser.cleanDeleteAppUser(in: coreDate.masterContext)
         //записываем данные
-        _ = AppUser.insertAppUser(in: coreDate.mainContext, name: text, timestamp: Date(), about: textAbout, image: imageData)
-        try! coreDate.mainContext.save()
+        _ = AppUser.insertAppUser(in: coreDate.masterContext, name: text, timestamp: Date(), about: textAbout, image: imageData)
+        try! coreDate.masterContext.save()
         self.saveDataStart()
         
     }
@@ -270,6 +261,7 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         self.showAlert(textMessage: self.saveDataOnMemory.textAlertFunc())
         self.fieldProfileDisable()
         self.btnAfterSave()
+        self.loadProfileData()
         //self.activityIndicator.stopAnimating()
     }
     
