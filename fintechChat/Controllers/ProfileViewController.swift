@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ProfileViewController: UIViewController , UIImagePickerControllerDelegate, UINavigationControllerDelegate,
     UITextViewDelegate, UITextFieldDelegate  {
@@ -14,8 +15,8 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var takePicturesForProfile: UIButton!
     @IBOutlet var profileNameTxt: UITextField!
-    
     @IBOutlet weak var aboutProfileTextView: UITextView!
+    
     @IBOutlet weak var gcdBtn: UIButton!
     @IBOutlet var operationBtn: UIButton!
     @IBOutlet var editBtn: UIButton!
@@ -25,8 +26,8 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     var saveDataOnMemory = SaveData()
     let operationQueue = ReadWriteData.OperationDataManager()
     let gcdQueue = ReadWriteData.GCDDataManager()
+    let coreDate = CoreData()
     
-  
     enum ImageSource {
         case photoLibrary
         case camera
@@ -66,6 +67,21 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     }
     
     
+    //save method
+    typealias SaveCompletion = () -> Void
+    func performSave(with context: NSManagedObjectContext, completion: SaveCompletion? = nil){
+        
+        context.perform {
+            do {
+                try context.save()
+            } catch {
+                print("ContextSave error: \(error)")
+            }
+        }
+    }
+    
+    
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         //максимум 60 символов
         if (profileNameTxt.text?.count)! < 61 {
@@ -85,26 +101,18 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
     //подгрузим данные в профиль
     private func loadProfileData() {
-
-        var profileNameTxt:String?
-        var aboutProfileTextView:String?
-        var profileImageView:UIImage
         
-        //new version - using class
+        //считываем данные  из coreDate
+        let model = coreDate.managedObjectModel
+        let user = AppUser.fetchRequest(model: model, templateName: "AppUser")
+        let result =  try! coreDate.mainContext.fetch(user!)
+        print(result.first!.name ?? "error")
         
-            gcdQueue.nameOfFile = "profileName.txt"
-            profileNameTxt =  self.gcdQueue.txtREadfile()
-            gcdQueue.nameOfFile = "profileAbout.txt"
-            aboutProfileTextView = self.gcdQueue.txtREadfile()
-            gcdQueue.nameOfFile = "userprofile.jpg"
-            profileImageView = self.gcdQueue.getImage()
-
+        let image = UIImage(data: (result.first?.image)!)
         
-        gcdQueue.queueMain.async {
-            self.profileNameTxt.text =  profileNameTxt
-            self.aboutProfileTextView.text = aboutProfileTextView
-            self.profileImageView.image = profileImageView
-        }
+        profileNameTxt.text =  result.first?.name
+        aboutProfileTextView.text = result.first?.about
+        profileImageView.image = image
     }
     
  
@@ -239,95 +247,31 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
 
     //сохраняем данные
     @IBAction func safeData(_ sender: UIButton) {
-        print("self.activityIndicator.startAnimating()")
+        
         self.activityIndicator.startAnimating()
         self.btnSaveDisable()
-        let selectedImage = self.profileImageView.image!
+        let imageData: Data = (self.profileImageView.image!.pngData())!
         let text = profileNameTxt.text!
         let textAbout = aboutProfileTextView.text!
 
-        switch sender.tag {
-        case 0:
-           
-            if self.saveDataOnMemory.saveProfileName {
-                gcdQueue.nameOfFile = "profileName.txt"
-                gcdQueue.text = text
-                gcdQueue.txtWriteFile()
-            }
-            
-            if self.saveDataOnMemory.saveAbout  {
-                gcdQueue.nameOfFile = "profileAbout.txt"
-                gcdQueue.text = textAbout
-                gcdQueue.txtWriteFile()
-            }
-            
-            if self.saveDataOnMemory.savePhoto {
-                gcdQueue.nameOfFile = "userprofile.jpg"
-                gcdQueue.selectedImage = selectedImage
-                gcdQueue.saveImage()
-            }
-            
-            gcdQueue.queueGlobal.async {
-                self.saveDataStart()
-                self.loadProfileData()
-            }
-
-            
-        case 1:
-            operationQueue.operationQueue.addOperation {
-                if self.saveDataOnMemory.saveProfileName {
-                    self.operationQueue.nameOfFile = "profileName.txt"
-                    self.operationQueue.text = text
-                    self.operationQueue.txtWriteFile()
-                }
-            }
-            
-        operationQueue.operationQueue.waitUntilAllOperationsAreFinished()
-            operationQueue.operationQueue.addOperation {
-                if self.saveDataOnMemory.saveAbout {
-                    self.operationQueue.nameOfFile = "profileAbout.txt"
-                    self.operationQueue.text = textAbout
-                    self.operationQueue.txtWriteFile()
-                    
-                }
-            }
-            operationQueue.operationQueue.waitUntilAllOperationsAreFinished()
-            operationQueue.operationQueue.addOperation {
-                if self.saveDataOnMemory.savePhoto {
-                    self.operationQueue.nameOfFile = "userprofile.jpg"
-                    self.operationQueue.selectedImage = selectedImage
-                    self.operationQueue.saveImage()
-                }
-            }
-            operationQueue.operationQueue.waitUntilAllOperationsAreFinished()
-            operationQueue.operationQueue.addOperation {
-                self.saveDataStart()
-                self.loadProfileData()
-            }
-            
-            default:
-                    break
-            }
+        
+        //work with coreData
+        
+        //очистим все
+        _ = AppUser.cleanDeleteAppUser(in: coreDate.mainContext)
+        //записываем данные
+        _ = AppUser.insertAppUser(in: coreDate.mainContext, name: text, timestamp: Date(), about: textAbout, image: imageData)
+        try! coreDate.mainContext.save()
+        self.saveDataStart()
+        
     }
 
     //safe data
     fileprivate func saveDataStart() {
-        for i in 1...150000 {
-            print(i)
-            if i == 150000 {
-                //self.saveDataOnMemory.saveData = true
-                //self.btnAfterSave()
-                gcdQueue.queueMain.async {
-                    self.showAlert(textMessage: self.saveDataOnMemory.textAlertFunc())
-                }
-            }
-        }
-        
+        self.showAlert(textMessage: self.saveDataOnMemory.textAlertFunc())
         self.fieldProfileDisable()
-        gcdQueue.queueMain.async {
-            self.btnAfterSave()
-            self.activityIndicator.stopAnimating()
-        }
+        self.btnAfterSave()
+        //self.activityIndicator.stopAnimating()
     }
     
     //button and activity state
@@ -371,23 +315,10 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     func showAlert(textMessage: String) {
         let alertController = UIAlertController(title: nil, message: textMessage, preferredStyle: .alert)
         let actionSave = UIAlertAction(title: "ОК" , style: .default) { (action) in
-            
+            self.activityIndicator.stopAnimating()
         }
-        let actionRepeat = UIAlertAction(title: "Повторить" , style: .default) { (action) in
-            self.activityIndicator.startAnimating()
-            self.saveDataOnMemory.saveData = true
-            self.gcdQueue.queueMain.async {
-                self.saveDataStart()
-                self.loadProfileData()
-            }
-
-        }
-            alertController.addAction(actionSave)
-        if !saveDataOnMemory.saveData {
-            alertController.addAction(actionRepeat)
-        }
+        alertController.addAction(actionSave)
         self.present(alertController, animated: true, completion: nil)
     }
-
 }
 

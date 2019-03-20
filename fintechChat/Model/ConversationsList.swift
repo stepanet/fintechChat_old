@@ -49,7 +49,7 @@ protocol SaveDataProtocol {
 
 struct SaveData: SaveDataProtocol {
     
-    var saveData: Bool = false
+    var saveData: Bool = true
     var savePhoto: Bool = false
     var saveProfileName: Bool = false
     var saveAbout: Bool = false
