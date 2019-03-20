@@ -18,13 +18,12 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     @IBOutlet weak var aboutProfileTextView: UITextView!
     
     @IBOutlet weak var gcdBtn: UIButton!
-    @IBOutlet var operationBtn: UIButton!
     @IBOutlet var editBtn: UIButton!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     
     var saveDataOnMemory = SaveData()
-    let operationQueue = ReadWriteData.OperationDataManager()
+    //let operationQueue = ReadWriteData.OperationDataManager()
     let gcdQueue = ReadWriteData.GCDDataManager()
     let coreDate = CoreData()
     
@@ -282,16 +281,13 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     
     //safe button disable
     fileprivate func btnSaveDisable() {
-
             self.gcdBtn.isEnabled = false
-            self.operationBtn.isEnabled = false
     }
     
     //safe button enable
     fileprivate func btnSaveEnable() {
         gcdQueue.queueMain.async {
             self.gcdBtn.isEnabled = true
-            self.operationBtn.isEnabled = true
         }
     }
     
@@ -299,7 +295,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
     fileprivate func btnEditHidden() {
         editBtn.isHidden = true
         gcdBtn.isHidden = false
-        operationBtn.isHidden = false
     }
 
     //
@@ -307,7 +302,6 @@ class ProfileViewController: UIViewController , UIImagePickerControllerDelegate,
         gcdQueue.queueMain.async {
             self.editBtn.isHidden = false
             self.gcdBtn.isHidden = true
-            self.operationBtn.isHidden = true
         }
     }
     

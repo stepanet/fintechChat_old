@@ -42,12 +42,6 @@ extension ProfileViewController {
         gcdBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor//UIColor.black.cgColor
         gcdBtn.backgroundColor = ThemeManager.currentTheme().backgroundColor
         
-        operationBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
-        operationBtn.clipsToBounds = true
-        operationBtn.tintColor = ThemeManager.currentTheme().titleTextColor
-        operationBtn.layer.borderWidth = 1
-        operationBtn.layer.borderColor = ThemeManager.currentTheme().titleTextColor.cgColor//UIColor.black.cgColor
-        operationBtn.backgroundColor = ThemeManager.currentTheme().backgroundColor
         
         editBtn.layer.cornerRadius = cornerRadius.editBtn.rawValue
         editBtn.clipsToBounds = true

@@ -300,18 +300,10 @@
                                     <outlet property="textDropDelegate" destination="cgX-rv-1w6" id="uPp-1k-4vm"/>
                                 </connections>
                             </textView>
-                            <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glP-Xj-078">
-                                <rect key="frame" x="164" y="521" width="140" height="39"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="Operation"/>
-                                <connections>
-                                    <action selector="safeData:" destination="cgX-rv-1w6" eventType="touchUpInside" id="0NC-VZ-BEd"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pnW-3w-3u6">
-                                <rect key="frame" x="16" y="521" width="140" height="39"/>
+                                <rect key="frame" x="16" y="521" width="288" height="39"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <state key="normal" title="GCD"/>
+                                <state key="normal" title="Сохранить"/>
                                 <connections>
                                     <action selector="safeData:" destination="cgX-rv-1w6" eventType="touchUpInside" id="ZCG-xB-ufE"/>
                                 </connections>
@@ -360,30 +352,27 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="5ks-cS-8Sj" firstAttribute="bottom" secondItem="pnW-3w-3u6" secondAttribute="bottom" constant="8" id="0L4-Ie-z0G"/>
                             <constraint firstItem="80f-JN-ZmA" firstAttribute="top" secondItem="JfC-zb-jem" secondAttribute="bottom" constant="8" symbolic="YES" id="39H-zL-XCl"/>
+                            <constraint firstItem="pnW-3w-3u6" firstAttribute="leading" secondItem="tdk-fc-srJ" secondAttribute="leading" id="3KM-Ma-svY"/>
                             <constraint firstItem="u4o-ha-Io8" firstAttribute="trailing" secondItem="JfC-zb-jem" secondAttribute="trailing" id="AGj-CH-4b9"/>
-                            <constraint firstItem="glP-Xj-078" firstAttribute="leading" secondItem="pnW-3w-3u6" secondAttribute="trailing" constant="8" symbolic="YES" id="DyZ-G4-2b3"/>
-                            <constraint firstItem="pnW-3w-3u6" firstAttribute="top" secondItem="tdk-fc-srJ" secondAttribute="bottom" constant="5" id="Fnz-Ra-0nP"/>
-                            <constraint firstItem="pnW-3w-3u6" firstAttribute="baseline" secondItem="hNr-pM-eNC" secondAttribute="baseline" id="Ghd-cr-kAM"/>
-                            <constraint firstItem="5ks-cS-8Sj" firstAttribute="bottom" secondItem="pnW-3w-3u6" secondAttribute="bottom" constant="8" id="HTr-6R-Jk7"/>
+                            <constraint firstItem="pnW-3w-3u6" firstAttribute="leading" secondItem="hNr-pM-eNC" secondAttribute="leading" id="BBj-8g-oA3"/>
                             <constraint firstItem="JfC-zb-jem" firstAttribute="top" secondItem="5ks-cS-8Sj" secondAttribute="top" constant="8" id="IED-of-Q5a"/>
                             <constraint firstItem="esS-dt-pLM" firstAttribute="centerX" secondItem="tdk-fc-srJ" secondAttribute="centerX" id="M2n-Eu-RHU"/>
                             <constraint firstItem="esS-dt-pLM" firstAttribute="centerY" secondItem="tdk-fc-srJ" secondAttribute="centerY" id="O5i-TP-k4C"/>
                             <constraint firstItem="80f-JN-ZmA" firstAttribute="leading" secondItem="JfC-zb-jem" secondAttribute="leading" id="OS7-eY-NJj"/>
                             <constraint firstItem="JfC-zb-jem" firstAttribute="leading" secondItem="gzz-sZ-TOH" secondAttribute="leadingMargin" id="Ohg-Jd-a2L"/>
                             <constraint firstItem="80f-JN-ZmA" firstAttribute="trailing" secondItem="u4o-ha-Io8" secondAttribute="trailing" id="Ouo-G6-Oiv"/>
-                            <constraint firstItem="pnW-3w-3u6" firstAttribute="height" secondItem="glP-Xj-078" secondAttribute="height" id="RPo-cz-gmX"/>
-                            <constraint firstItem="tdk-fc-srJ" firstAttribute="leading" secondItem="pnW-3w-3u6" secondAttribute="leading" id="UDc-Xd-mg7"/>
                             <constraint firstItem="JfC-zb-jem" firstAttribute="trailing" secondItem="gzz-sZ-TOH" secondAttribute="trailingMargin" id="UhG-eq-dCH"/>
+                            <constraint firstItem="pnW-3w-3u6" firstAttribute="baseline" secondItem="hNr-pM-eNC" secondAttribute="baseline" id="Whs-2K-8IL"/>
                             <constraint firstItem="u4o-ha-Io8" firstAttribute="bottom" secondItem="JfC-zb-jem" secondAttribute="bottom" id="ad0-EZ-9mj"/>
                             <constraint firstItem="80f-JN-ZmA" firstAttribute="leading" secondItem="tdk-fc-srJ" secondAttribute="leading" id="cXy-f8-11Z"/>
-                            <constraint firstItem="glP-Xj-078" firstAttribute="leading" secondItem="pnW-3w-3u6" secondAttribute="trailing" constant="8" id="cfP-O7-ahH"/>
-                            <constraint firstItem="pnW-3w-3u6" firstAttribute="baseline" secondItem="glP-Xj-078" secondAttribute="baseline" id="leu-5N-Tr1"/>
+                            <constraint firstItem="pnW-3w-3u6" firstAttribute="trailing" secondItem="hNr-pM-eNC" secondAttribute="trailing" id="gMD-yJ-Bgc"/>
+                            <constraint firstItem="pnW-3w-3u6" firstAttribute="top" secondItem="tdk-fc-srJ" secondAttribute="bottom" constant="5" id="nKN-ln-zgB"/>
                             <constraint firstItem="u4o-ha-Io8" firstAttribute="trailing" secondItem="JfC-zb-jem" secondAttribute="trailing" id="oNj-q1-CUr"/>
-                            <constraint firstItem="hNr-pM-eNC" firstAttribute="trailing" secondItem="glP-Xj-078" secondAttribute="trailing" id="p8B-NQ-S9S"/>
                             <constraint firstItem="tdk-fc-srJ" firstAttribute="top" secondItem="80f-JN-ZmA" secondAttribute="bottom" constant="8" id="rOo-oG-k4i"/>
-                            <constraint firstItem="pnW-3w-3u6" firstAttribute="leading" secondItem="hNr-pM-eNC" secondAttribute="leading" id="ufk-ij-RcA"/>
-                            <constraint firstItem="pnW-3w-3u6" firstAttribute="width" secondItem="glP-Xj-078" secondAttribute="width" id="w8l-kw-Tyl"/>
+                            <constraint firstItem="pnW-3w-3u6" firstAttribute="height" secondItem="hNr-pM-eNC" secondAttribute="height" id="vVN-oo-Inf"/>
+                            <constraint firstItem="pnW-3w-3u6" firstAttribute="width" secondItem="hNr-pM-eNC" secondAttribute="width" id="vyp-CZ-gg8"/>
                             <constraint firstItem="80f-JN-ZmA" firstAttribute="trailing" secondItem="tdk-fc-srJ" secondAttribute="trailing" id="wrZ-Rw-Pex"/>
                             <constraint firstItem="tdk-fc-srJ" firstAttribute="trailing" secondItem="hNr-pM-eNC" secondAttribute="trailing" id="zCw-F8-KEF"/>
                         </constraints>
@@ -401,7 +390,6 @@
                         <outlet property="activityIndicator" destination="esS-dt-pLM" id="KLL-Wt-PFT"/>
                         <outlet property="editBtn" destination="hNr-pM-eNC" id="T81-ts-jXD"/>
                         <outlet property="gcdBtn" destination="pnW-3w-3u6" id="0dg-BW-GLC"/>
-                        <outlet property="operationBtn" destination="glP-Xj-078" id="4MC-iY-gcS"/>
                         <outlet property="profileImageView" destination="JfC-zb-jem" id="f60-TM-Rke"/>
                         <outlet property="profileNameTxt" destination="80f-JN-ZmA" id="6rf-eD-jae"/>
                         <outlet property="takePicturesForProfile" destination="u4o-ha-Io8" id="B9w-Y8-JQc"/>
