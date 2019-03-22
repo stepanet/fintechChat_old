@@ -14,6 +14,11 @@ class ConversationsListViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet weak var profileImageBtn: UIBarButtonItem!
+    
+    let coreDate = CoreData()
+    
+    
     var conversationLists = [ConversationList]()
     var conversationListsOnline = [ConversationList]()
     var conversationListsHistory = [ConversationList]()
@@ -40,7 +45,9 @@ class ConversationsListViewController: UIViewController {
         
         //messageService.delegate = self
         
-        myPeerId = MCPeerID(displayName: UIDevice.current.name + "DmitryPyatin")
+        loadProfileData()
+        
+        myPeerId = MCPeerID(displayName: UIDevice.current.name + " DmitryPyatin")
         
         //Делаем устройство видимым для других
         serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: MessageServiceType)
@@ -70,6 +77,25 @@ class ConversationsListViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         session.delegate = self
+    }
+    
+    
+    private func loadProfileData() {
+        
+        //считываем данные  из coreDate
+        let model = coreDate.managedObjectModel
+        let user = AppUser.fetchRequest(model: model, templateName: "AppUser")
+        let result =  try! coreDate.mainContext.fetch(user!)
+        if result.isEmpty {
+            print("c o r e d a t a i s e m p t y ")
+            return
+        } else {
+            //print(result.first!.name ?? "error")
+            
+            let image = UIImage(data: (result.first?.image)!)
+            let res = UIImage(named: "slr-camera-2-xxl")
+            profileImageBtn.image = image
+        } 
     }
 }
 
@@ -336,5 +362,17 @@ extension ConversationsListViewController: MCSessionDelegate {
                print("Ошибка отправки: \(error)")
             }
         }
+    }
+}
+
+extension UIBarButtonItem {
+    class func itemWith(colorfulImage: UIImage?, target: AnyObject, action: Selector) -> UIBarButtonItem {
+        let button = UIButton(type: .custom)
+        button.setImage(colorfulImage, for: .normal)
+        button.frame = CGRect(x: 0.0, y: 0.0, width: 44.0, height: 44.0)
+        button.addTarget(target, action: action, for: .touchUpInside)
+        
+        let barButtonItem = UIBarButtonItem(customView: button)
+        return barButtonItem
     }
 }

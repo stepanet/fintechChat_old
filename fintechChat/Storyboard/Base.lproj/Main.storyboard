@@ -98,6 +98,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="profileImageBtn" destination="zxr-Ga-hEJ" id="QyM-zD-Id2"/>
                         <outlet property="tableView" destination="g3G-sR-I7e" id="ihv-Og-BjX"/>
                         <segue destination="GHQ-eW-2Tz" kind="show" identifier="showDetails" id="MIG-Yu-mZc"/>
                     </connections>
